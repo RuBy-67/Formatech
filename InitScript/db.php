@@ -8,8 +8,6 @@ use DB\Database;
 // $database = new Database('localhost', 'formatechfutur', 'root', '');
 $database = Database::getInstance();
 
-$database->executeQuery();
-
 // Fonction pour ajouter les formations
 function addFormations($formations, $db)
 {
