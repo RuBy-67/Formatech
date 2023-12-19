@@ -18,7 +18,7 @@ Le centre de formation « FormaTech FUTUR » est un nouveau centre deformation d
 > Layout -> comporte les layouts de base (header, nav, footer)
 > node_modules -> comporte les dossiers relatifs au package utiliser dans le projet
 > Pages -> structure des pages  
-> SQL -> comporte tous les requêtes sql
+> DbRequest -> comporte tous les requêtes sql
 > templates -> composants réutilisable
 
 > js -> JavaScript (si besoin)

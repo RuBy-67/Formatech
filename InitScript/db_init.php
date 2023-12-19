@@ -2,10 +2,10 @@
 
 require_once(__DIR__ . "\..\Autoloader.php");
 require_once('data.php');
-
 Autoloader::register();
 use DB\Database;
 
+// $database = new Database('localhost', 'formatechfutur', 'root', '');
 $database = Database::getInstance();
 
 // Fonction pour ajouter les formations
