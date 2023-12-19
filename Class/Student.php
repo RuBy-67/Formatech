@@ -46,7 +46,8 @@ class Student
         $database = Database::getInstance();
         getStudentListInDbByFormation($database, $formationId);
     }
-    public function getStudentProfilDetails($studentId){
+    public function getStudentProfilDetails($studentId)
+    {
         $database = Database::getInstance();
         getStudentProfilDetailsInDb($database, $studentId);
     }

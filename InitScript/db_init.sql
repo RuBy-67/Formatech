@@ -3,7 +3,8 @@ CREATE TABLE Speaker (
     speakerId INT PRIMARY KEY AUTO_INCREMENT,
     firstName VARCHAR(255),
     lastName VARCHAR(255),
-    mail VARCHAR(255)
+    mail VARCHAR(255),
+    password VARCHAR(255)
 );
 
 -- Table Module
@@ -28,7 +29,8 @@ CREATE TABLE Employees (
     firstName VARCHAR(255),
     lastName VARCHAR(255),
     job VARCHAR(255),
-    mail VARCHAR(255)
+    mail VARCHAR(255),
+    password VARCHAR(255)
 );
 
 -- Table Student
@@ -37,7 +39,8 @@ CREATE TABLE Student (
     firstName VARCHAR(255),
     lastName VARCHAR(255),
     mail VARCHAR(255),
-    birthDate DATE
+    birthDate DATE,
+    password VARCHAR(255)
 );
 -- Table Pivot Student/Promotion ---
 CREATE TABLE StudentPromotion (
