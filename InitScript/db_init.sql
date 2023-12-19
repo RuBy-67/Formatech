@@ -22,14 +22,6 @@ CREATE TABLE ClassRoom (
     name VARCHAR(255),
     capacityMax INT
 );
--- Table Student
-CREATE TABLE Student (
-    studentId INT PRIMARY KEY AUTO_INCREMENT,
-    firstName VARCHAR(255),
-    lastName VARCHAR(255),
-    mail VARCHAR(255),
-    birthDate DATE
-);
 -- Table Employees
 CREATE TABLE Employees (
     employeeId INT PRIMARY KEY AUTO_INCREMENT,
@@ -38,16 +30,22 @@ CREATE TABLE Employees (
     job VARCHAR(255),
     mail VARCHAR(255)
 );
--- Table Promotion
-CREATE TABLE Promotion (
-    promotionId INT PRIMARY KEY AUTO_INCREMENT,
-    studentId INT,
-    promotionYears INT,
-    startingDate DATE,
-    endingDate DATE,
-    FOREIGN KEY (studentId) REFERENCES Student (studentId)
-);
 
+-- Table Student
+CREATE TABLE Student (
+    studentId INT PRIMARY KEY AUTO_INCREMENT,
+    firstName VARCHAR(255),
+    lastName VARCHAR(255),
+    mail VARCHAR(255),
+    birthDate DATE
+);
+-- Table Pivot Student/Promotion ---
+CREATE TABLE StudentPromotion (
+    studentId INT,
+    promotionId INT,
+    FOREIGN KEY (studentId) REFERENCES Student (studentId),
+    FOREIGN KEY (promotionId) REFERENCES Promotion (promotionId)
+);
 
 -- Table Formation
 CREATE TABLE Formation (
@@ -59,6 +57,16 @@ CREATE TABLE Formation (
     moduleId INT,
     accessibility BOOL,
     FOREIGN KEY (moduleId) REFERENCES Module (moduleId)
+);
+
+-- Table Promotion
+CREATE TABLE Promotion (
+    promotionId INT PRIMARY KEY AUTO_INCREMENT,
+    formationId INT,
+    promotionYears INT,
+    startingDate DATE,
+    endingDate DATE,
+    FOREIGN KEY (formationId) REFERENCES Formation (formationId)
 );
 
 -- Table Session
