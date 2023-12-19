@@ -14,12 +14,13 @@ class Formation
 
 
 
-    public function __construct($firstName, $lastName, $job, $mail){
+    public function __construct($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $accessibility, $modules){
         $this->name = $name;
         $this->durationFormationInMonth = $durationFormationInMonth;
         $this->abbreviation = $abbreviation;
         $this->rncpLvl = $rncpLvl;
         $this->accessibility = $accessibility;
+        $this->modules = $modules;
     }
 
 }

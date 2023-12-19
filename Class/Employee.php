@@ -30,10 +30,9 @@ class Employee
     }
    
     //FP1 formation
-    public function createFormation($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $moduleId, $accessibility,) :void 
+    public function createFormation($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $moduleId, $accessibility) :void 
     {
         $database = Database::getInstance();
-        new Formation($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $moduleId, $accessibility,);
         addNewFormationInDb($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $moduleId, $accessibility, $database);
     }
 
