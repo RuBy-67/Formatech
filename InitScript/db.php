@@ -37,6 +37,4 @@ function addClassRooms($salles, $db)
 addFormations($formations, $database);
 addModules($modules, $database);
 addClassRooms($salles, $database);
-
-
 ?>
