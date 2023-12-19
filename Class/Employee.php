@@ -21,3 +21,5 @@ class Employee{
         addNewEmployeeInDb($firstName, $lastName, $job, $mail,$database);
     }
 }
+
+
