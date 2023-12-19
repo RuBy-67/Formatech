@@ -1,6 +1,6 @@
 <?php 
 
-namespace promotion;
+namespace Entity;
 use DB\Database;
 
 class Promotion{

@@ -1,6 +1,6 @@
 <?php
 
-namespace student;
+namespace Entity;
 
 use DB\Database;
 

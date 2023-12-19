@@ -27,7 +27,10 @@ class Database
             throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
-
+    
+    /**
+     * Singleton : permet de toujours récupérer la même instance de Database en l'instanciant 1 seule fois. Si elle existe on la récupère sinon on la créer
+     */ 
     public static function getInstance(): Database
     {
         if (self::$db === null) {

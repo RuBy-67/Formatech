@@ -1,9 +1,7 @@
 <?php 
 require_once(__DIR__ . "\..\\Autoloader.php");
 
-Autoloader::register();
-
-use StructureMembers\Employee;
+use Entity\Employee;
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

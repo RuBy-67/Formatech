@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__ . "\..\\Autoloader.php");
 ?>
 <form method="get">
     <label for="action">Action à effectuer:</label>

@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . "\..\Autoloader.php");
-Autoloader::register();
+
 
 function addNewPromotionInDb($formation, $promotionYears, $startingDate, $endingDate, $database) {
     return $database->executeQuery("INSERT INTO Promotion (formationId, promotionYears, startingDate, endingDate) VALUES (?, ?, ?, ?)", [$formation, $promotionYears, $startingDate, $endingDate]);

@@ -1,4 +1,21 @@
-<h2>Formulaire de creation de Formation</h2>
+<?php
+
+use Mapper\ModuleMapper;
+
+$moduleMapper = new ModuleMapper();
+$modules = $moduleMapper->getList();
+
+foreach ($modules as $module) {
+    echo $module->getName();
+
+    foreach ($module->getSpeakers() as $speaker) {
+        echo $speaker->getName();
+    }
+}
+
+?>
+
+<h2>Formulaire de creation de Formation</h02>
 
 <form action="/Actions/formation_creation.php" method="post">
     <label for="name">Nom de la formation:</label>
@@ -13,9 +30,12 @@
     <label for="rncpLvl">Niveau RNCP:</label>
     <input type="number" id="rncpLvl" name="rncpLvl" required><br>
 
-    <label for="moduleId">ID des module:</label>
-    <legend>Merci de les saisir avec un ; pour séparer les ids des modules</legend>
-    <input type="text" id="moduleId" name="moduleId" required><br>
+    <label for="accessibility">Modules</label>
+
+    <!-- <select id="accessibility" name="accessibility" multiple require>
+        <option value="public">Public</option>
+        <option value="private">Privé</option>
+    </select><br> -->
 
     <label for="accessibility">Accessibilité:</label>
     <select id="accessibility" name="accessibility" required>
@@ -23,5 +43,5 @@
         <option value="private">Privé</option>
     </select><br>
 
-    <input type="submit" value="Soumettre">
+    <!-- <input type="submit" value="Soumettre"> -->
 </form>
