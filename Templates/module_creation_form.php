@@ -1,4 +1,14 @@
+<?php
+
+use Mapper\SpeakerMapper;
+
+$speakerMapper = new SpeakerMapper();
+$speakers = $speakerMapper->getList();
+
+?>
+
 <h2>Formulaire de creation de Module</h2>
+
 
 <form action="/Actions/module_creation.php" method="post">
     <label for="name">Nom du module:</label>
@@ -7,9 +17,12 @@
     <label for="durationFormationInHours">Durée de la formation (en heures):</label>
     <input type="number" id="durationFormationInHours" name="durationFormationInHours" required><br>
 
-    <label for="speakerIDs">Ids des Intervenants:</label>
-    <legend>Merci de les saisir avec un ; pour séparer les ids des modules</legend>
-    <input type="text" id="speakerIDs" name="speakerIDs" required><br>
+    <label for="speakerId">Ids des Intervenants:</label>
+    <select multiple id="speakerId" name="speakerId[]" require>
+        <?php foreach ($speakers as $speaker) :?>
+            <option value="<?=$speaker->getId()?>"><?=$speaker->getId()?> - <?= $speaker->getName()?></option>
+        <?php endforeach ;?>
+    </select><br>
 
     <input type="submit" value="Crée le module">
 </form>

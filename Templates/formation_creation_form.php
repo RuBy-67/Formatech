@@ -5,13 +5,6 @@ use Mapper\ModuleMapper;
 $moduleMapper = new ModuleMapper();
 $modules = $moduleMapper->getList();
 
-foreach ($modules as $module) {
-    echo $module->getName();
-
-    foreach ($module->getSpeakers() as $speaker) {
-        echo $speaker->getName();
-    }
-}
 
 ?>
 
@@ -32,10 +25,11 @@ foreach ($modules as $module) {
 
     <label for="accessibility">Modules</label>
 
-    <!-- <select id="accessibility" name="accessibility" multiple require>
-        <option value="public">Public</option>
-        <option value="private">Privé</option>
-    </select><br> -->
+    <select multiple id="moduleId" name="moduleId[]" require>
+        <?php foreach ($modules as $module) :?>
+            <option value="<?=$module->getId()?>"><?=$module->getId()?> - <?= $module->getName()?></option>
+        <?php endforeach ;?>
+    </select><br>
 
     <label for="accessibility">Accessibilité:</label>
     <select id="accessibility" name="accessibility" required>
@@ -43,5 +37,5 @@ foreach ($modules as $module) {
         <option value="private">Privé</option>
     </select><br>
 
-    <!-- <input type="submit" value="Soumettre"> -->
+    <input type="submit" value="Soumettre">
 </form>
