@@ -21,34 +21,40 @@ class Student
         $this->birthDate = $birthDate;
     }
 
-    public function createStudent($firstName, $lastName, $mail, $birthDate)
+    public function createStudent($firstName, $lastName, $mail, $birthDate) : void
     {
-        $database = Database::getInstance();
-        return addNewStudentInDb($firstName, $lastName, $mail, $birthDate, $database);
+        Database::getInstance()->executeQuery("INSERT INTO Student (firstName, lastName, mail, birthDate) VALUES (?, ?, ?, ?)", [$firstName, $lastName, $mail, $birthDate]);
     }
-    public function modifyStudent($firstName, $lastName, $mail, $birthDate, $studentId)
+    public function modifyStudent($firstName, $lastName, $mail, $birthDate, $studentId) : void
     {
-        $database = Database::getInstance();
-        return modifystudentInDb($firstName, $lastName, $mail, $birthDate, $studentId, $database);
+        Database::getInstance()->executeQuery("UPDATE Student SET firstName = ?, lastName = ?, birthdate = ? WHERE studentId = ?", [$firstName, $lastName, $mail, $birthDate, $studentId]);
+        
     }
-    public function deleteStudent($studentId)
+    public function deleteStudent($studentId) : void
     {
-        $database = Database::getInstance();
-        return deleteStudentInDb($database, $studentId);
+        Database::getInstance()->executeQuery("DELETE FROM Student WHERE id = ?", [$studentId]);  
     }
-    public function getStudentList()
+    public function getStudentList() 
     {
-        $database = Database::getInstance();
-        return getStudentListInDb($database);
+        return Database::getInstance()->executeQuery("SELECT * FROM Student");
     }
     public function getStudentListByFormation($formationId)
     {
-        $database = Database::getInstance();
-        getStudentListInDbByFormation($database, $formationId);
+       return Database::getInstance()->executeQuery("
+        SELECT s.* FROM Student s
+        JOIN StudentPromotion sp ON s.studentId = sp.studentId
+        JOIN Promotion p ON sp.promotionId = p.promotionId
+        WHERE p.formationId = ?;
+    ", [$formationId]);
+
     }
     public function getStudentProfilDetails($studentId)
     {
-        $database = Database::getInstance();
-        getStudentProfilDetailsInDb($database, $studentId);
+        return Database::getInstance()->executeQuery("SELECT s.*, p.promotionId, p.promotionYears, p.startingDate, p.endingDate 
+        FROM Student s
+        JOIN StudentPromotion sp ON s.studentId = sp.studentId
+        JOIN Promotion p ON sp.promotionId = p.promotionId
+        WHERE s.studentId = ?", [$studentId]);
+    
     }
 }
