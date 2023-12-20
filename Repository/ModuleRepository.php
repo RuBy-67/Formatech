@@ -28,11 +28,12 @@ class ModuleRepository
 
     public function createModule(): void
     {
-    
+    //Insert just le module dans la table module
         $this->database
              ->executeQuery("INSERT INTO module (`formationId`, `name`, `durationFormationInMonth`) 
                             VALUES (?, ?, ?, ?, ?, ?)",
                             [null, ":". $this->module->getName(), ":" . $this->module->getDurationInHours()]
                         );
+             
     }
 }

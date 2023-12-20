@@ -23,10 +23,4 @@ class SpeakerRepository
                     ->fetchAll();
     }
 
-    public function getList(): array
-    {
-        return $this->database
-            ->executeQuery("SELECT * FROM speaker")
-            ->fetchAll();
-    }
 }
