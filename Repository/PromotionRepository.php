@@ -29,6 +29,24 @@ class PromotionRepository
             ->fetchAll();
     }
 
+    public function getPromotionDetailsInDb($promotionId): array
+    {
+        return $this->database
+            ->executeQuery("SELECT
+                            p.promotionId as promotion_promotionId,
+                            p.formationId as promotion_formationId,
+                            p.promotionYears as promotion_promotionYear,
+                            p.startingDate as promotion_startingDate,
+                            p.endingDate as promotion_endingDate
+                        FROM Promotion p
+                        WHERE p.promotionId = :promotionId",
+                [
+                    'promotionId' => $promotionId
+                ]
+            )
+            ->fetchAll();
+    }
+
     public function createPromotion($newPromotion): void
     {
         $this->database->executeQuery(
