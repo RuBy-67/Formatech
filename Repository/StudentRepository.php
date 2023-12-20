@@ -86,12 +86,12 @@ class StudentRepository
     }
 
 
-    function deleteStudentInDb(Student $student): void
+    function deleteStudentInDb(int $student): void
     {
         $this->database
             ->executeQuery("DELETE FROM student WHERE studentId = :studentId",
                 [
-                    'studentId' => $student->getId()
+                    'studentId' => $student
                 ]
             );
     }

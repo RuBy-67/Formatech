@@ -52,12 +52,12 @@ class PromotionRepository
             );
     }
 
-    function deletePromotionInDb(Promotion $promotion): void
+    function deletePromotionInDb($promotion): void
     {
         $this->database
             ->executeQuery("DELETE FROM Promotion WHERE promotionId = :promotionId",
                 [
-                    'promotionId' => $promotion->getId()
+                    'promotionId' => $promotion
                 ]
             );
     }
