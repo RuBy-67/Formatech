@@ -34,31 +34,39 @@ class StudentRepository
 
 
 
-    public function createStudent(int $promotionId): void
+    public function createStudent(Student $student, int $promotionId): void
     {
-        $this->database
-            ->executeQuery("INSERT INTO student (`studentId`, `firstName`, `lastName`, `mail`, `password`, `birthDate`) 
-                        VALUES (?, ?, ?, ?, ?, ?)",
-                [null, ":" . $this->student->getFirsName(), ":" . $this->student->getLastName(), ":" . $this->student->getMail(), ":" . $this->student->getPassword(), ":" . $this->student->getBirthDate()]
-            );
+        // Inserting the student into the 'student' table
+        $this->database->executeQuery(
+            "INSERT INTO student (`firstName`, `lastName`, `mail`, `password`, `birthDate`) 
+        VALUES (?, ?, ?, ?, ?)",
+            [
+                $student->getFirstName(),
+                $student->getLastName(),
+                $student->getMail(),
+                $student->getPassword(),
+                $student->getBirthDate()
+            ]
+        );
 
-        // Récupérer l'ID de l'étudiant que vous venez de créer
+        // Get the ID of the newly created student
         $studentId = $this->database->getLastInsertId();
 
-        // Associer l'étudiant à la promotion dans la table de liaison
-        $this->database
-            ->executeQuery("INSERT INTO studentpromotion (`studentId`, `promotionId`) 
-                        VALUES (?, ?)",
-                [":" . $studentId, ":" . $promotionId]
-            );
+        // Associate the student with the promotion in the 'studentpromotion' table
+        $this->database->executeQuery(
+            "INSERT INTO studentpromotion (`studentId`, `promotionId`) 
+        VALUES (?, ?)",
+            [$studentId, $promotionId]
+        );
     }
+
 
     function modifyStudentInDb(Student $student, int $promotionId): void
     {
         $this->database
             ->executeQuery("UPDATE student SET firstName = :firstName, lastName = :lastName, mail = :mail, password = :password, birthDate = :birthDate WHERE studentId = :studentId",
                 [
-                    'firstName' => $student->getFirsName(),
+                    'firstName' => $student->getFirstName(),
                     'lastName' => $student->getLastName(),
                     'mail' => $student->getMail(),
                     'password' => $student->getPassword(),
@@ -66,7 +74,7 @@ class StudentRepository
                     'studentId' => $student->getId()
                 ]
             );
-    
+
         // Mettre à jour l'association de l'étudiant à la promotion dans la table de liaison
         $this->database
             ->executeQuery("UPDATE StudentPromotion SET promotionId = :promotionId WHERE studentId = :studentId",
@@ -76,7 +84,7 @@ class StudentRepository
                 ]
             );
     }
-    
+
 
     function deleteStudentInDb(Student $student): void
     {
