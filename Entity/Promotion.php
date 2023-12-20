@@ -1,36 +1,110 @@
-<?php 
+<?php
 
 namespace Entity;
-use DB\Database;
 
-class Promotion{
+class Promotion
+{
+    private int $id;
     private int $formationId;
-    private string $promotionYears;
-    private int $startingDate;
-    private int $endingDate;
+    private int $promotionYear;
+    private string $startingDate;
+    private string $endingDate;
 
-    public function __construct($formationId, $promotionYears, $startingDate, $endingDate){
-        $this->formations= $formationId;
-        $this->promotionYears = $promotionYears;
-        $this->startingDate = $startingDate;
-        $this->endingDate = $endingDate;
-    }
 
-    public function createPromotion ($promotionYears, $startingDate, $endingDate, $formation) {
-        $database = Database::getInstance();
-        return addNewPromotionInDb($formation, $promotionYears, $startingDate, $endingDate, $database); 
-    }
-    public function modifyPromotion ($promotionId ,$promotionYears, $startingDate, $endingDate, $formation) {
-        $database = Database::getInstance();
-        return modifyPromotionInDb($promotionId ,$promotionYears, $startingDate, $endingDate, $formation, $database);
-    }
-    public function deletePromotion ($promotionId) {
-        $database = Database::getInstance();
-        return deletePromotionInDb($database, $promotionId);
-    }
-    public function getPromotionList () {
-        $database = Database::getInstance();
-        return getPromotionListInDb($database);
+    public function getId(): int
+    {
+        return $this->id;
     }
 
+    public function getFormationId(): int
+    {
+        return $this->formationId;
+    }
+
+    public function getPromotionYear(): int
+    {
+        return $this->promotionYear;
+    }
+    public function getStartingDate(): string
+    {
+        return $this->startingDate;
+    }
+
+    public function getEndingDate(): string
+    {
+        return $this->endingDate;
+    }
+
+
+    public function setId(int $id): self
+    {
+        $this->id = $this->isOnlyNumericCharacters($id) ?: null;
+
+        return $this;
+    }
+
+    public function setFormationId(int $formationId): self
+    {
+        $this->formationId = $this->isOnlyNumericCharacters($formationId) ?: null;
+
+        return $this;
+    }
+
+    public function setPromotionYear(int $promotionYear): self
+    {
+        $this->promotionYear = $this->isOnlyNumericCharacters($promotionYear) ?: null;
+
+        return $this;
+    }
+
+    public function setStartingDate(string $startingDate): self
+    {
+        $this->startingDate = $this->isOnlyDateCharacter($startingDate) ?: null;
+
+        return $this;
+    }
+
+    public function setEndingDate(string $endingDate): self
+    {
+        $this->endingDate = $this->isOnlyDateCharacter($endingDate) ?: null;
+
+        return $this;
+    }
+
+
+    //TODO mettre en place les checker de format comme dans la classe formation
+    //* Format check method
+    public function isOnlyAlphabeticCharacters($stringToCheck): bool
+    {
+        $regex = '/^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/u';
+
+        if (!preg_match($regex, $stringToCheck)) {
+            echo "Erreur dans la saisie merci de recommencer";
+            exit;
+        }
+        return true;
+    }
+
+    public function isOnlyNumericCharacters($stringToCheck): bool
+    {
+        $regex = '/^[0-9]+$/';
+
+        if (!preg_match($regex, $stringToCheck)) {
+            echo "Erreur dans la saisie merci de recommencer";
+            exit;
+        }
+        return true;
+    }
+    public function isOnlyDateCharacter($dateToCheck): bool
+    {
+        // Le motif regex pour le format "dd-mm-aaaa"
+        $regex = '/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/';
+        var_dump($dateToCheck);
+        if (!preg_match($regex, $dateToCheck)) {
+            echo "Erreur dans la saisie de la date, merci de recommencer.";
+            return false;
+        }
+
+        return true;
+    }
 }

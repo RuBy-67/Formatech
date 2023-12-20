@@ -2,52 +2,138 @@
 
 namespace Entity;
 
-use DB\Database;
-
 class Student
 {
+    private int $id;
     private string $firstName;
     private string $lastName;
     private string $mail;
     private int $birthDate;
-    private int $studentId;
+    private string $password;
 
-    public function __construct($studentId, $firstName, $lastName, $mail, $birthDate)
+    public function getId(): int
     {
-        $this->studentId = $studentId;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->mail = $mail;
-        $this->birthDate = $birthDate;
+        return $this->id;
     }
 
-    public function createStudent($firstName, $lastName, $mail, $birthDate)
+    public function getFirsName(): string
     {
-        $database = Database::getInstance();
-        return addNewStudentInDb($firstName, $lastName, $mail, $birthDate, $database);
+        return $this->firstName;
     }
-    public function modifyStudent($firstName, $lastName, $mail, $birthDate, $studentId)
+    public function getLastName(): string
     {
-        $database = Database::getInstance();
-        return modifystudentInDb($firstName, $lastName, $mail, $birthDate, $studentId, $database);
+        return $this->lastName;
     }
-    public function deleteStudent($studentId)
+
+    public function getmail(): string
     {
-        $database = Database::getInstance();
-        return deleteStudentInDb($database, $studentId);
+        return $this->mail;
     }
-    public function getStudentList()
+    public function getBirthDate(): string
     {
-        $database = Database::getInstance();
-        return getStudentListInDb($database);
+        return $this->birthDate;
     }
-    public function getStudentListByFormation($formationId)
+    public function getPassword(): string
     {
-        $database = Database::getInstance();
-        getStudentListInDbByFormation($database, $formationId);
+        return $this->password;
     }
-    public function getStudentProfilDetails($studentId){
-        $database = Database::getInstance();
-        getStudentProfilDetailsInDb($database, $studentId);
+
+    public function setId(int $id): self
+    {
+        $this->id = $this->isOnlyNumericCharacters($id) ?: null;
+
+        return $this;
     }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $this->isOnlyAlphabeticCharacters($firstName) ? ucfirst(strtolower($firstName)) : null;
+
+        return $this;
+    }
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $this->isOnlyAlphabeticCharacters($lastName) ? ucfirst(strtolower($lastName)) : null;
+
+        return $this;
+    }
+
+    public function setBirthDate(int $birthDate): self
+    {
+        $this->birthDate = $this->isOnlyNumericCharacters($birthDate) ?: null;
+
+        return $this;
+    }
+
+
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $this->isEmailFormatCorrect($mail) ? ucfirst(strtolower($mail)) : null;
+
+        return $this;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $this->isSecureParameter($password) ?: null;
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $this->password = $hashedPassword;
+        return $this;
+    }
+
+
+    //TODO mettre en place les checker de format comme dans la classe formation
+    //* Format check method
+    public function isOnlyAlphabeticCharacters($stringToCheck): bool
+    {
+        $regex = '/^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/u';
+
+        if (!preg_match($regex, $stringToCheck)) {
+            echo "Erreur dans la saisie merci de recommencer";
+            exit;
+        }
+        return true;
+    }
+
+    public function isOnlyNumericCharacters($stringToCheck): bool
+    {
+        $regex = '/^[0-9]+$/';
+
+        if (!preg_match($regex, $stringToCheck)) {
+            echo "Erreur dans la saisie merci de recommencer";
+            exit;
+        }
+        return true;
+    }
+    
+
+    public function isSecureParameter($stringToCheck): bool
+    {
+        $hasMinLength = strlen($stringToCheck) >= 8;
+        $hasUpperCase = preg_match('/[A-Z]/', $stringToCheck);
+        $hasLowerCase = preg_match('/[a-z]/', $stringToCheck);
+        $hasDigit = preg_match('/\d/', $stringToCheck);
+        $hasSpecialChar = preg_match('/[!@#$%^&*()\-_=+\[\]{}|;:\'",.<>?\/]/', $stringToCheck);
+        $hasNoSpace = !preg_match('/\s/', $stringToCheck);
+
+        if (!$hasMinLength || !$hasUpperCase || !$hasLowerCase || !$hasDigit || !$hasSpecialChar || !$hasNoSpace) {
+            echo "Erreur dans la saisie, merci de recommencer.";
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isEmailFormatCorrect($emailToCheck){
+        $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+
+         if (!preg_match($regex, $emailToCheck)) {
+            echo "Erreur dans la saisie merci de recommencer";
+            exit;
+        } 
+        return true;
+    }
+
 }
