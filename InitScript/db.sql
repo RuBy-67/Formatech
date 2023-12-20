@@ -44,41 +44,40 @@ CREATE TABLE Student (
 );
 
 
--- Table Formation --
+-- Table Formation 
 CREATE TABLE Formation (
     formationId INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
     durationFormationInMonth INT,
     abbreviation VARCHAR(255),
     rncpLvl INT,
-    accessibility BOOL,
+    accessibility BOOL
 );
 
--- Table Promotion -- 
+-- Table Promotion 
 CREATE TABLE Promotion (
     promotionId INT PRIMARY KEY AUTO_INCREMENT,
     promotionYears INT,
     startingDate DATE,
-    endingDate DATE,
-    FOREIGN KEY (formationId) REFERENCES Formation (formationId)
+    endingDate DATE
 );
 
--- Table Pivot Module/SpeakerId --
+-- Table Pivot Module/SpeakerId 
 CREATE TABLE ModuleSpeaker (
     speakerId INT,
     moduleId INT,
     FOREIGN KEY (speakerId) REFERENCES Speaker (speakerId)ON DELETE CASCADE,
     FOREIGN KEY (moduleId) REFERENCES Module (moduleId)ON DELETE CASCADE
 );
--- Table Pivot Module/Formation --
+-- Table Pivot Module/Formation 
 CREATE TABLE ModuleFormation (
     moduleId INT,
     formationId INT,
-    FOREIGN KEY (formationId) REFERENCES Formation (formationId)ON DELETE CASCADE,,
-    FOREIGN KEY (moduleId) REFERENCES Module (moduleId) ON DELETE CASCADE,
+    FOREIGN KEY (formationId) REFERENCES Formation (formationId)ON DELETE CASCADE,
+    FOREIGN KEY (moduleId) REFERENCES Module (moduleId) ON DELETE CASCADE
 );
 
--- Table Pivot Student/Promotion ---
+-- Table Pivot Student/Promotion 
 CREATE TABLE StudentPromotion (
     studentId INT,
     promotionId INT,
