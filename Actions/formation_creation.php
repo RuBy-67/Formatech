@@ -7,9 +7,10 @@ $name = $_POST['name'];
 $durationInMonth = $_POST['durationFormationInMonth'];
 $abbreviation = $_POST['abbreviation'];
 $rncpLvl = $_POST['rncpLvl'];
-$moduleIdString = $_POST['moduleId'];
 $accessibility = $_POST['accessibility'];
 $selectedModuleIds = isset($_POST['moduleId']) ? $_POST['moduleId'] : array();
+
+
 
 $formationRepository = new FormationRepository();
 $formationRepository->createFormation($name, $durationInMonth, $abbreviation, $rncpLvl, $accessibility, $selectedModuleIds);

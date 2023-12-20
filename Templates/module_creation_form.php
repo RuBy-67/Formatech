@@ -1,9 +1,13 @@
 <?php
 
 use Mapper\SpeakerMapper;
+use Mapper\FormationMapper;
 
 $speakerMapper = new SpeakerMapper();
 $speakers = $speakerMapper->getList();
+
+$formationMapper = new FormationMapper();
+$formations = $formationMapper->getList();
 ?>
 
 <h2>Formulaire de creation de Module</h2>
@@ -21,7 +25,14 @@ $speakers = $speakerMapper->getList();
         <?php foreach ($speakers as $speaker) :?>
             <option value="<?=$speaker->getId()?>"><?=$speaker->getId()?> - <?= $speaker->getFirstName()?> <?= $speaker->getLastName()?></option>
         <?php endforeach?>
-        </select><br>
+    </select><br>
+    
+    <label for="formationId">Ids des Formations dont le module est issue:</label>
+    <select multiple id="formationId" name="formationId[]" require>
+        <?php foreach ($formations as $formation) :?>
+            <option value="<?=$formation->getId()?>"><?=$formation->getId()?> - <?= $formation->getName()?></option>
+        <?php endforeach?>
+    </select><br>
 
     <input type="submit" value="Crée le module">
 </form>

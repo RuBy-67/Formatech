@@ -25,7 +25,7 @@ $modules = $moduleMapper->getList();
 
     <label for="accessibility">Modules</label>
 
-    <select multiple id="moduleId" name="moduleId[]" require>
+    <select multiple id="moduleId" name="moduleId[]">
         <?php foreach ($modules as $module) :?>
             <option value="<?=$module->getId()?>"><?=$module->getId()?> - <?= $module->getName()?></option>
         <?php endforeach ;?>

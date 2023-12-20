@@ -67,6 +67,15 @@ class ModuleRepository
                                     [$idNewModule['moduleId'], $speakerId]
                                     );
         }
+
+        foreach($module->getFormations() as $formationId){
+          
+            $this   ->database
+                    ->executeQuery("INSERT INTO moduleformation (`moduleId`,`formationId`) 
+                                    VALUES (?, ?)",
+                                    [$idNewModule['moduleId'], $formationId]
+                                    );
+        }
     }
 
     public function deleteModule(int $id): void

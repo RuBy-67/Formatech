@@ -8,6 +8,6 @@ $moduleIdToDelete = $_POST['moduleIdToDelete'];
 
 $moduleRepository = new ModuleRepository();
 $moduleRepository->deletemodule($moduleIdToDelete);
-exit;
+
 header("Location: {$_SERVER['HTTP_REFERER']}");
 exit;
