@@ -68,4 +68,31 @@ class ModuleRepository
                                     );
         }
     }
+
+    public function deleteModule(int $id): void
+    {
+        //Delete into Table Formation
+        $this   ->database
+                ->executeQuery("DELETE FROM `module`
+                                WHERE `moduleId` = :moduleId"
+                                ,[
+                                    ':moduleId' => $id
+                                ]);
+        //Delete into pivot table moduleSpeaker
+        $this   ->database
+                ->executeQuery("DELETE FROM `modulespeaker`
+                                WHERE `moduleId` = :moduleId"
+                                ,[
+                                    ':moduleId' => $id
+                                ]
+                            );
+        //Delete into pivot table moduleformation
+        $this   ->database
+                ->executeQuery("DELETE FROM `moduleformation`
+                                WHERE `moduleId` = :moduleId"
+                                ,[
+                                    ':moduleId' => $id
+                                ]
+                            );
+    }
 }

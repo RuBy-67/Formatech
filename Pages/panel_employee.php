@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "\..\\Autoloader.php");
+
 ?>
 <form method="get">
     <label for="action">Action à effectuer:</label>
@@ -7,6 +8,7 @@ require_once(__DIR__ . "\..\\Autoloader.php");
         <option value="formation_creation">Crée une nouvelle formation</option>
         <option value="module_creation">Crée un nouveau Module</option>
         <option value="formation_delete">Supprimer une formation</option>
+        <option value="module_delete">Supprimer un module</option>
     </select><br>
     <input type="submit" value="Acceder au panel de gestion de l'action">
 </form>

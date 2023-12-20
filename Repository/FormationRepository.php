@@ -95,7 +95,5 @@ class FormationRepository
                                     ':formationId' => $id
                                 ]
                             );
-
-        
     }
 }
