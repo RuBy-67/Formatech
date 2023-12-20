@@ -7,7 +7,7 @@ use Entity\Module;
 class ModuleRepository
 {
     private Database $database;
-    private Module $module;
+  
 
     public function __construct()
     {
@@ -38,8 +38,10 @@ class ModuleRepository
     public function createModule(string $name, int $durationInHours, array $speakerIDs): void
     {
         
-        $module = new Module($name, $durationInHours, $speakerIDs);
-
+        $module = new Module();
+        $module ->setName($name)
+                ->setDurationInHours($durationInHours)
+                ->setSpeakers($speakerIDs);
         //Insert just le module dans la table module
         $this->database
              ->executeQuery("INSERT INTO module (`moduleId`, `name`, `durationModuleInHours`) 

@@ -58,7 +58,7 @@ class formationRepository
             $this   ->database
                     ->executeQuery("INSERT INTO moduleformation (`moduleId`,`formationId`) 
                                     VALUES (?, ?)",
-                                    [$idNewFormation['formationId'], $moduleId]
+                                    [$moduleId, $idNewFormation['formationId']]
                                     );
         }
     }

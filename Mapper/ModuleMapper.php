@@ -35,10 +35,10 @@ class ModuleMapper
             }
            
                 
-                $entity->setId($moduleId)
-                    ->setName($moduleFromDb['module_name'])
-                    ->setDurationInHours($moduleFromDb['module_durationModuleInHours'])
-                    ->addSpeaker($this->speakerMapper->getOneByArray($moduleFromDb));
+                $entity ->setId($moduleId)
+                        ->setName($moduleFromDb['module_name'])
+                        ->setDurationInHours($moduleFromDb['module_durationModuleInHours'])
+                        ->addSpeaker($this->speakerMapper->getOneByArray($moduleFromDb));
 
             $moduleEntities[$entity->getId()] = $entity;
         }
