@@ -8,6 +8,7 @@ use Entity\Module;
 //Transformer la Donnée de la Database en entité
 class ModuleMapper
 {
+    private static ?ModuleMapper $instance = null;
     private ModuleRepository $moduleRepository;
     private SpeakerMapper $speakerMapper;
 
@@ -16,11 +17,23 @@ class ModuleMapper
         $this->moduleRepository = new ModuleRepository();
     }
 
+
+    public static function getInstance(): ModuleMapper
+    {
+        if (self::$instance === null) {
+            self::$instance = new ModuleMapper();
+        }
+
+        return self::$instance;
+    }
+
     /**
      * @return Module[]
      */
     public function getList(): array
-    {   $this->speakerMapper = new SpeakerMapper();
+    {  
+        $this->speakerMapper = new SpeakerMapper();
+
         $moduleArrayFromDb = $this->moduleRepository->getList();
         $moduleEntities = [];
 

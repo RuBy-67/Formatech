@@ -8,19 +8,30 @@ use Entity\Speaker;
 
 class SpeakerMapper
 {
+    private static ?SpeakerMapper $instance = null;
     private SpeakerRepository $speakerRepository;
     private ModuleMapper $moduleMapper;
 
     public function __construct()
     {
         $this->speakerRepository = new SpeakerRepository();
+        $this->moduleMapper = ModuleMapper::getInstance();
+    }
+
+    public static function getInstance(): SpeakerMapper
+    {
+        if (self::$instance === null) {
+            self::$instance = new SpeakerMapper();
+        }
+
+        return self::$instance;
     }
 
     /**
      * @return Speakers[]
      */
     public function getList(): array
-    {   $this->moduleMapper = new ModuleMapper();
+    {   
         $speakerArrayFromDb = $this->speakerRepository->getList();
         $speakerEntities = [];
 

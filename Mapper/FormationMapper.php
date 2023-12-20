@@ -4,6 +4,8 @@ namespace Mapper;
 
 use Repository\FormationRepository;
 use Entity\Formation;
+use Mapper\ModuleMapper;
+
 //Transformer la Donnée de la Database en entité
 class FormationMapper
 {
@@ -13,6 +15,7 @@ class FormationMapper
     public function __construct()
     {
         $this->formationRepository = new FormationRepository();
+        $this->moduleMapper = ModuleMapper::getInstance();
     }
 
     /**
@@ -20,7 +23,7 @@ class FormationMapper
      */
     public function getList(): array
     {
-        $this->moduleMapper = new ModuleMapper();
+
         $formationArrayFromDb = $this->formationRepository->getList();
         $formationEntities = [];
 
@@ -34,9 +37,10 @@ class FormationMapper
                 $entity = new Formation();
             }
             
+            
             $entity->setId($formationId)
                    ->setName($formationFromDb['formation_name'])
-                   ->setDurationInHours($formationFromDb['formation_durationformationInHours'])
+                   ->setDurationInMonth($formationFromDb['formation_durationInMonth'])
                    ->addModule($this->moduleMapper->getOneByArray($formationFromDb));
 
             $formationEntities[$entity->getId()] = $entity;

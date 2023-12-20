@@ -16,15 +16,6 @@ class Formation
      */
     private array $modules = [];
 
-    public function __construct($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $accessibility, $modules){
-        $this->setName($name);
-        $this->setDurationInMonth($durationFormationInMonth);
-        $this->setAbbreviation($abbreviation);
-        $this->setRncpLvl($rncpLvl);
-        $this->setAccessibility($accessibility);
-        $this->modules = $modules;
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -66,10 +57,14 @@ class Formation
   
 
 
- 
 
+     public function setId(int $id): self
+    {
+      $this->id = $this->isOnlyNumericCharacters($id) ? ucfirst(strtolower($id)) : null;
 
-    //* Set element
+      return $this;
+    }
+
     public function setName(string $name): self
     {
       $this->name = $this->isOnlyAlphabeticCharacters($name) ? ucfirst(strtolower($name)) : null;
