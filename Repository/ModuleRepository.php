@@ -17,23 +17,53 @@ class ModuleRepository
     public function getList(): array
     {
         return $this->database
-                    ->executeQuery("SELECT m.moduleId as module_moduleId, m.name as module_name, m.durationModuleInHours as module_durationModuleInHours,
-                                    ms.speakerId as modulespeaker_speakerId, ms.moduleId as modulespeaker_moduleId,
-                                    s.speakerId as speaker_speakerId, s.firstName as speaker_firstName, s.lastName as speaker_lastName, s.mail as speaker_mail, s.password as speaker_password
+                    ->executeQuery("SELECT 
+                                        m.moduleId as module_moduleId, 
+                                        m.name as module_name, 
+                                        m.durationModuleInHours as module_durationModuleInHours,
+                                        ms.speakerId as modulespeaker_speakerId, 
+                                        ms.moduleId as modulespeaker_moduleId,
+                                        s.speakerId as speaker_speakerId, 
+                                        s.firstName as speaker_firstName, 
+                                        s.lastName as speaker_lastName, 
+                                        s.mail as speaker_mail, 
+                                        s.password as speaker_password
                                     FROM `module` m
                                     JOIN modulespeaker ms ON m.moduleId = ms.moduleId
                                     JOIN speaker s ON s.speakerId = ms.speakerId;")
                     ->fetchAll();
     }
 
-    public function createModule(): void
+
+    public function createModule(string $name, int $durationInHours, array $speakerIDs): void
     {
-    //Insert just le module dans la table module
+        
+        $module = new Module($name, $durationInHours, $speakerIDs);
+
+        //Insert just le module dans la table module
         $this->database
-             ->executeQuery("INSERT INTO module (`formationId`, `name`, `durationFormationInMonth`) 
-                            VALUES (?, ?, ?, ?, ?, ?)",
-                            [null, ":". $this->module->getName(), ":" . $this->module->getDurationInHours()]
+             ->executeQuery("INSERT INTO module (`moduleId`, `name`, `durationModuleInHours`) 
+                            VALUES (?, ?, ?)",
+                            [null, $module->getName(), $module->getDurationInHours()]
                         );
-             
+    
+        $idNewModule = $this ->database
+                                ->executeQuery("SELECT moduleId
+                                                FROM module
+                                                WHERE name = :name
+                                                AND durationModuleInHours = :durationModuleInHours
+                                                " ,[':name' => $name,
+                                                    ':durationModuleInHours' => $durationInHours,
+                                                  ])
+                                ->fetch();
+        
+        foreach($module->getSpeakers() as $speakerId){
+          
+            $this   ->database
+                    ->executeQuery("INSERT INTO modulespeaker (`moduleId`,`speakerId`) 
+                                    VALUES (?, ?)",
+                                    [$idNewModule['moduleId'], $speakerId]
+                                    );
+        }
     }
 }

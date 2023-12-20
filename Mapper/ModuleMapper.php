@@ -14,14 +14,13 @@ class ModuleMapper
     public function __construct()
     {
         $this->moduleRepository = new ModuleRepository();
-        $this->speakerMapper = new SpeakerMapper();
     }
 
     /**
      * @return Module[]
      */
     public function getList(): array
-    {
+    {   $this->speakerMapper = new SpeakerMapper();
         $moduleArrayFromDb = $this->moduleRepository->getList();
         $moduleEntities = [];
 
@@ -34,15 +33,25 @@ class ModuleMapper
             } else {
                 $entity = new Module();
             }
-            
-            $entity->setId($moduleId)
-                   ->setName($moduleFromDb['module_name'])
-                   ->setDurationInHours($moduleFromDb['module_durationModuleInHours'])
-                   ->addSpeaker($this->speakerMapper->getOneByArray($moduleFromDb));
+           
+                
+                $entity->setId($moduleId)
+                    ->setName($moduleFromDb['module_name'])
+                    ->setDurationInHours($moduleFromDb['module_durationModuleInHours'])
+                    ->addSpeaker($this->speakerMapper->getOneByArray($moduleFromDb));
 
             $moduleEntities[$entity->getId()] = $entity;
         }
 
         return $moduleEntities;
     }
+
+    public function getOneByArray(array $moduleDataFromDb): Module
+    {
+        $entity = new Module();
+        $entity->setName($moduleDataFromDb['module_name']);     
+
+        return $entity;
+    }
+    
 }

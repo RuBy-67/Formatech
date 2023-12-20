@@ -4,7 +4,6 @@ use Mapper\SpeakerMapper;
 
 $speakerMapper = new SpeakerMapper();
 $speakers = $speakerMapper->getList();
-
 ?>
 
 <h2>Formulaire de creation de Module</h2>
@@ -20,9 +19,9 @@ $speakers = $speakerMapper->getList();
     <label for="speakerId">Ids des Intervenants:</label>
     <select multiple id="speakerId" name="speakerId[]" require>
         <?php foreach ($speakers as $speaker) :?>
-            <option value="<?=$speaker->getId()?>"><?=$speaker->getId()?> - <?= $speaker->getName()?></option>
-        <?php endforeach ;?>
-    </select><br>
+            <option value="<?=$speaker->getId()?>"><?=$speaker->getId()?> - <?= $speaker->getFirstName()?> <?= $speaker->getLastName()?></option>
+        <?php endforeach?>
+        </select><br>
 
     <input type="submit" value="Crée le module">
 </form>

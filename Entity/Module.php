@@ -15,6 +15,15 @@ class Module{
      */
     private array $speakers = [];
 
+    
+    public function __construct($name, $durationInHours, $speakeriD){
+        $this->setName($name);
+        $this->setDurationInHours($durationInHours);
+        $this->setSpeakers($speakeriD);
+    }
+
+    
+
     public function getId(): int
     {
         return $this->id;

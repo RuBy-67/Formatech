@@ -5,7 +5,7 @@ use Db\Database;
 
 class Formation
 {
-    private int $id;
+    private ?int $id;
     private string $name;
     private int $durationInMonth;
     private string $abbreviation;
@@ -18,7 +18,7 @@ class Formation
 
 
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -49,16 +49,16 @@ class Formation
     }
 
     /**
-     * @return Speaker[]
+     * @return Module[]
      */
-    public function getSpeakers(): array
+    public function getModules(): array
     {
-        return $this->speakers;
+        return $this->modules;
     }
 
     public function __construct($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $accessibility, $modules){
         $this->setName($name);
-        $this->setDurationFormationInMonth($durationFormationInMonth);
+        $this->setDurationInMonth($durationFormationInMonth);
         $this->setAbbreviation($abbreviation);
         $this->setRncpLvl($rncpLvl);
         $this->setAccessibility($accessibility);
@@ -77,9 +77,9 @@ class Formation
       return $this;
     }
 
-    public function setDurationFormationInMonth(int $durationFormationInMonth): self
+    public function setDurationInMonth(int $durationInMonth): self
     {
-        $this->durationFormationInMonth = $this->isOnlyNumericCharacters($durationFormationInMonth) ? ucfirst(strtolower($durationFormationInMonth)) : null;
+        $this->durationInMonth = $this->isOnlyNumericCharacters($durationInMonth) ? ucfirst(strtolower($durationInMonth)) : null;
 
         return $this;
     }

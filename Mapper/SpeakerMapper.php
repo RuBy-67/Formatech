@@ -3,11 +3,13 @@
 namespace Mapper;
 
 use Repository\SpeakerRepository;
+use Mapper\ModuleMapper;
 use Entity\Speaker;
 
 class SpeakerMapper
 {
     private SpeakerRepository $speakerRepository;
+    private ModuleMapper $moduleMapper;
 
     public function __construct()
     {
@@ -15,10 +17,10 @@ class SpeakerMapper
     }
 
     /**
-     * @return Module[]
+     * @return Speakers[]
      */
     public function getList(): array
-    {
+    {   $this->moduleMapper = new ModuleMapper();
         $speakerArrayFromDb = $this->speakerRepository->getList();
         $speakerEntities = [];
 
@@ -29,17 +31,20 @@ class SpeakerMapper
             if (isset($speakerEntities[$speakerId])) {
                 $entity = $speakerEntities[$speakerId];
             } else {
-                $entity = new speaker();
+                $entity = new Speaker();
             }
-            
-            $entity->setId($speakerId)
-                   ->setName($speakerFromDb['speaker_name'])
-                   ->setDurationInHours($speakerFromDb['speaker_durationspeakerInHours'])
-                   ->addSpeaker($this->speakerMapper->getOneByArray($speakerFromDb));
+                
+                $entity ->setId($speakerId)
+                        ->setFirstName($speakerFromDb['speaker_firstName'])
+                        ->setLastName($speakerFromDb['speaker_lastName'])
+                        ->setMail($speakerFromDb['speaker_mail'])
+                        ->addModule($this->moduleMapper->getOneByArray($speakerFromDb));
 
-            $speakerEntities[$entity->getId()] = $entity;
+                $speakerEntities[$entity->getId()] = $entity;
+            
         }
 
+        
         return $speakerEntities;
     }
 

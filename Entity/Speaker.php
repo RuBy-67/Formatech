@@ -68,7 +68,7 @@ class Speaker {
 
     public function setMail(string $mail): self
     {
-        $this->mail = $this->isOnlyAlphabeticCharacters($mail) ? ucfirst(strtolower($mail)) : null;
+        $this->mail = $this->isEmailFormatCorrect($mail) ? ucfirst(strtolower($mail)) : null;
 
         return $this;
     }
@@ -85,8 +85,10 @@ class Speaker {
 
     public function addModule(Module $module): self
     {
-        // TODO : Vérifier que le module n'existe pas deja dans le tableau avant de l'ajouter
+        
+       if (!in_array($module, $this->modules, true)) {
         $this->modules[] = $module;
+        }
 
         return $this;
     }
@@ -98,7 +100,7 @@ class Speaker {
         $regex = '/^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/u';
 
         if (!preg_match($regex, $stringToCheck)) {
-            echo "Erreur dans la saisie merci de recommencer";
+            echo "Erreur dans la saisie de {$stringToCheck} merci de recommencer";
             exit;
         } 
         return true;
@@ -109,6 +111,16 @@ class Speaker {
         $regex = '/^[0-9]+$/';
 
         if (!preg_match($regex, $stringToCheck)) {
+            echo "Erreur dans la saisie merci de recommencer";
+            exit;
+        } 
+        return true;
+    }
+
+    public function isEmailFormatCorrect($emailToCheck){
+        $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+
+         if (!preg_match($regex, $emailToCheck)) {
             echo "Erreur dans la saisie merci de recommencer";
             exit;
         } 

@@ -1,23 +1,16 @@
 <?php
 require_once(__DIR__ . "\..\\Autoloader.php");
-require_once(__DIR__ . "\..\\Functions\index.php");
 
 
-
-use Entity\Employee;
-use Entity\Module;
+use Repository\ModuleRepository;
 
 $name = $_POST['name'];
-$durationFormationInHours = $_POST['durationFormationInHours'];
-$speakerIDsString = $_POST['speakerIDs'];
+$durationInHours = $_POST['durationFormationInHours'];
+$selectedSpeakerIds = isset($_POST['speakerId']) ? $_POST['speakerId'] : array();
 
-
-
-checkIfStringOfIds($speakerIDsString);
-$speakerIdsArray = splitIdsInStringIntoArray($speakerIDsString);
-$formation = new Module($name, $durationFormationInHours,$speakerIdsArray);
-
+$moduleRepository = new ModuleRepository();
+$moduleRepository->createModule($name, $durationInHours, $selectedSpeakerIds);
+exit;
+header("Location: {$_SERVER['HTTP_REFERER']}");
 exit;
 
-//! TODO: cabler avec BD
-Employee::createModule($name, $durationFormationInHours,$speakerIdsArray);
