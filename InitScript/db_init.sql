@@ -43,8 +43,8 @@ CREATE TABLE Student (
 CREATE TABLE StudentPromotion (
     studentId INT,
     promotionId INT,
-    FOREIGN KEY (studentId) REFERENCES Student (studentId),
-    FOREIGN KEY (promotionId) REFERENCES Promotion (promotionId)
+    FOREIGN KEY (studentId) REFERENCES Student (studentId) ON DELETE CASCADE,
+    FOREIGN KEY (promotionId) REFERENCES Promotion (promotionId)ON DELETE CASCADE
 );
 
 -- Table Formation

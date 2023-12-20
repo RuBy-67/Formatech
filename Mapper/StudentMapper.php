@@ -39,7 +39,8 @@ class StudentMapper
                 ->setLastName($studentFromDb['student_lastName'])
                 ->setMail($studentFromDb['student_mail'])
                 ->setPassword($studentFromDb['student_password'])
-                ->setBirthDate($studentFromDb['student_birthDate']);
+                ->setBirthDate($studentFromDb['student_birthDate'])
+                ->setPromotionId($studentFromDb['student_promotionId']);
 
 
             $studentEntities[$entity->getId()] = $entity;

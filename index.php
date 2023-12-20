@@ -1,12 +1,12 @@
 <?php 
-use Entity\Promotion;
-use Mapper\PromotionMapper;
+use Entity\Student;
+use Mapper\StudentMapper;
 
 require_once(__DIR__ . "./Autoloader.php");
-require_once(__DIR__ . "./Mapper/PromotionMapper.php");
+require_once(__DIR__ . "./Mapper/StudentMapper.php");
 
-// Instancier la classe PromotiontMapper
-$PromotionMapper = new PromotionMapper();
+// Instancier la classe StudenttMapper
+$StudentMapper = new StudentMapper();
 
 // Appeler la méthode getList
-var_dump ($PromotionMapper->getList());
+var_dump ($StudentMapper->getList());
