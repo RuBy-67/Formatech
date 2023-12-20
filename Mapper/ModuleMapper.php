@@ -12,16 +12,18 @@ class ModuleMapper
     private ModuleRepository $moduleRepository;
     private SpeakerMapper $speakerMapper;
 
-    public function __construct()
+    protected function _construct(): void
     {
         $this->moduleRepository = new ModuleRepository();
+        $this->speakerMapper = SpeakerMapper::getInstance();
     }
-
 
     public static function getInstance(): ModuleMapper
     {
+        
         if (self::$instance === null) {
             self::$instance = new ModuleMapper();
+            self::$instance->_construct();
         }
 
         return self::$instance;
@@ -32,8 +34,6 @@ class ModuleMapper
      */
     public function getList(): array
     {  
-        $this->speakerMapper = new SpeakerMapper();
-
         $moduleArrayFromDb = $this->moduleRepository->getList();
         $moduleEntities = [];
 
@@ -46,12 +46,15 @@ class ModuleMapper
             } else {
                 $entity = new Module();
             }
-           
-                
-                $entity ->setId($moduleId)
-                        ->setName($moduleFromDb['module_name'])
-                        ->setDurationInHours($moduleFromDb['module_durationModuleInHours'])
-                        ->addSpeaker($this->speakerMapper->getOneByArray($moduleFromDb));
+               
+            $entity->setId($moduleId)
+                   ->setName($moduleFromDb['module_name'])
+                   ->setDurationInHours($moduleFromDb['module_durationModuleInHours']);
+
+            $moduleSpeaker = $this->speakerMapper->getOneByArray($moduleFromDb);
+            if ($moduleSpeaker !== null) {
+                $entity->addSpeaker($moduleSpeaker);
+            }
 
             $moduleEntities[$entity->getId()] = $entity;
         }
@@ -59,12 +62,56 @@ class ModuleMapper
         return $moduleEntities;
     }
 
-    public function getOneByArray(array $moduleDataFromDb): Module
+    public function getOneByArray(array $moduleDataFromDb = null): ?Module
     {
+        if (!isset($moduleDataFromDb['module_moduleId'])) {
+            return null;
+        }
+
         $entity = new Module();
-        $entity->setName($moduleDataFromDb['module_name']);     
+        $entity->setId($moduleDataFromDb['module_moduleId'])
+               ->setName($moduleDataFromDb['module_name'])
+               ->setDurationInHours($moduleDataFromDb['module_durationModuleInHours']);
+
+        $moduleSpeaker = $this->speakerMapper->getOneByArray($moduleDataFromDb);
+        if ($moduleSpeaker !== null) {
+            $entity->addSpeaker($moduleSpeaker);
+        }
 
         return $entity;
     }
-    
+
+    public function getOneById(int $moduleId): ?Module
+    {
+        $moduleRowsFromDb = $this->moduleRepository->getOneById($moduleId);
+
+        if (empty($moduleRowsFromDb)) {
+            return null;
+        }
+
+        $moduleEntities = [];
+        foreach($moduleRowsFromDb as $row) {
+            $entity = null;
+            $moduleId = $row['module_moduleId'];
+
+            if (isset($moduleEntities[$moduleId])) {
+                $entity = $moduleEntities[$moduleId];
+            } else {
+                $entity = new Module();
+            }
+
+            $entity->setId($row['module_moduleId'])
+               ->setName($row['module_name'])
+               ->setDurationInHours($row['module_durationModuleInHours']);
+
+            $moduleSpeaker = $this->speakerMapper->getOneByArray($row);
+            if ($moduleSpeaker !== null) {
+                $entity->addSpeaker($moduleSpeaker);
+            }
+
+            $moduleEntities[$entity->getId()] = $entity;
+        }        
+
+        return reset($moduleEntities) ?: null;
+    }
 }

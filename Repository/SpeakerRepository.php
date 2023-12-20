@@ -27,9 +27,9 @@ class SpeakerRepository
                                         m.durationModuleInHours as module_durationModuleInHours
                                     FROM
                                         `speaker` s
-                                    JOIN
+                                    LEFT JOIN
                                         modulespeaker ms ON s.speakerId = ms.speakerId
-                                    JOIN
+                                    LEFT JOIN
                                         module m ON m.moduleId = ms.moduleId;")
                     ->fetchAll();
     }

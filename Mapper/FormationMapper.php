@@ -9,13 +9,25 @@ use Mapper\ModuleMapper;
 //Transformer la Donnée de la Database en entité
 class FormationMapper
 {
+    private static ?FormationMapper $instance = null;
     private FormationRepository $formationRepository;
     private ModuleMapper $moduleMapper;
 
-    public function __construct()
+    protected function _construct()
     {
         $this->formationRepository = new FormationRepository();
         $this->moduleMapper = ModuleMapper::getInstance();
+    }
+
+    public static function getInstance(): FormationMapper
+    {
+        
+        if (self::$instance === null) {
+            self::$instance = new FormationMapper();
+            self::$instance->_construct();
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -43,8 +55,12 @@ class FormationMapper
                    ->setDurationInMonth($formationFromDb['formation_durationInMonth'])
                    ->setAbbreviation($formationFromDb['formation_abbreviation'])
                    ->setRncpLvl($formationFromDb['formation_rncpLvl'])
-                   ->setAccessibility($formationFromDb['formation_accessibility'])
-                   ->addModule($this->moduleMapper->getOneByArray($formationFromDb));
+                   ->setAccessibility($formationFromDb['formation_accessibility']);
+
+            $formationModule = $this->moduleMapper->getOneByArray($formationFromDb);
+            if ($formationModule !== null) {
+                $entity->addModule($formationModule);
+            }
 
             $formationEntities[$entity->getId()] = $entity;
         }

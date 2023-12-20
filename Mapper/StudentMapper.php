@@ -8,11 +8,22 @@ use Entity\Student;
 //Transformer la Donnée de la Database en entité
 class StudentMapper
 {
+    private static ?StudentMapper $instance = null;
     private StudentRepository $studentRepository;
 
-    public function __construct()
+    protected function _construct()
     {
         $this->studentRepository = new StudentRepository();
+    }
+
+    public static function getInstance(): StudentMapper
+    {
+        if (self::$instance === null) {
+            self::$instance = new StudentMapper();
+            self::$instance->_construct();
+        }
+
+        return self::$instance;
     }
 
     /**

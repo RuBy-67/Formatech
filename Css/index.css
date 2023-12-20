@@ -1,0 +1,97 @@
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* splide */
+@import "@splidejs/splide/css";
+
+/* Font */
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-bold
+    font-title;
+}
+
+h1 {
+    @apply text-white;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply text-black;
+}
+
+h1 {
+    @apply md:text-h1
+    text-h2;
+}
+h2 {
+    @apply md:text-h2
+    text-h3;
+}
+h3 {
+    @apply md:text-h3
+    text-h4;
+}
+h4 {
+    @apply md:text-h4
+    text-h5;
+}
+h5 {
+    @apply md:text-h5
+    text-h6
+    text-black;
+}
+h6 {
+    @apply text-h6
+    text-black;
+}
+p,
+a {
+    @apply text-base
+    font-text;
+}
+
+input {
+    align-items: center;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 0.375em;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #363636;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.5em;
+    justify-content: center;
+    line-height: 1.5;
+    padding: calc(0.5em - 1px) 1em;
+    position: relative;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+}
+.table-spacing {
+    border: 1px solid black;
+}
