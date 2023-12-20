@@ -41,6 +41,9 @@ class FormationMapper
             $entity->setId($formationId)
                    ->setName($formationFromDb['formation_name'])
                    ->setDurationInMonth($formationFromDb['formation_durationInMonth'])
+                   ->setAbbreviation($formationFromDb['formation_abbreviation'])
+                   ->setRncpLvl($formationFromDb['formation_rncpLvl'])
+                   ->setAccessibility($formationFromDb['formation_accessibility'])
                    ->addModule($this->moduleMapper->getOneByArray($formationFromDb));
 
             $formationEntities[$entity->getId()] = $entity;

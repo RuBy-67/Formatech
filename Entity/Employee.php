@@ -30,54 +30,6 @@ class Employee
     public function addInDb($firstName, $lastName, $job, $mail,$database ){
         $database->executeQuery("INSERT INTO employees (`employeeId`, `firstName`, `lastName`, `job`, `mail`) VALUES (?, ?, ?, ?, ?)", [null,$firstName, $lastName, $job, $mail]);
     }
-   
-    //FP1 formation
-    public static function createFormation($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $moduleId, $accessibility) :void 
-    {
-        $database = Database::getInstance();
-        
-        Formation::addInDb($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $accessibility, $database);
-        echo "La formation à bien était crée son id ";
-    }
-
-    public function modifyFormation(): void 
-    { 
-        $database = Database::getInstance();
-        $database->modifyInDb($promotionId ,$promotionYears, $startingDate, $endingDate, $formation, $database);
-    }
-
-    
-
-    // public function deleteFormation() :void
-    // {
-
-    // }
-    // //! doit afficher la liste des modules associés
-    // public function getFormationList() :array
-    // {
-    //     getModuleListByFormation();
-    // }
-
-    // //Fp1 Module
-    // public function createModule() :void 
-    // {
-
-    // }
-
-    // public function modifyModule() :void 
-    // {
-
-    // }
-
-    // public function deleteModule() :void
-    // {
-
-    // }
-
-    // public function getModuleList() :array
-    // {
-        
-    // }
 
     
 }

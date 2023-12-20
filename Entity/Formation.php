@@ -10,7 +10,7 @@ class Formation
     private int $durationInMonth;
     private string $abbreviation;
     private string $rncpLvl;
-    private string $accessibility;
+    private int $accessibility;
     /**
      * @var module[]
      */
@@ -57,6 +57,10 @@ class Formation
   
 
 
+ 
+
+
+    //* Set element
 
      public function setId(int $id): self
     {
@@ -64,7 +68,7 @@ class Formation
 
       return $this;
     }
-
+    
     public function setName(string $name): self
     {
       $this->name = $this->isOnlyAlphabeticCharacters($name) ? ucfirst(strtolower($name)) : null;
@@ -95,7 +99,7 @@ class Formation
 
     public function setAccessibility(string $accessibility): self
     {
-        $this->accessibility = $this->isOnlyAlphabeticCharacters($accessibility) ? ucfirst(strtolower($accessibility)) : null; 
+        $this->accessibility = $this->isOnlyNumericCharacters($accessibility) ? ucfirst(strtolower($accessibility)) : null; 
 
         return $this;
     }

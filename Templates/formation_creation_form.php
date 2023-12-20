@@ -33,8 +33,8 @@ $modules = $moduleMapper->getList();
 
     <label for="accessibility">Accessibilité:</label>
     <select id="accessibility" name="accessibility" required>
-        <option value="public">Public</option>
-        <option value="private">Privé</option>
+        <option value="1">Public</option>
+        <option value="0">Privé</option>
     </select><br>
 
     <input type="submit" value="Soumettre">

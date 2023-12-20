@@ -62,7 +62,10 @@ class SpeakerMapper
     public function getOneByArray(array $speakerDataFromDb): Speaker
     {
         $entity = new Speaker();
-        $entity->setFirstName($speakerDataFromDb['speaker_firstName']);     
+        $entity ->setId($speakerDataFromDb['speaker_speakerId'])
+                ->setFirstName($speakerDataFromDb['speaker_firstName'])
+                ->setLastName($speakerDataFromDb['speaker_lastName'])
+                ->setMail($speakerDataFromDb['speaker_mail']);
 
         return $entity;
     }
