@@ -26,7 +26,6 @@ class StudentMapper
         foreach ($studentArrayFromDb as $studentFromDb) {
             $entity = null;
             $studentId = $studentFromDb['student_studentId'];
-            var_dump($studentFromDb);
 
             if (isset($studentEntities[$studentId])) {
                 $entity = $studentEntities[$studentId];

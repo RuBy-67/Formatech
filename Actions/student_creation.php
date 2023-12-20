@@ -13,7 +13,6 @@ $birthDate = $_POST['birthDate'];
 $password = $_POST['password'];
 $promotionId = $_POST['promotionId'];  // Assurez-vous que 'promotionId' est bien le nom de votre champ dans le formulaire
 
-var_dump($_POST);
 // Création d'une nouvelle instance de la classe Student
 $newStudent = new Student();
 $newStudent

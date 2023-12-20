@@ -29,14 +29,20 @@ class PromotionRepository
             ->fetchAll();
     }
 
-    public function createPromotion(): void
+    public function createPromotion($newPromotion): void
     {
-        $this->database
-            ->executeQuery("INSERT INTO Promotion (`promotionId`, `formationId`, `promotionYears`, `startingDate`, `endingDate`) 
-                        VALUES (?, ?, ?, ?, ?)",
-                [null, ":" . $this->promotion->getFormationId(), ":" . $this->promotion->getPromotionYear(), ":" . $this->promotion->getStartingDate(), ":" . $this->promotion->getEndingDate()]
-            );
+        $this->database->executeQuery(
+            "INSERT INTO Promotion (`formationId`, `promotionYears`, `startingDate`, `endingDate`) 
+             VALUES ( :formationId, :promotionYear, :startingDate, :endingDate)",
+            [
+                'formationId' => $newPromotion->getFormationId(),
+                'promotionYear' => $newPromotion->getPromotionYear(),
+                'startingDate' => $newPromotion->getStartingDate(),
+                'endingDate' => $newPromotion->getEndingDate()
+            ]
+        );
     }
+    
 
     function modifyPromotionInDb(Promotion $promotion): void
     {

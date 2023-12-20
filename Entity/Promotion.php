@@ -45,31 +45,40 @@ class Promotion
 
     public function setFormationId(int $formationId): self
     {
-        $this->formationId = $this->isOnlyNumericCharacters($formationId) ?: null;
-
+        if ($this->isOnlyNumericCharacters($formationId)) {
+            $this->formationId = $formationId;
+        }
+    
         return $this;
     }
+    
 
     public function setPromotionYear(int $promotionYear): self
-    {
-        $this->promotionYear = $this->isOnlyNumericCharacters($promotionYear) ?: null;
-
-        return $this;
+{
+    if ($this->isOnlyNumericCharacters($promotionYear)) {
+        $this->promotionYear = $promotionYear;
     }
 
-    public function setStartingDate(string $startingDate): self
-    {
-        $this->startingDate = $this->isOnlyDateCharacter($startingDate) ?: null;
+    return $this;
+}
 
-        return $this;
+public function setStartingDate(string $startingDate): self
+{
+    if ($this->isOnlyDateCharacter($startingDate)) {
+        $this->startingDate = $startingDate;
     }
 
-    public function setEndingDate(string $endingDate): self
-    {
-        $this->endingDate = $this->isOnlyDateCharacter($endingDate) ?: null;
+    return $this;
+}
 
-        return $this;
+public function setEndingDate(string $endingDate): self
+{
+    if ($this->isOnlyDateCharacter($endingDate)) {
+        $this->endingDate = $endingDate;
     }
+
+    return $this;
+}
 
 
     //TODO mettre en place les checker de format comme dans la classe formation
@@ -99,7 +108,6 @@ class Promotion
     {
         // Le motif regex pour le format "dd-mm-aaaa"
         $regex = '/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/';
-        var_dump($dateToCheck);
         if (!preg_match($regex, $dateToCheck)) {
             echo "Erreur dans la saisie de la date, merci de recommencer.";
             return false;

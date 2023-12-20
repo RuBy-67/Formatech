@@ -31,7 +31,9 @@ class Student
     }
     public function getBirthDate(): string
     {
+        
         return $this->birthDate;
+
     }
     public function getPassword(): string
     {
@@ -60,12 +62,14 @@ class Student
 
     public function setBirthDate(string $birthDate): self
     {
-        $this->birthDate = $this->isOnlyDateCharacter($birthDate) ?: null;
-
+        if ($this->isOnlyDateCharacter($birthDate)) {
+            $this->birthDate = $birthDate;
+        } else {
+            $this->birthDate = null;
+        }
+    
         return $this;
     }
-
-
 
     public function setMail(string $mail): self
     {
@@ -140,7 +144,7 @@ class Student
     {
         // Le motif regex pour le format "dd-mm-aaaa"
         $regex = '/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/';
-        var_dump($dateToCheck);
+    
         if (!preg_match($regex, $dateToCheck)) {
             echo "Erreur dans la saisie de la date, merci de recommencer, DATE_FORMAT";
             return false;

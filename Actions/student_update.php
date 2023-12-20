@@ -12,7 +12,6 @@ $mail = $_POST['mail'];
 $birthDate = $_POST['birthDate'];
 $password = $_POST['password'];
 $promotionId = $_POST['promotionId'];
-var_dump($_POST);
 // Créez une instance de StudentRepository
 $studentRepository = new StudentRepository();
 

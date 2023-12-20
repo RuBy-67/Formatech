@@ -4,7 +4,6 @@ use Mapper\StudentMapper;
 
 $studentMapper = new StudentMapper();
 $students = $studentMapper->getList();
-var_dump($students);
 
 ?>
 
@@ -36,7 +35,8 @@ var_dump($students);
                         <?= $student->getMail() ?>
                     </td>
                     <td>
-                        <?= $student->getBirthDate() ?>
+                        <?= $student->getBirthDate();?>
+                        
                     </td>
                 </tr>
             <?php endforeach ?>
