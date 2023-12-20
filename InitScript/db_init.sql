@@ -37,6 +37,14 @@ CREATE TABLE Student (
     firstName VARCHAR(255),
     lastName VARCHAR(255),
     mail VARCHAR(255),
+    birthDate DATE
+);
+-- Table Pivot Student/Promotion ---
+CREATE TABLE StudentPromotion (
+    studentId INT,
+    promotionId INT,
+    FOREIGN KEY (studentId) REFERENCES Student (studentId) ON DELETE CASCADE,
+    FOREIGN KEY (promotionId) REFERENCES Promotion (promotionId)ON DELETE CASCADE
     birthDate DATE,
     password VARCHAR(255)
 );

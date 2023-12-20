@@ -3,7 +3,6 @@
 require_once(__DIR__ . "\..\Autoloader.php");
 require_once('data.php');
 
-Autoloader::register();
 use DB\Database;
 
 $database = Database::getInstance();
@@ -37,6 +36,4 @@ function addClassRooms($salles, $db)
 addFormations($formations, $database);
 addModules($modules, $database);
 addClassRooms($salles, $database);
-
-
 ?>
