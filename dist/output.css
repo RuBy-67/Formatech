@@ -576,12 +576,42 @@ video {
   }
 }
 
+.fixed {
+  position: fixed;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.mx-1\.5 {
+  margin-left: 0.375rem;
+  margin-right: 0.375rem;
+}
+
+.mb-12 {
+  margin-bottom: 3rem;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
 }
 
 .mb-8 {
   margin-bottom: 2rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
 }
 
 .flex {
@@ -592,12 +622,36 @@ video {
   display: table;
 }
 
+.grid {
+  display: grid;
+}
+
 .hidden {
   display: none;
 }
 
+.h-14 {
+  height: 3.5rem;
+}
+
+.h-\[400px\] {
+  height: 400px;
+}
+
 .h-\[678px\] {
   height: 678px;
+}
+
+.w-1\/3 {
+  width: 33.333333%;
+}
+
+.w-14 {
+  width: 3.5rem;
+}
+
+.w-\[90\%\] {
+  width: 90%;
 }
 
 .w-full {
@@ -606,6 +660,14 @@ video {
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
@@ -620,6 +682,10 @@ video {
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
 .gap-2 {
   gap: 0.5rem;
 }
@@ -632,8 +698,17 @@ video {
   gap: 2rem;
 }
 
+.gap-y-12 {
+  row-gap: 3rem;
+}
+
 .rounded-md {
   border-radius: 0.375rem;
+}
+
+.bg-\[\#FBFBFB\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 251 251 / var(--tw-bg-opacity));
 }
 
 .bg-darkGrey {
@@ -651,12 +726,12 @@ video {
   background-color: rgb(243 243 243 / var(--tw-bg-opacity));
 }
 
-.bg-top-banner {
-  background-image: url('/Assets/images/quantic_computers_01.png');
-}
-
 .bg-cover {
   background-size: cover;
+}
+
+.p-3 {
+  padding: 0.75rem;
 }
 
 .px-1 {
@@ -669,13 +744,27 @@ video {
   padding-right: 1rem;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
 
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .text-center {
   text-align: center;
+}
+
+.text-h4 {
+  font-size: 32px;
 }
 
 .text-black {
@@ -688,14 +777,37 @@ video {
   color: rgb(243 243 243 / var(--tw-text-opacity));
 }
 
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-black\/5 {
+  --tw-shadow-color: rgb(53 74 84 / 0.05);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
 /* splide */
 
 /* Font */
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 80%;
+  }
 }
 
 h1,
@@ -815,12 +927,75 @@ input {
   white-space: nowrap;
 }
 
+.banner-bg {
+  background-image: linear-gradient(black, black),url('/Assets/images/quantic_computers_01.png');
+  background-blend-mode: soft-light;
+}
+
 .table-spacing {
   border: 1px solid black;
 }
 
+.card {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:nth-child(3n + 2) {
+  border-left: 1px solid #354A54;
+}
+
+.card:nth-child(3n + 2):first-child,
+.card:nth-child(3n + 2):nth-last-child(2) {
+  border-right: 1px solid #354A54;
+}
+
+.card:nth-child(3n + 3):not(:first-child):not(:last-child) {
+  border-left: 1px solid #354A54;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:bg-neutral-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(82 82 82 / var(--tw-bg-opacity));
+  }
+
+  .dark\:shadow-black\/10 {
+    --tw-shadow-color: rgb(53 74 84 / 0.1);
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+}
+
 @media (min-width: 640px) {
+  .sm\:w-max {
+    width: -moz-max-content;
+    width: max-content;
+  }
+
   .sm\:flex-row {
     flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:flex-row {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  .lg\:justify-start {
+    justify-content: flex-start;
+  }
+
+  .lg\:py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 }

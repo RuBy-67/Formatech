@@ -11,9 +11,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+.container {
+    @apply lg:w-4/5
+        md:w-[90%];
 }
 
 h1,
@@ -93,6 +97,32 @@ input {
     vertical-align: top;
     white-space: nowrap;
 }
+
+.banner-bg {
+    @apply bg-top-banner;
+    background-blend-mode: soft-light;
+}
+
 .table-spacing {
     border: 1px solid black;
+}
+
+.card {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:nth-child(3n + 2) {
+    border-left: 1px solid theme("colors.black");
+}
+
+.card:nth-child(3n + 2):first-child,
+.card:nth-child(3n + 2):nth-last-child(2) {
+    border-right: 1px solid theme("colors.black");
+}
+
+.card:nth-child(3n + 3):not(:first-child):not(:last-child) {
+    border-left: 1px solid theme("colors.black");
 }

@@ -1,8 +1,4 @@
-<?php
-
-?>
-
-<form action="/formatech/Actions/student_creation.php" method="post">
+<form action="/Actions/student_creation.php" method="post">
     <label for="firstName">Prénom :</label>
     <input type="text" id="firstName" name="firstName" required><br>
 

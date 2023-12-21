@@ -28,7 +28,7 @@ $formations = $formationMapper->getList();
             }
             else
             {
-                    $visibility = 'Privé';
+                $visibility = 'Privé';
             }
                 
             ?>

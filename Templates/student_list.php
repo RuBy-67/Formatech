@@ -1,10 +1,13 @@
 <?php
 require_once(__DIR__ . "\..\\Autoloader.php");
+
 use Mapper\StudentMapper;
 
-$studentMapper = new StudentMapper();
+// $studentMapper = new StudentMapper();
+$studentMapper = StudentMapper::getInstance();
 $students = $studentMapper->getList();
 
+var_dump($students);
 ?>
 
 <section>
