@@ -14,7 +14,7 @@ if (isset($_POST['promotionId'])) {
     // Affichage de la liste des étudiants
     foreach ($students as $student) {
         // Afficher les détails de l'étudiant
-        echo "<li>" . $student['firstName'] . ' ' . $student['lastName'] ." <br></li>";
+        echo "<li>" . $student['firstName'] . ' ' . $student['lastName'] .'<br>Contact: ' . $student['mail'] ." <br><br></li>";
     }
 } else {
     echo "Aucune promotion sélectionnée";
