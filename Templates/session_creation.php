@@ -57,7 +57,6 @@ $promotions = $promotionRepository->getList();
                 <?= $classroom['classroom_$classroomName'] ?>
             </option>
         <?php endforeach; ?>
-        <option value="1">1</option>
     </select><br>
 
 

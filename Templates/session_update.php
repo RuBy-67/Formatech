@@ -6,8 +6,8 @@ $sessionMapper = SessionMapper::getInstance();
 $sessions = $sessionMapper->getList();
 ?>
 
-<form action="/formatech/Actions/session_delete.php" method="post">
-    <select id="sessionToDelete" name="sessionId" required>
+<form action="/formatech/Actions/session_update.php" method="post">
+    <select id="sessionToUpdate" name="sessionId" required>
         <?php
         $sessions = $sessionMapper->getList();
         foreach ($sessions as $session) {
@@ -15,5 +15,5 @@ $sessions = $sessionMapper->getList();
         }
         ?>
     </select><br>
-    <input type="submit" value="Delete Session">
+    <input type="submit" value="update Session">
 </form>

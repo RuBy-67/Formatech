@@ -43,15 +43,40 @@ class SessionMapper
             }
 
             $entity->setId($sessionId)
-                ->setDate($sessionFromDb['date'])
-                ->setStartTime($sessionFromDb['startTime'])
-                ->setEndTime($sessionFromDb['endTime'])
-                ->setModuleId($sessionFromDb['moduleId'])
-                ->setPromotionId($sessionFromDb['promotionId']);
+            ->setDate($sessionFromDb['date'])
+            ->setStartTime($sessionFromDb['startTime'])
+            ->setEndTime($sessionFromDb['endTime'])
+            ->setModuleId($sessionFromDb['moduleId'])
+            ->setModuleName($sessionFromDb['moduleName']) 
+            ->setPromotionId($sessionFromDb['promotionId'])
+            ->setClassRoomId($sessionFromDb['classRoomId'])
+            ->setClassName($sessionFromDb['className']) 
+            ->setSpeakerId($sessionFromDb['SpeakerId'])
+            ->setSpeakerFirstName($sessionFromDb['speakerFirstName'])
+            ->setSpeakerLastName($sessionFromDb['speakerLastName']);
 
             $sessionEntities[$entity->getId()] = $entity;
         }
 
         return $sessionEntities;
     }
+
+    public function getOneById(int $sessionId): ?Session
+{
+    $sessionDataFromDb = $this->sessionRepository->getOneById($sessionId);
+
+    return $sessionDataFromDb !== null
+        ? (new Session())
+            ->setId($sessionDataFromDb['sessionId'])
+            ->setDate($sessionDataFromDb['date'])
+            ->setStartTime($sessionDataFromDb['startTime'])
+            ->setEndTime($sessionDataFromDb['endTime'])
+            ->setModuleId($sessionDataFromDb['moduleId'])
+            ->setPromotionId($sessionDataFromDb['promotionId'])
+            ->setClassRoomId($sessionDataFromDb['classRoomId'])
+            ->setSpeakerId($sessionDataFromDb['SpeakerId'])
+        : null;
+}
+
+    
 }
