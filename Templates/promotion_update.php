@@ -32,7 +32,7 @@ $endingDate = $promotionDetails['promotion_endingDate'];
 
 <h2>Mise à jour de la promotion</h2>
 
-<form action="/Actions/promotion_update.php" method="post" class="flex flex-col justify-center items-center h-full">
+<form action="/Actions/promotion_update.php" method="post" class="flex flex-col justify-center items-center">
     <input type="hidden" name="promotionId" value="<?php echo $promotionId; ?>">
     <div class="grid grid-cols-2 gap-x-8 gap-y-3 mb-8 justify-items-center">
         <div class="flex flex-col items-center">

@@ -6,6 +6,7 @@ class Promotion
 {
     private int $id;
     private int $formationId;
+    private Formation $formation;
     private int $promotionYear;
     private string $startingDate;
     private string $endingDate;
@@ -115,5 +116,17 @@ public function setEndingDate(string $endingDate): self
         }
 
         return true;
+    }
+
+    public function getFormation(): Formation
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(Formation $formation): self
+    {
+        $this->formation = $formation;
+
+        return $this;
     }
 }

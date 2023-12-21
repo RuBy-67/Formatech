@@ -75,14 +75,14 @@ class StudentMapper
         foreach($studentRowsFromDb as $row) {
             $entity = null;
             $studentId = $row['student_studentId'];
-
+            
             if (isset($studentEntities[$studentId])) {
                 $entity = $studentEntities[$studentId];
             } else {
                 $entity = new Student();
             }
 
-            $entity->setId($row['student_studentId'])
+            $entity->setId($studentId)
                    ->setFirstName($row['student_firstName'])
                    ->setLastName($row['student_lastName'])
                    ->setBirthDate($row['student_birthDate'])

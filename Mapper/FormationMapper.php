@@ -13,6 +13,11 @@ class FormationMapper
     private FormationRepository $formationRepository;
     private ModuleMapper $moduleMapper;
 
+    /**
+     * @var Formation[]
+     */
+    private array $loadedFormations = [];
+
     public function _construct()
     {
         $this->formationRepository = new FormationRepository();
@@ -63,6 +68,38 @@ class FormationMapper
         }
 
         return $formationEntities;
+    }
+
+    public function getOneByArray(array $formationDataFromDb = null): ?Formation
+    {
+        if (!isset($formationDataFromDb['formation_formationId'])) {
+            return null;
+        }
+
+        $entity = null;
+        $formationId = $formationDataFromDb['formation_formationId'];
+        
+        if (isset($this->loadedFormations[$formationId])) {
+            $entity = $this->loadedFormations[$formationId];
+        } else {
+            $entity = new Formation();
+        }
+
+        $entity->setId($formationDataFromDb['formation_formationId'])
+               ->setName($formationDataFromDb['formation_name'])
+               ->setDurationInMonth($formationDataFromDb['formation_durationFormationInMonth'])
+               ->setAbbreviation($formationDataFromDb['formation_abbreviation'])
+               ->setRncpLvl($formationDataFromDb['formation_rncpLvl'])
+               ->setAccessibility($formationDataFromDb['formation_accessibility']);
+
+        $formationModule = $this->moduleMapper->getOneByArray($formationDataFromDb);
+        if ($formationModule !== null) {
+            $entity->addModule($formationModule);
+        }
+
+        $this->loadedFormations[$entity->getId()] = $entity;
+
+        return $entity;
     }
 
     /**

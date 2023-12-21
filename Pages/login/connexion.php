@@ -31,7 +31,6 @@ require_once(__DIR__ . '\..\\..\\Layouts\\header.php');
     </form>
     </section>
 <?php
-var_dump(password_hash('mdp', PASSWORD_DEFAULT));
 require_once(__DIR__ . '\..\\..\\Layouts\\footer.php');
 ?>
 
@@ -57,28 +56,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    $result = getUserbyDb( $mail, $password, $table, $database);
-    if ($result->rowCount() > 0) {
-        $user = $result->fetch(PDO::FETCH_ASSOC);
+    $result = getUserbyDb( $mail, $table, $database);
+    $user = $result->fetch();    
 
-        $_SESSION['user_id'] = $user[$idColumnName];
-        $_SESSION['user_type'] = $type;
-        $_SESSION['user_firstname'] = $user['firstName'];
-        $_SESSION['user_lastname'] = $user['lastName'];
-        $_SESSION['user_mail'] = $user['mail'];
+    if ($user) {
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user[$idColumnName];
+            $_SESSION['user_type'] = $type;
+            $_SESSION['user_firstname'] = $user['firstName'];
+            $_SESSION['user_lastname'] = $user['lastName'];
+            $_SESSION['user_mail'] = $user['mail'];
 
-        // Redirect the user to a dashboard page, for example
-        header("Location: dashboard.php");
-        exit();
+            // Redirect the user to a dashboard page, for example
+            header("Location: dashboard.php");
+            exit();
+        }
+       echo "Identifiants incorrects";
     } else {
         echo "Aucun utilisateur correspondant sur " . $type . ".";
     }
 }
-function getUserbyDb($mail, $password, $table, $database)
+function getUserbyDb($mail, $table, $database)
 {
     $result = $database->executeQuery(
-        "SELECT * FROM $table WHERE mail = ? AND password = ?",
-        [$mail, $password]
+        "SELECT * FROM $table WHERE mail = :mail",
+        ['mail' => $mail]
     );
 
     return $result;

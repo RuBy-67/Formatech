@@ -7,19 +7,19 @@ $sessionMapper = SessionMapper::getInstance();
 $sessions = $sessionMapper->getList();
 ?>
 
-<section>
-    <h2>Liste des sessions</h2>
-    <table>
-        <thead>
+<section class="container">
+    <h2 class=" text-center">Liste des sessions</h2>
+    <table class=" w-full">
+        <thead class="bg-darkGrey text-white">
             <tr>
                 <th hidden>Session ID</th>
                 <th>Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
+                <th>Heure de Début:</th>
+                <th>Heure de fin</th>
                 <th>Module ID</th>
                 <th>Promotion ID</th>
-                <th>Classroom ID</th>
                 <th>Speaker ID</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -44,11 +44,9 @@ $sessions = $sessionMapper->getList();
                         <?= $session->getPromotionId() ?>
                     </td>
                     <td>
-                        <?= $session->getClassName() ?>
-                    </td>
-                    <td>
                         <?= $session->getSpeakerFirstName() ?> - <?= $session->getSpeakerLastName() ?>
                     </td>
+                    <td><a href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=session_update&id=<?= $session->getId() ?>" class="bg-white rounded-md px-1">Modifier</a></td>
                 </tr>
             <?php endforeach ?>
 

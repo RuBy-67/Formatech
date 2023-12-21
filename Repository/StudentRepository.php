@@ -124,13 +124,25 @@ class StudentRepository
                                         p.formationId as promotion_formationId, 
                                         p.promotionYears as promotion_Years,
                                         p.startingDate as promotion_startingDate,
-                                        p.endingDate as promotion_endingDate
+                                        p.endingDate as promotion_endingDate,
+                                        f.formationId as formation_formationId,
+                                        f.name as formation_name,
+                                        f.durationFormationInMonth as formation_durationFormationInMonth,
+                                        f.abbreviation as formation_abbreviation,
+                                        f.rncpLvl as formation_rncpLvl,
+                                        f.accessibility as formation_accessibility,
+                                        m.moduleId as module_moduleId,
+                                        m.name as module_name,
+                                        m.durationModuleInHours as module_durationModuleInHours
                                     FROM `student` s
                                     LEFT JOIN studentpromotion sp ON s.studentId = sp.studentId
                                     LEFT JOIN promotion p ON sp.promotionId = p.promotionId
+                                    LEFT JOIN formation f ON p.formationId = f.formationId
+                                    LEFT JOIN moduleformation mf ON mf.formationId = f.formationId
+                                    LEFT JOIN module m ON m.moduleId = mf.moduleId
                                     WHERE s.studentId = :studentId;",
                                     ['studentId' => $id])
-                    ->fetch();
+                    ->fetchAll();
     }
 
     public function addStudentInPromotion($studentId, $promotionId)

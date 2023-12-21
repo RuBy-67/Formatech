@@ -15,6 +15,11 @@ class Student
      */
     private  $promotionId = [];
 
+    /**
+     * @var Promotion[]
+     */
+    private  $promotions = [];
+
     public function getId(): int
     {
         return $this->id;
@@ -171,4 +176,27 @@ class Student
         return true;
     }
 
+    public function addPromotion(Promotion $promotionToAdd): self
+    {
+        $promotionToAddInPromotions = array_filter(
+            $this->promotions,
+            function (Promotion $currentPromotion) use ($promotionToAdd) {
+                return $currentPromotion->getId() === $promotionToAdd->getId();
+            }
+        );
+
+        if (!$promotionToAddInPromotions) {
+            $this->promotions[] = $promotionToAdd;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Promotion[]
+     */
+    public function getPromotions(): array
+    {
+        return $this->promotions;
+    }
 }

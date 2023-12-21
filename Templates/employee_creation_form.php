@@ -2,7 +2,7 @@
 
 <form action="/Actions/employee_creation.php"   
       method="post"
-      class="flex flex-col justify-center items-center h-full"
+      class="flex flex-col justify-center items-center"
 >
     <div class="grid grid-cols-2 gap-x-8 gap-y-3 mb-8 justify-items-center">
         <div class="flex flex-col items-center">

@@ -3,6 +3,7 @@
 namespace Mapper;
 
 use Repository\PromotionRepository;
+use Mapper\FormationMapper;
 use Entity\Promotion;
 
 //Transformer la Donnée de la Database en entité
@@ -10,10 +11,17 @@ class PromotionMapper
 {
     private static ?PromotionMapper $instance = null;
     private PromotionRepository $promotionRepository;
+    private FormationMapper $formationMapper;
+
+    /**
+     * @var Promotions[]
+     */
+    private array $loadedPromotions = [];
     
     public function __construct()
     {
         $this->promotionRepository = new promotionRepository();
+        $this->formationMapper = FormationMapper::getInstance();
     }
 
     public static function getInstance(): PromotionMapper
@@ -28,7 +36,7 @@ class PromotionMapper
     }
 
     /**
-     * @return promotion[]
+     * @return Promotion[]
      */
     public function getList(): array
     {
@@ -50,5 +58,35 @@ class PromotionMapper
         return $promotionEntities;
     }
 
+    public function getOneByArray(array $promotionDataFromDb = null): ?Promotion
+    {
+        if (!isset($promotionDataFromDb['promotion_promotionId'])) {
+            return null;
+        }
+
+        $entity = null;
+        $promotionId = $promotionDataFromDb['promotion_promotionId'];
+        
+        if (isset($this->loadedPromotions[$promotionId])) {
+            $entity = $this->loadedPromotions[$promotionId];
+        } else {
+            $entity = new Promotion();
+        }
+
+        $entity->setId($promotionDataFromDb['promotion_promotionId'])
+               ->setFormationId($promotionDataFromDb['promotion_formationId'])
+               ->setPromotionYear($promotionDataFromDb['promotion_Years'])
+               ->setStartingDate($promotionDataFromDb['promotion_startingDate'])
+               ->setEndingDate($promotionDataFromDb['promotion_endingDate']);
+
+        $promotionFormation = $this->formationMapper->getOneByArray($promotionDataFromDb);
+        if ($promotionFormation !== null) {
+            $entity->setFormation($promotionFormation);
+        }
+
+        $this->loadedPromotions[$entity->getId()] = $entity;
+
+        return $entity;
+    }
 }
 

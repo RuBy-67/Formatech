@@ -32,7 +32,7 @@ $password = $studentDetails['student_password'];
 $promotionId = $studentDetails['promotion_formationId'];
 ?>
 
-<form action="/Actions/student_update.php" method="post" class="flex flex-col justify-center items-center h-full">
+<form action="/Actions/student_update.php" method="post" class="flex flex-col justify-center items-center">
     <input type="hidden" name="studentId" value="<?php echo $studentId; ?>">
     <div class="grid grid-cols-2 gap-x-8 gap-y-3 mb-8 justify-items-center">
         <div class="flex flex-col items-center">

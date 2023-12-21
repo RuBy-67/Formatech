@@ -14,7 +14,7 @@ $Employee = $EmployeeMapper->getOneById($EmployeeId);
     <h2 class="text-center">Formulaire de modification d'information de l'employé <?= $Employee->getFirstName() ?> <?= $Employee->getLastName() ?></h2>
     <form action="/Actions/employee_edit.php"   
       method="post"
-      class="flex flex-col justify-center items-center h-full"
+      class="flex flex-col justify-center items-center"
     >   
         <input type="hidden" name="id" value="<?= $Employee->getId() ?>" />
         <div class="grid grid-cols-2 gap-x-8 gap-y-3 mb-8 justify-items-center">
