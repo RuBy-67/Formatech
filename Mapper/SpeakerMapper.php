@@ -32,30 +32,30 @@ class SpeakerMapper
      * @return Speaker[]
      */
     public function getList(): array
-    {   
+    {
         $speakerArrayFromDb = $this->speakerRepository->getList();
         $speakerEntities = [];
-    
+
         foreach ($speakerArrayFromDb as $speakerFromDb) {
             $entity = new Speaker();
-    
+
             $entity->setId($speakerFromDb['speaker_speakerId'])
-                   ->setFirstName($speakerFromDb['speaker_firstName'])
-                   ->setLastName($speakerFromDb['speaker_lastName'])
-                   ->setMail($speakerFromDb['speaker_mail'])
-                   ->setPassword($speakerFromDb['speaker_password']);
-    
+                ->setFirstName($speakerFromDb['speaker_firstName'])
+                ->setLastName($speakerFromDb['speaker_lastName'])
+                ->setMail($speakerFromDb['speaker_mail'])
+                ->setPassword($speakerFromDb['speaker_password']);
+
             $entityModule = $this->moduleMapper->getOneByArray($speakerFromDb);
             if ($entityModule !== null) {
                 $entity->addModule($entityModule);
             }
-    
+
             $speakerEntities[] = $entity;
         }
-    
+
         return $speakerEntities;
     }
-    
+
 
     public function getOneByArray(array $speakerDataFromDb): ?Speaker
     {
@@ -64,11 +64,28 @@ class SpeakerMapper
         }
 
         $entity = new Speaker();
-        $entity ->setId($speakerDataFromDb['speaker_speakerId'])
-                ->setFirstName($speakerDataFromDb['speaker_firstName'])
-                ->setLastName($speakerDataFromDb['speaker_lastName'])
-                ->setMail($speakerDataFromDb['speaker_mail']);
+        $entity->setId($speakerDataFromDb['speaker_speakerId'])
+            ->setFirstName($speakerDataFromDb['speaker_firstName'])
+            ->setLastName($speakerDataFromDb['speaker_lastName'])
+            ->setMail($speakerDataFromDb['speaker_mail']);
 
         return $entity;
+    }
+    public function getOneById(int $speakerId): ?Speaker
+    {
+        $speakerDataFromDb = $this->speakerRepository->getOneById($speakerId);
+
+        if ($speakerDataFromDb !== null) {
+            $entity = new Speaker();
+            $entity->setId($speakerDataFromDb['speaker_speakerId'])
+                ->setFirstName($speakerDataFromDb['speaker_firstName'])
+                ->setLastName($speakerDataFromDb['speaker_lastName'])
+                ->setMail($speakerDataFromDb['speaker_mail'])
+                ->setPassword($speakerDataFromDb['speaker_password']);
+
+            return $entity;
+        }
+
+        return null;
     }
 }

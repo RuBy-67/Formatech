@@ -78,4 +78,21 @@ class SpeakerRepository
             ->executeQuery("DELETE FROM speaker WHERE speakerId = :speakerId", ['speakerId' => $speakerId]);
     }
 
+    public function getOneById(int $speakerId): ?array
+    {
+        return $this->database
+            ->executeQuery("SELECT
+                                s.speakerId as speaker_speakerId,
+                                s.firstName as speaker_firstName,
+                                s.lastName as speaker_lastName,
+                                s.mail as speaker_mail,
+                                s.password as speaker_password
+                            FROM
+                                `speaker` s
+                            WHERE
+                                s.speakerId = ?",
+                            [$speakerId])
+            ->fetch();
+    }
+
 }
