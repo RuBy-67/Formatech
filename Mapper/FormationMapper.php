@@ -11,11 +11,18 @@ class FormationMapper
 {
     private FormationRepository $formationRepository;
     private ModuleMapper $moduleMapper;
-
+    private static ?FormationMapper $instance = null;
     public function __construct()
     {
         $this->formationRepository = new FormationRepository();
         $this->moduleMapper = ModuleMapper::getInstance();
+    }
+    public function getInstance(): FormationMapper
+    {
+        if (self::$instance === null) {
+            self::$instance = new FormationMapper();
+        }
+        return self::$instance;
     }
 
     /**
@@ -36,7 +43,6 @@ class FormationMapper
             } else {
                 $entity = new Formation();
             }
-            
             
             $entity->setId($formationId)
                    ->setName($formationFromDb['formation_name'])
