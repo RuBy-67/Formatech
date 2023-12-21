@@ -602,6 +602,10 @@ video {
   margin-bottom: 3rem;
 }
 
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
 .mb-8 {
   margin-bottom: 2rem;
 }
@@ -616,10 +620,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mb-3 {
-  margin-bottom: 0.75rem;
 }
 
 .flex {
@@ -802,10 +802,6 @@ video {
 
 .text-h4 {
   font-size: 32px;
-}
-
-.leading-\[1px\] {
-  line-height: 1px;
 }
 
 .leading-span {
