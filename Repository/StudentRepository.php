@@ -93,7 +93,9 @@ class StudentRepository
                 [
                     'studentId' => $student
                 ]
+                
             );
+            $this->database->executeQuery("DELETE FROM studentpromotion WHERE studentId = :studentId", ['studentId' => $student]);
     }
 
     public function getStudentListInDbByFormation($formationId)

@@ -3,29 +3,28 @@ require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\StudentRepository;
 
-// Assumez que vous avez récupéré l'ID de l'étudiant à mettre à jour
+
 $studentId = 1;
 //isset($_GET['studentId']) ? $_GET['studentId'] : null;
 
-// Si l'ID n'est pas fourni, redirigez ou effectuez une autre logique appropriée
+
 if (!$studentId) {
     header("Location: /path/to/error_page.php");
     exit;
 }
 
-// Créez une instance de StudentRepository
+
 $studentRepository = new StudentRepository();
 
-// Utilisez la méthode getStudentProfilDetailsInDb pour obtenir les détails de l'étudiant par ID
+
 $studentDetails = $studentRepository->getStudentProfilDetailsInDb($studentId);
 
-// Vérifiez si l'étudiant existe
+
 if (!$studentDetails) {
     header("Location: /path/to/error_page.php");
     exit;
 }
 
-// Les détails de l'étudiant sont maintenant dans $studentDetails
 $firstName = $studentDetails['firstName'];
 $lastName = $studentDetails['lastName'];
 $mail = $studentDetails['mail'];

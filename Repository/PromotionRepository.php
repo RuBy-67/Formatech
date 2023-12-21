@@ -39,12 +39,8 @@ class PromotionRepository
                             p.startingDate as promotion_startingDate,
                             p.endingDate as promotion_endingDate
                         FROM Promotion p
-                        WHERE p.promotionId = :promotionId",
-                [
-                    'promotionId' => $promotionId
-                ]
-            )
-            ->fetchAll();
+                        WHERE p.promotionId = ?", [$promotionId]
+            )->fetch();
     }
 
     public function createPromotion($newPromotion): void
@@ -60,7 +56,7 @@ class PromotionRepository
             ]
         );
     }
-    
+
 
     function modifyPromotionInDb(Promotion $promotion): void
     {
@@ -80,6 +76,12 @@ class PromotionRepository
     {
         $this->database
             ->executeQuery("DELETE FROM Promotion WHERE promotionId = :promotionId",
+                [
+                    'promotionId' => $promotion
+                ]
+            );
+        $this->database
+            ->executeQuery("UPDATE StudentPromotion SET promotionId = NULL WHERE promotionId = :promotionId",
                 [
                     'promotionId' => $promotion
                 ]
