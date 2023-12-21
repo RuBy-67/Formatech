@@ -34,27 +34,21 @@ class PromotionMapper
     {
         $promotionArrayFromDb = $this->promotionRepository->getList();
         $promotionEntities = [];
-
+    
         foreach ($promotionArrayFromDb as $promotionFromDb) {
-            $entity = null;
-            $promotionId = $promotionFromDb['promotion_promotionId'];
-
-            if (isset($promotionEntities[$promotionId])) {
-                $entity = $promotionEntities[$promotionId];
-            } else {
-                $entity = new promotion();
-            }
-
-            $entity->setId($promotionId)
+            $entity = new Promotion(); // Toujours créer une nouvelle entité
+    
+            $entity->setId($promotionFromDb['promotion_promotionId'])
                 ->setFormationId($promotionFromDb['promotion_formationId'])
                 ->setPromotionYear($promotionFromDb['promotion_promotionYear'])
                 ->setStartingDate($promotionFromDb['promotion_startingDate'])
                 ->setEndingDate($promotionFromDb['promotion_endingDate']);
-
-            $promotionEntities[$entity->getId()] = $entity;
+    
+            $promotionEntities[] = $entity; // Utilisez un tableau indexé par des clés numériques
         }
-        
+    
         return $promotionEntities;
     }
+    
 }
 

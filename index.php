@@ -8,5 +8,3 @@ require_once(__DIR__ . "./Mapper/StudentMapper.php");
 // Instancier la classe StudenttMapper
 $StudentMapper = StudentMapper::getInstance();
 
-// Appeler la méthode getList
-var_dump ($StudentMapper->getList());
