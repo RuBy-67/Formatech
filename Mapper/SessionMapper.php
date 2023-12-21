@@ -34,7 +34,7 @@ class SessionMapper
 
         foreach ($sessionArrayFromDb as $sessionFromDb) {
             $entity = null;
-            $sessionId = $sessionFromDb['session_sessionId'];
+            $sessionId = $sessionFromDb['sessionId'];
 
             if (isset($sessionEntities[$sessionId])) {
                 $entity = $sessionEntities[$sessionId];
@@ -43,11 +43,11 @@ class SessionMapper
             }
 
             $entity->setId($sessionId)
-                ->setDate($sessionFromDb['session_date'])
-                ->setStartTime($sessionFromDb['session_startTime'])
-                ->setEndTime($sessionFromDb['session_endTime'])
-                ->setModuleId($sessionFromDb['session_moduleId'])
-                ->setPromotionId($sessionFromDb['session_promotionId']);
+                ->setDate($sessionFromDb['date'])
+                ->setStartTime($sessionFromDb['startTime'])
+                ->setEndTime($sessionFromDb['endTime'])
+                ->setModuleId($sessionFromDb['moduleId'])
+                ->setPromotionId($sessionFromDb['promotionId']);
 
             $sessionEntities[$entity->getId()] = $entity;
         }

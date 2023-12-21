@@ -18,14 +18,14 @@ class SessionRepository
     {
         return $this->database
             ->executeQuery("SELECT
-                                session_sessionId,
-                                session_date,
-                                session_startTime,
-                                session_endTime,
-                                session_moduleId,
-                                session_promotionId,
-                                session_classRoomId,
-                                session_SpeakerId
+                                sessionId,
+                                date,
+                                startTime,
+                                endTime,
+                                moduleId,
+                                promotionId,
+                                classRoomId,
+                                SpeakerId
                             FROM session")
             ->fetchAll();
     }

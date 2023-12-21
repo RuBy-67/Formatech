@@ -73,23 +73,14 @@ class Session
 
     public function setStartTime(string $startTime): self
     {
-        if ($this->isTimeFormatCorrect($startTime)) {
             $this->startTime = $startTime;
-        } else {
-            $this->startTime = null;
-        }
 
         return $this;
     }
 
     public function setEndTime(string $endTime): self
     {
-        if ($this->isTimeFormatCorrect($endTime)) {
             $this->endTime = $endTime;
-        } else {
-            $this->endTime = null;
-        }
-
         return $this;
     }
 
