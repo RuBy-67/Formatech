@@ -67,4 +67,41 @@ class FormationMapper
 
         return $formationEntities;
     }
+
+    public function getOneById(int $formationId): ?Formation
+    {
+        $formationRowsFromDb = $this->formationRepository->getOneById($formationId);
+
+        if (empty($formationRowsFromDb)) {
+            return null;
+        }
+
+        $formationEntities = [];
+        foreach($formationRowsFromDb as $row) {
+            $entity = null;
+            $formationId = $row['formation_formationId'];
+
+            if (isset($formationEntities[$formationId])) {
+                $entity = $formationEntities[$formationId];
+            } else {
+                $entity = new Formation();
+            }
+
+            $entity->setId($row['formation_formationId'])
+                   ->setName($row['formation_name'])
+                   ->setDurationInMonth($row['formation_durationInMonth'])
+                   ->setAbbreviation($row['formation_abbreviation'])
+                   ->setRncpLvl($row['formation_rncpLvl'])
+                   ->setAccessibility($row['formation_accessibility']);
+
+            $formationModule = $this->moduleMapper->getOneByArray($row);
+            if ($formationModule !== null) {
+                $entity->addModule($formationModule);
+            }
+
+            $formationEntities[$entity->getId()] = $entity;
+        }        
+
+        return reset($formationEntities) ?: null;
+    }
 }

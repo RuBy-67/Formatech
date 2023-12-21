@@ -11,9 +11,11 @@
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=formation_list">Liste des formations</a>
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=module_list">Liste des modules</a>
         </section>
-        <section class="flex-grow flex flex-col items-center" >
+        <section class="flex-grow flex flex-col items-center mb-8" >
             <?php if(isset($_GET['action'])): ?>
                 <?php require("../Templates/{$_GET['action']}.php"); ?>
+            <?php else: ?>
+                <?php require("../Templates/formation_creation_form.php"); ?>
             <?php endif; ?>
         </section>
     </div>

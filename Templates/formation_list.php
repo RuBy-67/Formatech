@@ -17,6 +17,7 @@ $formations = $formationMapper->getList();
             <th>Niveau RNCP</th>
             <th>Visibilité</th>
             <th>Modules liés</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -43,6 +44,7 @@ $formations = $formationMapper->getList();
                     <span><?= $module->getName() ?></span>
                     <?php endforeach ?>
                 </td>
+                <td><a href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=formation_edit_form&id=<?= $formation->getId() ?>" class="bg-white rounded-md px-1">Modifier</a></td>
             </tr>
         <?php endforeach ?>
     </tbody>

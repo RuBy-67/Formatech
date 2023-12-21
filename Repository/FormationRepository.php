@@ -83,4 +83,79 @@ class FormationRepository
                                 ]
                             );
     }
+
+    public function getOneById(int $id): array
+    {
+        return $this->database
+                    ->executeQuery("SELECT 
+                                        f.formationId as formation_formationId, 
+                                        f.name as formation_name, 
+                                        f.durationFormationInMonth as formation_durationInMonth, 
+                                        f.abbreviation as formation_abbreviation, 
+                                        f.rncpLvl as formation_rncpLvl, 
+                                        f.accessibility as formation_accessibility,
+                                        mf.moduleId as moduleformation_moduleId,
+                                        mf.formationId as moduleformation_formationId, 
+                                        m.moduleId as module_moduleId, 
+                                        m.name as module_name, 
+                                        m.durationModuleInHours as module_durationModuleInHours
+                                    FROM `formation` f
+                                    LEFT JOIN moduleformation mf ON f.formationId = mf.formationId
+                                    LEFT JOIN module m ON m.moduleId = mf.moduleId
+                                    WHERE f.formationId = :formationId;",
+                                    ['formationId' => $id])
+                    ->fetchAll();
+    }
+
+    public function updateFormation(Formation $formation): void
+    {
+        $this->database
+             ->executeQuery("UPDATE formation SET
+                             name = :name,
+                             durationFormationInMonth = :durationFormationInMonth,
+                             abbreviation = :abbreviation,
+                             rncpLvl = :rncpLvl,
+                             accessibility = :accessibility
+                             WHERE formationId = :formationId;",
+                            [
+                                'formationId' => $formation->getId(),
+                                'name' => $formation->getName(),
+                                'durationFormationInMonth' => $formation->getDurationInMonth(),
+                                'abbreviation' => $formation->getAbbreviation(),
+                                'rncpLvl' => $formation->getRncpLvl(),
+                                'accessibility' => $formation->getAccessibility()
+                            ]
+                        );
+    }
+
+    public function addModulesToformation(int $formationId, array $moduleIdsToAdd): void
+    {
+        foreach($moduleIdsToAdd as $moduleIdToAdd){
+            $this->database
+                 ->executeQuery(
+                    "INSERT INTO moduleformation
+                     ( moduleId, formationId) 
+                    VALUES ( :moduleId, :formationId);",
+                    [
+                        'moduleId' => $moduleIdToAdd,
+                        'formationId' => $formationId
+                    ]
+                 );
+        }
+    }
+
+    public function removeModulesFromFormation(int $formationId, array $moduleIdsToRemove): void
+    {
+        foreach($moduleIdsToRemove as $moduleIdToRemove){
+            $this->database
+                 ->executeQuery(
+                    "DELETE FROM moduleformation
+                     WHERE moduleId = :moduleId AND  formationId = :formationId;",
+                    [
+                        'moduleId' => $moduleIdToRemove,
+                        'formationId' => $formationId
+                    ]
+                 );
+        }
+    }
 }

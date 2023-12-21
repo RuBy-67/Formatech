@@ -55,7 +55,15 @@ class Formation
     }
 
   
-
+    public function getModulesIds(): array
+    {
+        return array_map(
+            function (Module $module) {
+                return $module->getId();
+            },
+            $this->modules
+        );
+    }
 
  
 
