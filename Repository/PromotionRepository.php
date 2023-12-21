@@ -20,12 +20,14 @@ class PromotionRepository
     {
         return $this->database
             ->executeQuery("SELECT
-                            p.promotionId as promotion_promotionId,
-                            p.formationId as promotion_formationId,
-                            p.promotionYears as promotion_promotionYear,
-                            p.startingDate as promotion_startingDate,
-                            p.endingDate as promotion_endingDate
-                        FROM Promotion p")
+            p.promotionId as promotion_promotionId,
+            p.formationId as promotion_formationId,
+            p.promotionYears as promotion_promotionYear,
+            p.startingDate as promotion_startingDate,
+            p.endingDate as promotion_endingDate,
+            f.name as formation_name
+        FROM Promotion p
+       LEFT JOIN Formation f ON p.formationId = f.formationId")
             ->fetchAll();
     }
 

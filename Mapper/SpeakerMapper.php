@@ -43,12 +43,7 @@ class SpeakerMapper
                 ->setFirstName($speakerFromDb['speaker_firstName'])
                 ->setLastName($speakerFromDb['speaker_lastName'])
                 ->setMail($speakerFromDb['speaker_mail'])
-                ->setPassword($speakerFromDb['speaker_password'])
-                ->setModuleSpeakerId($speakerFromDb['modulespeaker_speakerId'])
-                ->setModuleId($speakerFromDb['modulespeaker_moduleId'])
-                ->setModuleModuleId($speakerFromDb['module_moduleId'])
-                ->setModuleName($speakerFromDb['module_name'])
-                ->setModuleDuration($speakerFromDb['module_durationModuleInHours']);
+                ->setPassword($speakerFromDb['speaker_password']);
 
             $entityModule = $this->moduleMapper->getOneByArray($speakerFromDb);
             if ($entityModule !== null) {
