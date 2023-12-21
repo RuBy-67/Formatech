@@ -93,9 +93,9 @@ class StudentRepository
                 [
                     'studentId' => $student
                 ]
-                
+
             );
-            $this->database->executeQuery("DELETE FROM studentpromotion WHERE studentId = :studentId", ['studentId' => $student]);
+        $this->database->executeQuery("DELETE FROM studentpromotion WHERE studentId = :studentId", ['studentId' => $student]);
     }
 
     public function getStudentListInDbByFormation($formationId)
@@ -119,7 +119,20 @@ class StudentRepository
         )->fetch();
     }
 
-    
+    public function addStudentInPromotion($studentId, $promotionId)
+    {
+        // Vérifier si la paire étudiant-promotion existe déjà
+        $existingPair = $this->database->executeQuery("SELECT * FROM StudentPromotion WHERE studentId = ? AND promotionId = ?",
+            [$studentId, $promotionId]
+        )->fetch();
+
+        if (!$existingPair) {
+            return $this->database->executeQuery("INSERT INTO StudentPromotion (studentId, promotionId) VALUES (?, ?)",
+                [$studentId, $promotionId]
+            );
+        }
+    }
+
 
 
 }
