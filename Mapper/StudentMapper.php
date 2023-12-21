@@ -11,7 +11,7 @@ class StudentMapper
     private static ?StudentMapper $instance = null;
     private StudentRepository $studentRepository;
 
-    protected function _construct()
+    public function _construct()
     {
         $this->studentRepository = new StudentRepository();
     }
@@ -50,4 +50,5 @@ class StudentMapper
 
         return $studentEntities;
     }
+    
 }
