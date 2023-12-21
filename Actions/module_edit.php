@@ -23,5 +23,5 @@ $moduleRepository->updateModule($module);
 $moduleRepository->addSpeakersToModule($moduleId, $speakersToAddToModule);
 $moduleRepository->removeSpeakersFromModule($moduleId, $speakersToRemoveFromModule);
 
-header("Location: {$_SERVER['HTTP_REFERER']}");
+header("Location: /Pages/panel_employee.php?action=module_list");
 exit;

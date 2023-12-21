@@ -9,7 +9,7 @@ $students = $studentMapper->getList();
 ?>
 
 <section class="container">
-    <h2 class=" text-center">Liste des étudiants</h2>
+    <h2 class=" text-center mb-8">Liste des étudiants</h2>
     <table class="w-full">
         <thead class="bg-darkGrey text-white">
             <tr>

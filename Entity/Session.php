@@ -113,7 +113,7 @@ class Session
     }
 
 
-    public function setClassRoomId(?int $classRoomId): self
+    public function setClassRoomId(?int $classRoomId = null): self
     {
         $this->classRoomId = $classRoomId;
 

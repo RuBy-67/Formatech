@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once(__DIR__ . "..\..\..\Autoloader.php");
 use DB\Database;
 
@@ -10,22 +10,18 @@ if ($type != "etudiant" && $type != "intervenant" && $type != "employe") {
     exit();
 
 }
+
 ?>
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Connexion
-        <?php echo $type; ?>
-    </title>
-</head>
-
-<body>
-    <h2>Connexion
-        <?php echo $type; ?>
-    </h2>
-    <form method="post">
+<?php
+require_once(__DIR__ . '\..\\..\\Layouts\\header.php');
+?>
+<section class="w-full h-[400px] banner-bg bg-cover flex flex-col justify-center items-center mb-8 ">
+    <h1 class="text-white text-center ">Connexion
+        <?php echo $type; ?></h1>
+</section>
+<section class="container">
+    <form method="post" class="flex flex-col items-center">
         <input type="hidden" name="type" value="<?php echo $type; ?>">
         <label for="mail">Adresse e-mail :</label>
         <input type="text" id="mail" name="mail" required><br>
@@ -33,7 +29,12 @@ if ($type != "etudiant" && $type != "intervenant" && $type != "employe") {
         <input type="password" id="password" name="password" required><br>
         <input type="submit" value="Se connecter">
     </form>
-</body>
+    </section>
+<?php
+var_dump(password_hash('mdp', PASSWORD_DEFAULT));
+require_once(__DIR__ . '\..\\..\\Layouts\\footer.php');
+?>
+
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    $result = getUserbyDb($type, $mail, $password, $table, $idColumnName, $database);
+    $result = getUserbyDb( $mail, $password, $table, $database);
     if ($result->rowCount() > 0) {
         $user = $result->fetch(PDO::FETCH_ASSOC);
 
@@ -73,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Aucun utilisateur correspondant sur " . $type . ".";
     }
 }
-function getUserbyDb($type, $mail, $password, $table, $idColumnName, $database)
+function getUserbyDb($mail, $password, $table, $database)
 {
     $result = $database->executeQuery(
         "SELECT * FROM $table WHERE mail = ? AND password = ?",
