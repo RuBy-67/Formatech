@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_mail'] = $user['mail'];
 
         // Redirect the user to a dashboard page, for example
-        header("Location: dashboard.php");
+        header("Location: info_$type.php");
         exit();
     } else {
         echo "Aucun utilisateur correspondant sur " . $type . ".";

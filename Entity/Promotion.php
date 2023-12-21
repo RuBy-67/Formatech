@@ -9,12 +9,21 @@ class Promotion
     private int $promotionYear;
     private string $startingDate;
     private string $endingDate;
+    private string $formationName;
+
+
 
 
     public function getId(): int
     {
         return $this->id;
     }
+
+    public function getFormationName(): string
+    {
+        return $this->formationName;
+    }
+
 
     public function getFormationId(): int
     {
@@ -51,6 +60,11 @@ class Promotion
         }
     
         return $this;
+    }
+
+    public function setFormationName(string $formationName): void
+    {
+        $this->formationName = $formationName;
     }
     
 
