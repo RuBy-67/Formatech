@@ -10,7 +10,10 @@ class Student
     private string $mail;
     private string $birthDate;
     private string $password;
-    private int $promotionId;
+    /**
+     * @var Promotion
+     */
+    private  $promotionId = [];
 
     public function getId(): int
     {
@@ -42,6 +45,8 @@ class Student
     {
         return $this->password;
     }
+   
+
     public function setPromotionId(int $id): self
     {
         if ($this->isOnlyNumericCharacters($id)) {
@@ -93,7 +98,7 @@ class Student
 
     public function setPassword(string $password): self
     {
-        $this->password = $this->isSecureParameter($password);
+        // $this->password = $this->isSecureParameter($password);
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $this->password = $hashedPassword;
@@ -126,23 +131,23 @@ class Student
     }
     
 
-    public function isSecureParameter($stringToCheck): bool
-    {
-        $hasMinLength = strlen($stringToCheck) >= 8;
-        $hasUpperCase = preg_match('/[A-Z]/', $stringToCheck);
-        $hasLowerCase = preg_match('/[a-z]/', $stringToCheck);
-        $hasDigit = preg_match('/\d/', $stringToCheck);
-        $hasSpecialChar = preg_match('/[!@#$%^&*()\-_=+\[\]{}|;:\'",.<>?\/]/', $stringToCheck);
-        $hasNoSpace = !preg_match('/\s/', $stringToCheck);
+    // public function isSecureParameter($stringToCheck): bool
+    // {
+    //     $hasMinLength = strlen($stringToCheck) >= 8;
+    //     $hasUpperCase = preg_match('/[A-Z]/', $stringToCheck);
+    //     $hasLowerCase = preg_match('/[a-z]/', $stringToCheck);
+    //     $hasDigit = preg_match('/\d/', $stringToCheck);
+    //     $hasSpecialChar = preg_match('/[!@#$%^&*()\-_=+\[\]{}|;:\'",.<>?\/]/', $stringToCheck);
+    //     $hasNoSpace = !preg_match('/\s/', $stringToCheck);
 
-        if ($hasMinLength) {
-            //? !$hasMinLength || !$hasUpperCase || !$hasLowerCase || !$hasDigit || !$hasSpecialChar || !$hasNoSpace
-            echo "Erreur dans la saisie, merci de recommencer, MDP";
-            return false;
-        }
+    //     if ($hasMinLength) {
+    //         //? !$hasMinLength || !$hasUpperCase || !$hasLowerCase || !$hasDigit || !$hasSpecialChar || !$hasNoSpace
+    //         echo "Erreur dans la saisie, merci de recommencer, MDP";
+    //         return false;
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 
     public function isEmailFormatCorrect($emailToCheck){
         $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';

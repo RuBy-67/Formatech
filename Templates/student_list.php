@@ -6,13 +6,12 @@ use Mapper\StudentMapper;
 $studentMapper = StudentMapper::getInstance();
 $students = $studentMapper->getList();
 
-var_dump($students);
 ?>
 
-<section>
-    <h2>Liste des étudiants</h2>
-    <table>
-        <thead>
+<section class="container">
+    <h2 class=" text-center">Liste des étudiants</h2>
+    <table class="w-full">
+        <thead class="bg-darkGrey text-white">
             <tr>
                 <th hidden>StudentId</th>
                 <th>First Name</th>
@@ -20,6 +19,7 @@ var_dump($students);
                 <th>Email</th>
                 <th>Birth Date</th>
                 <th>Promotion ID</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +43,8 @@ var_dump($students);
                     <td>
                         <?= $student->getPromotionId() ?>
                     </td>
+                    <td><a href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=student_update&id=<?= $student->getId() ?>" class="bg-white rounded-md px-1">Modifier</a></td>
+                </tr>
                 </tr>
             <?php endforeach ?>
 

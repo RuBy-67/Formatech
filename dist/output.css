@@ -873,6 +873,7 @@ h1 {
 }
 
 h2 {
+  margin-bottom: 2rem;
   font-size: 40px;
 }
 
@@ -966,10 +967,6 @@ select,
   background-blend-mode: soft-light;
 }
 
-.table-spacing {
-  border: 1px solid black;
-}
-
 .card {
   width: 100%;
   position: relative;
@@ -988,6 +985,16 @@ select,
 
 .card:nth-child(3n + 3):not(:first-child):not(:last-child) {
   border-left: 1px solid #354A54;
+}
+
+tr:not(:last-child) td {
+  border-bottom: 1px solid #354A54;
+}
+
+td {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: center;
 }
 
 @media (prefers-color-scheme: dark) {

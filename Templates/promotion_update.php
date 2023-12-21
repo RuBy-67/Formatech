@@ -29,34 +29,28 @@ $startingDate = $promotionDetails['promotion_startingDate'];
 $endingDate = $promotionDetails['promotion_endingDate'];
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mise à jour de la promotion</title>
-</head>
-<body>
 
 <h2>Mise à jour de la promotion</h2>
 
-<form action="/formatech/Actions/promotion_update.php" method="post">
+<form action="/Actions/promotion_update.php" method="post" class="flex flex-col justify-center items-center h-full">
     <input type="hidden" name="promotionId" value="<?php echo $promotionId; ?>">
-
-    <label for="formationId">ID de la formation :</label>
-    <input type="number" id="formationId" name="formationId" value="<?php echo $formationId; ?>" required><br>
-
-    <label for="promotionYear">Année de promotion :</label>
-    <input type="number" id="promotionYear" name="promotionYear" value="<?php echo $promotionYear; ?>" required><br>
-
-    <label for="startingDate">Date de début :</label>
-    <input type="date" id="startingDate" name="startingDate" value="<?php echo $startingDate; ?>" required><br>
-
-    <label for="endingDate">Date de fin :</label>
-    <input type="date" id="endingDate" name="endingDate" value="<?php echo $endingDate; ?>" required><br>
-
+    <div class="grid grid-cols-2 gap-x-8 gap-y-3 mb-8 justify-items-center">
+        <div class="flex flex-col items-center">
+            <label for="formationId">ID de la formation :</label>
+            <input type="number" id="formationId" name="formationId" value="<?php echo $formationId; ?>" required><br>
+        </div>
+        <div class="flex flex-col items-center">
+            <label for="promotionYear">Année de promotion :</label>
+            <input type="number" id="promotionYear" name="promotionYear" value="<?php echo $promotionYear; ?>" required><br>
+        </div>
+        <div class="flex flex-col items-center">
+            <label for="startingDate">Date de début :</label>
+            <input type="date" id="startingDate" name="startingDate" value="<?php echo $startingDate; ?>" required><br>
+        </div>
+        <div class="flex flex-col items-center">
+            <label for="endingDate">Date de fin :</label>
+            <input type="date" id="endingDate" name="endingDate" value="<?php echo $endingDate; ?>" required><br>
+        </div>
+    </div>
     <input type="submit" value="Mettre à jour la promotion">
 </form>
-
-</body>
-</html>

@@ -1,22 +1,25 @@
 <?php
 require_once(__DIR__ . "\..\\Autoloader.php");
 use Mapper\PromotionMapper;
+use Mapper\FormationMapper;
 
-$promotionMapper = new PromotionMapper();
+$promotionMapper = PromotionMapper::getInstance();
 $promotions = $promotionMapper->getList();
 
+$formationMapper = FormationMapper::getInstance();
 ?>
 
-<section>
-    <h2>Liste Promotion</h2>
-    <table>
-        <thead>
+<section  class="container">
+    <h2 class=" text-center">Liste Promotion</h2>
+    <table class="w-full">
+        <thead class="bg-darkGrey text-white">
             <tr>
                 <th hidden>Id</th>
                 <th>Promotion Year</th>
                 <th>Formation Id</th>
                 <th>StartingDate</th>
                 <th>EndingDate</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +41,7 @@ $promotions = $promotionMapper->getList();
                         <?= $promotion->getEndingDate();?>
                         
                     </td>
+                    <td><a href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=promotion_update&id=<?= $promotion->getId() ?>" class="bg-white rounded-md px-1">Modifier</a></td>
                 </tr>
             <?php endforeach ?>
         </tbody>

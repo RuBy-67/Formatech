@@ -5,5 +5,5 @@ use Repository\PromotionRepository;
 $studentId = $_POST['promotionId'];
  $promotionRepository = new PromotionRepository();
  $promotionRepository->deletePromotionInDb($studentId);
- header("Location: /path/to/success_page.php");
+ header("Location: /Pages/panel_employee.php");
  exit;

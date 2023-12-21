@@ -6,15 +6,16 @@ $moduleMapper = ModuleMapper::getInstance();
 $modules = $moduleMapper->getList();
 ?>
 
-<section>
-    <h2>Nos modules</h2>
-    <table>
-        <thead>
+<section class="container">
+    <h2  class=" text-center">Nos modules</h2>
+    <table class="w-full">
+        <thead class="bg-darkGrey text-white">
             <tr>
                 <th>Id du module</th>
                 <th>Nom</th>
                 <th>Durée en heures</th>
                 <th>Intervenants</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

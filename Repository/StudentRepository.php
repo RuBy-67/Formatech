@@ -107,16 +107,30 @@ class StudentRepository
             [$formationId]
         )->fetchAll();
     }
-
-    public function getStudentProfilDetailsInDb($studentId)
-    {
-        return $this->database->executeQuery("SELECT s.*, p.promotionId, p.promotionYears, p.startingDate, p.endingDate 
-            FROM Student s
-            JOIN StudentPromotion sp ON s.studentId = sp.studentId
-            JOIN Promotion p ON sp.promotionId = p.promotionId
-            WHERE s.studentId = ?",
-            [$studentId]
-        )->fetch();
+    //getOneById
+    public function getOneById($id)
+    {   
+        return $this->database
+                    ->executeQuery("SELECT 
+                                        s.studentId as student_studentId, 
+                                        s.firstName as student_firstName, 
+                                        s.lastName as student_lastName, 
+                                        s.mail as student_mail, 
+                                        s.birthDate as student_birthDate, 
+                                        s.password as student_password,
+                                        sp.studentId as modulestudent_studentId, 
+                                        sp.promotionId as promotionstudent_promotionId,
+                                        p.promotionId as promotion_promotionId, 
+                                        p.formationId as promotion_formationId, 
+                                        p.promotionYears as promotion_Years,
+                                        p.startingDate as promotion_startingDate,
+                                        p.endingDate as promotion_endingDate
+                                    FROM `student` s
+                                    LEFT JOIN studentpromotion sp ON s.studentId = sp.studentId
+                                    LEFT JOIN promotion p ON sp.promotionId = p.promotionId
+                                    WHERE s.studentId = :studentId;",
+                                    ['studentId' => $id])
+                    ->fetch();
     }
 
     public function addStudentInPromotion($studentId, $promotionId)

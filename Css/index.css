@@ -47,7 +47,8 @@ h1 {
 }
 h2 {
     @apply md:text-h2
-    text-h3;
+    text-h3
+    mb-8;
 }
 h3 {
     @apply md:text-h3
@@ -109,10 +110,6 @@ select,
     background-blend-mode: soft-light;
 }
 
-.table-spacing {
-    border: 1px solid black;
-}
-
 .card {
     width: 100%;
     position: relative;
@@ -131,4 +128,11 @@ select,
 
 .card:nth-child(3n + 3):not(:first-child):not(:last-child) {
     border-left: 1px solid theme("colors.black");
+}
+
+tr:not(:last-child) td {
+    border-bottom: 1px solid theme("colors.black");
+}
+td {
+    @apply text-center py-2;
 }
