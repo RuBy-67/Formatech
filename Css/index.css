@@ -15,6 +15,10 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+main {
+    flex-grow: 1;
+}
 .container {
     @apply lg:w-4/5
         md:w-[90%];

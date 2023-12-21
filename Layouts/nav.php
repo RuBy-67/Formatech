@@ -11,7 +11,13 @@
             <a href="<?= $item['url']; ?>" class="text-black mx-1.5">
             <?= $item['name']; ?>
             </a>
+            
         </li>
     <?php endforeach; ?>
+    <?php if (isset($_SESSION['user_type']) || $_SESSION['user_type'] ) :?>
+        <li>
+            <a href="/Pages/login/dashboard.php" class="text-black mx-1.5">Mes données</a>
+        </li>
+    <?php endif;?>
     </ul>
 </nav>

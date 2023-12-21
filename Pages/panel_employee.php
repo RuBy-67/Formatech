@@ -1,11 +1,9 @@
 <?php require_once(__DIR__ . "\..\\Layouts\\header.php");
-// Start the session
-session_start();
 
 // Check if the user is not an employee
-if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employee') {
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employe') {
     // Redirect the user to index.php or any other login page
-    header("Location: index.php");
+    header("Location: /index.php");
     exit();
 }
 
@@ -15,7 +13,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employee') {
     <section class="w-full h-[300px] banner-bg bg-cover flex flex-col justify-center items-center mb-8 ">
         <h1 class="text-center mt-8">Panneau de gestion</h1> 
     </section>
-    <div class="flex">
+    <div class="flex mb-8">
         <section class="flex flex-col gap-2 ml-4"> 
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=student_creation">Ajouter un étudiant</a>
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=student_delete_form">Retirer un étudiant</a>
