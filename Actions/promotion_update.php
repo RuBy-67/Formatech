@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $promotionRepository->modifyPromotionInDb($promotion);
 
     
-    header("Location: /path/to/success_page.php");
+    header("Location: /Pages/panel_employee.php");
     exit;
 } else {
    

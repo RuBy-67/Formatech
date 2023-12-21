@@ -598,31 +598,16 @@ video {
   margin-right: 0.375rem;
 }
 
-.my-5 {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
-}
-
-.mx-5 {
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
-}
-
-.my-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
 .mb-12 {
   margin-bottom: 3rem;
 }
 
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
-
 .mb-8 {
   margin-bottom: 2rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
 }
 
 .mr-4 {
@@ -631,14 +616,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.ml-8 {
-  margin-left: 2rem;
-}
-
-.ml-4 {
-  margin-left: 1rem;
 }
 
 .flex {
@@ -661,21 +638,16 @@ video {
   height: 3.5rem;
 }
 
+.h-\[300px\] {
+  height: 300px;
+}
+
 .h-\[400px\] {
   height: 400px;
 }
 
 .h-\[678px\] {
   height: 678px;
-}
-
-.h-\[300px\] {
-  height: 300px;
-}
-
-.h-max {
-  height: -moz-max-content;
-  height: max-content;
 }
 
 .h-full {
@@ -706,12 +678,12 @@ video {
   list-style-type: none;
 }
 
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -750,13 +722,13 @@ video {
   gap: 2rem;
 }
 
-.gap-y-12 {
-  row-gap: 3rem;
-}
-
 .gap-x-8 {
   -moz-column-gap: 2rem;
        column-gap: 2rem;
+}
+
+.gap-y-12 {
+  row-gap: 3rem;
 }
 
 .gap-y-3 {
@@ -775,11 +747,6 @@ video {
 .bg-darkGrey {
   --tw-bg-opacity: 1;
   background-color: rgb(44 44 44 / var(--tw-bg-opacity));
-}
-
-.bg-lightGrey {
-  --tw-bg-opacity: 1;
-  background-color: rgb(153 174 186 / var(--tw-bg-opacity));
 }
 
 .bg-white {
@@ -820,28 +787,12 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.pt-5 {
-  padding-top: 1.25rem;
-}
-
 .text-center {
   text-align: center;
 }
 
 .text-h4 {
   font-size: 32px;
-}
-
-.text-h6 {
-  font-size: 18px;
-}
-
-.text-h2 {
-  font-size: 48px;
-}
-
-.text-h3 {
-  font-size: 40px;
 }
 
 .text-black {
@@ -922,6 +873,7 @@ h1 {
 }
 
 h2 {
+  margin-bottom: 2rem;
   font-size: 40px;
 }
 
@@ -977,6 +929,7 @@ a {
 
 button,
 input,
+select,
 .button {
   align-items: center;
   -webkit-appearance: none;
@@ -1014,10 +967,6 @@ input,
   background-blend-mode: soft-light;
 }
 
-.table-spacing {
-  border: 1px solid black;
-}
-
 .card {
   width: 100%;
   position: relative;
@@ -1036,6 +985,16 @@ input,
 
 .card:nth-child(3n + 3):not(:first-child):not(:last-child) {
   border-left: 1px solid #354A54;
+}
+
+tr:not(:last-child) td {
+  border-bottom: 1px solid #354A54;
+}
+
+td {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: center;
 }
 
 @media (prefers-color-scheme: dark) {

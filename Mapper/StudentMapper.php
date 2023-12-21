@@ -3,6 +3,7 @@
 namespace Mapper;
 
 use Repository\StudentRepository;
+use Mapper\PromotionMapper;
 use Entity\Student;
 
 //Transformer la Donnée de la Database en entité
@@ -10,10 +11,12 @@ class StudentMapper
 {
     private static ?StudentMapper $instance = null;
     private StudentRepository $studentRepository;
+    private PromotionMapper $promotionMapper;
 
     public function _construct(): void
     {
         $this->studentRepository = new StudentRepository();
+        $this->promotionMapper = PromotionMapper::getInstance();
     }
    
     public static function getInstance(): StudentMapper
@@ -38,7 +41,6 @@ class StudentMapper
         foreach ($studentArrayFromDb as $studentFromDb) {
             $entity = null;
             $studentId = $studentFromDb['student_studentId'];
-            var_dump($studentFromDb);
 
             if (isset($studentEntities[$studentId])) {
                 $entity = $studentEntities[$studentId];
@@ -59,6 +61,43 @@ class StudentMapper
         }
 
         return $studentEntities;
+    }
+
+    public function getOneById(int $studentId): ?Student
+    {
+        $studentRowsFromDb = $this->studentRepository->getOneById($studentId);
+
+        if (empty($studentRowsFromDb)) {
+            return null;
+        }
+
+        $studentEntities = [];
+        foreach($studentRowsFromDb as $row) {
+            $entity = null;
+            $studentId = $row['student_studentId'];
+
+            if (isset($studentEntities[$studentId])) {
+                $entity = $studentEntities[$studentId];
+            } else {
+                $entity = new Student();
+            }
+
+            $entity->setId($row['student_studentId'])
+                   ->setFirstName($row['student_firstName'])
+                   ->setLastName($row['student_lastName'])
+                   ->setBirthDate($row['student_birthDate'])
+                   ->setMail($row['student_mail'])
+                   ->setPassword($row['student_password']);
+
+            $studentPromotion = $this->promotionMapper->getOneByArray($row);
+            if ($studentPromotion !== null) {
+                $entity->addPromotion($studentPromotion);
+            }
+
+            $studentEntities[$entity->getId()] = $entity;
+        }        
+
+        return reset($studentEntities) ?: null;
     }
     
 }
