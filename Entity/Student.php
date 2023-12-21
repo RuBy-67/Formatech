@@ -10,10 +10,15 @@ class Student
     private string $mail;
     private string $birthDate;
     private string $password;
+    private int $promotionId;
 
     public function getId(): int
     {
         return $this->id;
+    }
+    public function getPromotionId(): int
+    {
+        return $this->promotionId;
     }
 
     public function getFirstName(): string
@@ -31,13 +36,16 @@ class Student
     }
     public function getBirthDate(): string
     {
-        
         return $this->birthDate;
-
     }
     public function getPassword(): string
     {
         return $this->password;
+    }
+    public function setPromotionId(int $id): self
+    {
+        $this->promotionId = $this->isOnlyNumericCharacters($id) ?: null;
+        return $this;
     }
 
     public function setId(int $id): self
