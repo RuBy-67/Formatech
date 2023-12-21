@@ -6,7 +6,7 @@ use Repository\StudentRepository;
 use Entity\Student;
 
 //Transformer la Donnée de la Database en entité
-class StudentMapper
+class StudentMapper 
 {
     private StudentRepository $studentRepository;
 
@@ -22,30 +22,21 @@ class StudentMapper
     {
         $studentArrayFromDb = $this->studentRepository->getList();
         $studentEntities = [];
-
+    
         foreach ($studentArrayFromDb as $studentFromDb) {
-            $entity = null;
-            $studentId = $studentFromDb['student_studentId'];
-            var_dump($studentFromDb);
-
-            if (isset($studentEntities[$studentId])) {
-                $entity = $studentEntities[$studentId];
-            } else {
-                $entity = new student();
-            }
-
-            $entity->setId($studentId)
+            $entity = new Student(); // Toujours créer une nouvelle entité
+    
+            $entity->setId($studentFromDb['student_studentId'])
                 ->setFirstName($studentFromDb['student_firstName'])
                 ->setLastName($studentFromDb['student_lastName'])
                 ->setMail($studentFromDb['student_mail'])
                 ->setPassword($studentFromDb['student_password'])
-                ->setBirthDate($studentFromDb['student_birthDate'])
-                ->setPromotionId($studentFromDb['student_promotionId']);
-
-
-            $studentEntities[$entity->getId()] = $entity;
+                ->setBirthDate($studentFromDb['student_birthDate']);
+    
+            $studentEntities[] = $entity; // Utilisez un tableau indexé par des clés numériques
         }
-
+    
         return $studentEntities;
     }
+    
 }

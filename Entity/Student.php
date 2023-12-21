@@ -8,7 +8,7 @@ class Student
     private string $firstName;
     private string $lastName;
     private string $mail;
-    private int $birthDate;
+    private string $birthDate;
     private string $password;
 
     public function getId(): int
@@ -16,7 +16,7 @@ class Student
         return $this->id;
     }
 
-    public function getFirsName(): string
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -31,7 +31,9 @@ class Student
     }
     public function getBirthDate(): string
     {
+        
         return $this->birthDate;
+
     }
     public function getPassword(): string
     {
@@ -58,14 +60,16 @@ class Student
         return $this;
     }
 
-    public function setBirthDate(int $birthDate): self
+    public function setBirthDate(string $birthDate): self
     {
-        $this->birthDate = $this->isOnlyNumericCharacters($birthDate) ?: null;
-
+        if ($this->isOnlyDateCharacter($birthDate)) {
+            $this->birthDate = $birthDate;
+        } else {
+            $this->birthDate = null;
+        }
+    
         return $this;
     }
-
-
 
     public function setMail(string $mail): self
     {
@@ -76,7 +80,7 @@ class Student
 
     public function setPassword(string $password): self
     {
-        $this->password = $this->isSecureParameter($password) ?: null;
+        $this->password = $this->isSecureParameter($password);
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $this->password = $hashedPassword;
@@ -91,7 +95,7 @@ class Student
         $regex = '/^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/u';
 
         if (!preg_match($regex, $stringToCheck)) {
-            echo "Erreur dans la saisie merci de recommencer";
+            echo "Erreur dans la saisie merci de recommencer, Alphabetic";
             exit;
         }
         return true;
@@ -102,7 +106,7 @@ class Student
         $regex = '/^[0-9]+$/';
 
         if (!preg_match($regex, $stringToCheck)) {
-            echo "Erreur dans la saisie merci de recommencer";
+            echo "Erreur dans la saisie merci de recommencer, Numeric";
             exit;
         }
         return true;
@@ -118,8 +122,9 @@ class Student
         $hasSpecialChar = preg_match('/[!@#$%^&*()\-_=+\[\]{}|;:\'",.<>?\/]/', $stringToCheck);
         $hasNoSpace = !preg_match('/\s/', $stringToCheck);
 
-        if (!$hasMinLength || !$hasUpperCase || !$hasLowerCase || !$hasDigit || !$hasSpecialChar || !$hasNoSpace) {
-            echo "Erreur dans la saisie, merci de recommencer.";
+        if ($hasMinLength) {
+            //? !$hasMinLength || !$hasUpperCase || !$hasLowerCase || !$hasDigit || !$hasSpecialChar || !$hasNoSpace
+            echo "Erreur dans la saisie, merci de recommencer, MDP";
             return false;
         }
 
@@ -130,9 +135,21 @@ class Student
         $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
 
          if (!preg_match($regex, $emailToCheck)) {
-            echo "Erreur dans la saisie merci de recommencer";
+            echo "Erreur dans la saisie merci de recommencer, EMAIL";
             exit;
         } 
+        return true;
+    }
+    public function isOnlyDateCharacter($dateToCheck): bool
+    {
+        // Le motif regex pour le format "dd-mm-aaaa"
+        $regex = '/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/';
+    
+        if (!preg_match($regex, $dateToCheck)) {
+            echo "Erreur dans la saisie de la date, merci de recommencer, DATE_FORMAT";
+            return false;
+        }
+
         return true;
     }
 
