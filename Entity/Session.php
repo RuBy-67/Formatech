@@ -12,6 +12,10 @@ class Session
     private int $promotionId;
     private int $classRoomId;
     private int $speakerId;
+    private ?string $className;
+    private ?string $moduleName;
+    private ?string $speakerFirstName;
+    private ?string $speakerLastName;
 
     public function getId(): int
     {
@@ -73,23 +77,14 @@ class Session
 
     public function setStartTime(string $startTime): self
     {
-        if ($this->isTimeFormatCorrect($startTime)) {
             $this->startTime = $startTime;
-        } else {
-            $this->startTime = null;
-        }
 
         return $this;
     }
 
     public function setEndTime(string $endTime): self
     {
-        if ($this->isTimeFormatCorrect($endTime)) {
             $this->endTime = $endTime;
-        } else {
-            $this->endTime = null;
-        }
-
         return $this;
     }
 
@@ -116,10 +111,53 @@ class Session
 
         return $this;
     }
+
+
     public function setClassRoomId(?int $classRoomId): self
     {
         $this->classRoomId = $classRoomId;
 
+        return $this;
+    }
+
+    public function getSpeakerFirstName(): ?string
+    {
+        return $this->speakerFirstName;
+    }
+
+    public function setSpeakerFirstName(?string $speakerFirstName): self
+    {
+        $this->speakerFirstName = $speakerFirstName;
+        return $this;
+    }
+
+    public function getSpeakerLastName(): ?string
+    {
+        return $this->speakerLastName;
+    }
+    public function getClassName(): ?string
+    {
+        return $this->className;
+    }
+    public function getModuleName(): ?string
+    {
+        return $this->moduleName;
+    }
+
+    public function setModuleName(?string $moduleName): self
+    {
+        $this->moduleName = $moduleName;
+        return $this;
+    }
+    public function setClassName(?string $className): self
+    {
+        $this->className = $className;
+        return $this;
+    }
+
+    public function setSpeakerLastName(?string $speakerLastName): self
+    {
+        $this->speakerLastName = $speakerLastName;
         return $this;
     }
 
