@@ -31,7 +31,7 @@ class StudentMapper
     }
 
     /**
-     * @return student[]
+     * @return Student[]
      */
     public function getList(): array
     {
@@ -45,7 +45,7 @@ class StudentMapper
             if (isset($studentEntities[$studentId])) {
                 $entity = $studentEntities[$studentId];
             } else {
-                $entity = new student();
+                $entity = new Student();
             }
 
             $entity->setId($studentId)

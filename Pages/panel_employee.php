@@ -22,9 +22,9 @@
         </section>
         <section class="flex-grow flex flex-col items-center mb-8" >
             <?php if(isset($_GET['action'])): ?>
-                <?php require("../Templates/{$_GET['action']}.php"); ?>
+                <?php require_once("../Templates/{$_GET['action']}.php"); ?>
             <?php else: ?>
-                <?php require("../Templates/formation_creation_form.php"); ?>
+                <?php require_once("../Templates/formation_creation_form.php"); ?>
             <?php endif; ?>
         </section>
     </div>

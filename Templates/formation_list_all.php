@@ -19,6 +19,7 @@ $formations = $formationMapper->getList();
                 <th>Visibilité</th>
                 <th>Modules liés</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@ $formations = $formationMapper->getList();
                         <?php endforeach ?>
                     </td>
                     <td><a href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=formation_edit_form&id=<?= $formation->getId() ?>" class="bg-white rounded-md px-1">Modifier</a></td>
+                    <td><a href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=formation_details&id=<?= $formation->getId() ?>" class="bg-white rounded-md px-1">Détails</a></td>
                 </tr>
             <?php endforeach ?>
         </tbody>

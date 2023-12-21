@@ -14,7 +14,7 @@ $formationMapper = FormationMapper::getInstance();
     <table class="w-full">
         <thead class="bg-darkGrey text-white">
             <tr>
-                <th hidden>Id</th>
+                <th>Id</th>
                 <th>Promotion Year</th>
                 <th>Formation Id</th>
                 <th>StartingDate</th>
@@ -25,7 +25,7 @@ $formationMapper = FormationMapper::getInstance();
         <tbody>
             <?php foreach ($promotions as $promotion): ?>
                 <tr>
-                    <td hidden>
+                    <td>
                         <?= $promotion->getId() ?>
                     </td>
                     <td>

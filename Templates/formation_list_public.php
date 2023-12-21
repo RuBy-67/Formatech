@@ -20,5 +20,5 @@ $formations = $formationMapper->getListPublic();
                     </p>
                 </div>
             <?php endforeach ?>
-    </article>
+     </article>
     
