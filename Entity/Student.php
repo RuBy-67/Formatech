@@ -44,14 +44,19 @@ class Student
     }
     public function setPromotionId(int $id): self
     {
-        $this->promotionId = $this->isOnlyNumericCharacters($id) ?: null;
+        if ($this->isOnlyNumericCharacters($id)) {
+            $this->promotionId = $id;
+        }
+    
         return $this;
     }
 
     public function setId(int $id): self
     {
-        $this->id = $this->isOnlyNumericCharacters($id) ?: null;
-
+        if ($this->isOnlyNumericCharacters($id)) {
+            $this->id = $id;
+        }
+    
         return $this;
     }
 

@@ -38,8 +38,9 @@ class Promotion
 
     public function setId(int $id): self
     {
-        $this->id = $this->isOnlyNumericCharacters($id) ?: null;
-
+        if ($this->isOnlyNumericCharacters($id)) {
+            $this->id = $id;
+        }
         return $this;
     }
 

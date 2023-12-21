@@ -12,7 +12,7 @@ class SpeakerMapper
     private SpeakerRepository $speakerRepository;
     private ModuleMapper $moduleMapper;
 
-    protected function _construct()
+    public function _construct()
     {
         $this->speakerRepository = new SpeakerRepository();
         $this->moduleMapper = ModuleMapper::getInstance();

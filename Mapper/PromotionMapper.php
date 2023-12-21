@@ -11,7 +11,7 @@ class PromotionMapper
     private static ?PromotionMapper $instance = null;
     private PromotionRepository $promotionRepository;
     
-    protected function __construct()
+    public function __construct()
     {
         $this->promotionRepository = new promotionRepository();
     }
