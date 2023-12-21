@@ -58,9 +58,11 @@ class Speaker
 
 
 
-    public function setId(string $id): self
+    public function setId(int $id): self
     {
-        $this->id = $this->isOnlyNumericCharacters($id) ?: null;
+        if ($this->isOnlyNumericCharacters($id)) {
+            $this->id = $id;
+        }
         return $this;
     }
 

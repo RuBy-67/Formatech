@@ -29,41 +29,33 @@ class SpeakerMapper
     }
 
     /**
-     * @return Speakers[]
+     * @return Speaker[]
      */
     public function getList(): array
     {   
         $speakerArrayFromDb = $this->speakerRepository->getList();
         $speakerEntities = [];
-
-        foreach($speakerArrayFromDb as $speakerFromDb){
-            $entity = null;
-            $speakerId = $speakerFromDb['speaker_speakerId'];
-
-            if (isset($speakerEntities[$speakerId])) {
-                $entity = $speakerEntities[$speakerId];
-            } else {
-                $entity = new Speaker();
+    
+        foreach ($speakerArrayFromDb as $speakerFromDb) {
+            $entity = new Speaker();
+    
+            $entity->setId($speakerFromDb['speaker_speakerId'])
+                   ->setFirstName($speakerFromDb['speaker_firstName'])
+                   ->setLastName($speakerFromDb['speaker_lastName'])
+                   ->setMail($speakerFromDb['speaker_mail'])
+                   ->setPassword($speakerFromDb['speaker_password']);
+    
+            $entityModule = $this->moduleMapper->getOneByArray($speakerFromDb);
+            if ($entityModule !== null) {
+                $entity->addModule($entityModule);
             }
-                
-                $entity ->setId($speakerId)
-                        ->setFirstName($speakerFromDb['speaker_firstName'])
-                        ->setLastName($speakerFromDb['speaker_lastName'])
-                        ->setMail($speakerFromDb['speaker_mail'])
-                        ->setPassword($speakerFromDb['speaker_password']);
-                
-                $entityModule = $this->moduleMapper->getOneByArray($speakerFromDb);
-                if ($entityModule !== null) {
-                    $entity->addModule($entityModule);
-                }
-
-                $speakerEntities[$entity->getId()] = $entity;
-            
+    
+            $speakerEntities[] = $entity;
         }
-
-        
+    
         return $speakerEntities;
     }
+    
 
     public function getOneByArray(array $speakerDataFromDb): ?Speaker
     {
