@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./Pages/*", "./Pages/login/*", "./Templates/*", "./Layouts/*", "./Actions/* ],
+    content: ["./Pages/*", "./Pages/login/*", "./Templates/*", "./Layouts/*", "./Actions/*"],
     theme: {
         container: {
             center: true,
@@ -31,6 +31,9 @@ module.exports = {
             },
             backgroundImage: {
                 "top-banner": "linear-gradient(black, black),url('/Assets/images/quantic_computers_01.png')",
+            },
+            lineHeight: {
+                span: "1px",
             },
         },
     },
