@@ -2,11 +2,13 @@
 
 namespace Entity;
 
-class Speaker {
+class Speaker
+{
     private int $id;
     private string $firstName;
     private string $lastName;
     private string $mail;
+    private string $password;
     /**
      * @var module[]
      */
@@ -29,9 +31,13 @@ class Speaker {
         return $this->lastName;
     }
 
-     public function getMail(): string
+    public function getMail(): string
     {
         return $this->mail;
+    }
+    public function getPassword(): string
+    {
+        return $this->password;
     }
 
     /**
@@ -41,14 +47,22 @@ class Speaker {
     {
         return $this->modules;
     }
-
-
-
-
-    public function setId(string $id): self
+    public function setPassword(string $password): self
     {
-       $this->id = $this->isOnlyNumericCharacters($id) ? ucfirst(strtolower($id)) : null;
+        $this->password = $this->isSecureParameter($password);
 
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $this->password = $hashedPassword;
+        return $this;
+    }
+
+
+
+    public function setId(int $id): self
+    {
+        if ($this->isOnlyNumericCharacters($id)) {
+            $this->id = $id;
+        }
         return $this;
     }
 
@@ -85,9 +99,9 @@ class Speaker {
 
     public function addModule(Module $module): self
     {
-        
-       if (!in_array($module, $this->modules, true)) {
-        $this->modules[] = $module;
+
+        if (!in_array($module, $this->modules, true)) {
+            $this->modules[] = $module;
         }
 
         return $this;
@@ -95,14 +109,14 @@ class Speaker {
 
 
     //* Format check method
-    public function isOnlyAlphabeticCharacters($stringToCheck) :bool
+    public function isOnlyAlphabeticCharacters($stringToCheck): bool
     {
         $regex = '/^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/u';
 
         if (!preg_match($regex, $stringToCheck)) {
             echo "Erreur dans la saisie de {$stringToCheck} merci de recommencer";
             exit;
-        } 
+        }
         return true;
     }
 
@@ -113,17 +127,36 @@ class Speaker {
         if (!preg_match($regex, $stringToCheck)) {
             echo "Erreur dans la saisie merci de recommencer";
             exit;
-        } 
+        }
         return true;
     }
 
-    public function isEmailFormatCorrect($emailToCheck){
+    public function isEmailFormatCorrect($emailToCheck)
+    {
         $regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
 
-         if (!preg_match($regex, $emailToCheck)) {
+        if (!preg_match($regex, $emailToCheck)) {
             echo "Erreur dans la saisie merci de recommencer";
             exit;
-        } 
+        }
+        return true;
+    }
+
+    public function isSecureParameter($stringToCheck): bool
+    {
+        $hasMinLength = strlen($stringToCheck) >= 8;
+        $hasUpperCase = preg_match('/[A-Z]/', $stringToCheck);
+        $hasLowerCase = preg_match('/[a-z]/', $stringToCheck);
+        $hasDigit = preg_match('/\d/', $stringToCheck);
+        $hasSpecialChar = preg_match('/[!@#$%^&*()\-_=+\[\]{}|;:\'",.<>?\/]/', $stringToCheck);
+        $hasNoSpace = !preg_match('/\s/', $stringToCheck);
+
+        //if ($hasMinLength) {
+        //  //? !$hasMinLength || !$hasUpperCase || !$hasLowerCase || !$hasDigit || !$hasSpecialChar || !$hasNoSpace
+        //  echo "Erreur dans la saisie, merci de recommencer, MDP";
+        //  return false;
+        //}
+
         return true;
     }
 }
