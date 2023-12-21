@@ -1,10 +1,11 @@
 <?php
 session_start();
-use Db\Database;
+require_once(__DIR__ . "..\..\..\Autoloader.php");
+use DB\Database;
 
-$database = Database::getInstance();
+$database = new Database();
 $type = $_GET['type'];
-if ($type != "etudiant" || $type != "intervenant" || $type != "employe") {
+if ($type != "etudiant" && $type != "intervenant" && $type != "employe") {
     header("Location: index.php");
     exit();
 
@@ -55,25 +56,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    $result = getUserbyDb($type, $mail, $password, $database);
-    if ($result) {
-        if ($result->num_rows > 0) {
-            $user = $result->fetch_assoc();
+    $result = getUserbyDb($type, $mail, $password, $table, $idColumnName, $database);
+    if ($result->rowCount() > 0) {
+        $user = $result->fetch(PDO::FETCH_ASSOC);
 
-            $_SESSION['user_id'] = $user[$idColumnName];
-            $_SESSION['user_type'] = $type;
-            $_SESSION['user_firstname'] = $user['firstName'];
-            $_SESSION['user_lastname'] = $user['lastName'];
-            $_SESSION['user_mail'] = $user['mail'];
+        $_SESSION['user_id'] = $user[$idColumnName];
+        $_SESSION['user_type'] = $type;
+        $_SESSION['user_firstname'] = $user['firstName'];
+        $_SESSION['user_lastname'] = $user['lastName'];
+        $_SESSION['user_mail'] = $user['mail'];
 
-            //! Redirigez l'utilisateur vers une page de tableau de bord par exemple
-            header("Location: dashboard.php");
-            exit();
-        } else {
-            echo "Aucun utilisateur correspondant sur " . $type . ".";
-        }
+        // Redirect the user to a dashboard page, for example
+        header("Location: dashboard.php");
+        exit();
     } else {
-        echo "Erreur dans la requête SQL.";
+        echo "Aucun utilisateur correspondant sur " . $type . ".";
     }
+}
+function getUserbyDb($type, $mail, $password, $table, $idColumnName, $database)
+{
+    $result = $database->executeQuery(
+        "SELECT * FROM $table WHERE mail = ? AND password = ?",
+        [$mail, $password]
+    );
+
+    return $result;
 }
 ?>

@@ -1,4 +1,15 @@
-<?php require_once(__DIR__ . "\..\\Layouts\\header.php") ?>
+<?php require_once(__DIR__ . "\..\\Layouts\\header.php");
+// Start the session
+session_start();
+
+// Check if the user is not an employee
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employee') {
+    // Redirect the user to index.php or any other login page
+    header("Location: index.php");
+    exit();
+}
+
+?>
 
 <div>
     <section class="w-full h-[300px] banner-bg bg-cover flex flex-col justify-center items-center mb-8 ">
