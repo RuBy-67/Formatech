@@ -12,7 +12,7 @@ class SpeakerMapper
     private SpeakerRepository $speakerRepository;
     private ModuleMapper $moduleMapper;
 
-    public function __construct()
+    protected function _construct()
     {
         $this->speakerRepository = new SpeakerRepository();
         $this->moduleMapper = ModuleMapper::getInstance();
@@ -22,6 +22,7 @@ class SpeakerMapper
     {
         if (self::$instance === null) {
             self::$instance = new SpeakerMapper();
+            self::$instance->_construct();
         }
 
         return self::$instance;
@@ -48,8 +49,12 @@ class SpeakerMapper
                 $entity ->setId($speakerId)
                         ->setFirstName($speakerFromDb['speaker_firstName'])
                         ->setLastName($speakerFromDb['speaker_lastName'])
-                        ->setMail($speakerFromDb['speaker_mail'])
-                        ->addModule($this->moduleMapper->getOneByArray($speakerFromDb));
+                        ->setMail($speakerFromDb['speaker_mail']);
+                
+                $entityModule = $this->moduleMapper->getOneByArray($speakerFromDb);
+                if ($entityModule !== null) {
+                    $entity->addModule($entityModule);
+                }
 
                 $speakerEntities[$entity->getId()] = $entity;
             
@@ -59,8 +64,12 @@ class SpeakerMapper
         return $speakerEntities;
     }
 
-    public function getOneByArray(array $speakerDataFromDb): Speaker
+    public function getOneByArray(array $speakerDataFromDb): ?Speaker
     {
+        if (!isset($speakerDataFromDb['speaker_speakerId'])) {
+            return null;
+        }
+
         $entity = new Speaker();
         $entity ->setId($speakerDataFromDb['speaker_speakerId'])
                 ->setFirstName($speakerDataFromDb['speaker_firstName'])

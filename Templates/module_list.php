@@ -2,7 +2,7 @@
 
 use Mapper\ModuleMapper;
 
-$moduleMapper = new ModuleMapper();
+$moduleMapper = ModuleMapper::getInstance();
 $modules = $moduleMapper->getList();
 ?>
 
@@ -28,6 +28,7 @@ $modules = $moduleMapper->getList();
                             <span><?= $speaker->getFirstName() ?> <?= $speaker->getLastName() ?> </span>
                         <?php endforeach ?>
                     </td>
+                    <td><a href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=module_edit_form&id=<?= $module->getId() ?>" class="bg-white rounded-md px-1">Modifier</a></td>
                 </tr>
             <?php endforeach ?>
         </tbody>

@@ -105,6 +105,16 @@ class Module{
         return $this;
     }
 
+    public function getSpeakersIds(): array
+    {
+        return array_map(
+            function (Speaker $speaker) {
+                return $speaker->getId();
+            },
+            $this->speakers
+        );
+    }
+
     public function addFormation(Formation $formation): self
     {
         if (!in_array($formation, $this->formations, true)) {

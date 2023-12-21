@@ -8,11 +8,23 @@ use Entity\Promotion;
 //Transformer la Donnée de la Database en entité
 class PromotionMapper
 {
+    private static ?PromotionMapper $instance = null;
     private PromotionRepository $promotionRepository;
 
-    public function __construct()
+    protected function _construct()
     {
         $this->promotionRepository = new promotionRepository();
+    }
+
+    public static function getInstance(): PromotionMapper
+    {
+        
+        if (self::$instance === null) {
+            self::$instance = new PromotionMapper();
+            self::$instance->_construct();
+        }
+
+        return self::$instance;
     }
 
     /**

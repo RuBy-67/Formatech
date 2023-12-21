@@ -31,8 +31,8 @@ class FormationRepository
                                         m.name as module_name, 
                                         m.durationModuleInHours as module_durationModuleInHours
                                     FROM `formation` f
-                                    JOIN moduleformation mf ON f.formationId = mf.formationId
-                                    JOIN module m ON m.moduleId = mf.moduleId;")
+                                    LEFT JOIN moduleformation mf ON f.formationId = mf.formationId
+                                    LEFT JOIN module m ON m.moduleId = mf.moduleId;")
                     ->fetchAll();
     }
 
@@ -54,26 +54,13 @@ class FormationRepository
         );
         
         $idNewFormation = $this ->database
-                                ->executeQuery("SELECT formationId
-                                                FROM formation
-                                                WHERE name = :name
-                                                AND durationFormationInMonth = :durationInMonth
-                                                AND abbreviation = :abbreviation
-                                                AND rncpLvl = :rncpLvl
-                                                AND accessibility = :accessibility
-                                                " ,[':name' => $name,
-                                                    ':durationInMonth' => $durationInMonth,
-                                                    ':abbreviation' => $abbreviation,
-                                                    ':rncpLvl' => $rncpLvl,
-                                                    ':accessibility' => $accessibility
-                                                  ])
-                                ->fetch();
+                                ->getLastInsertId();
 
         foreach($formation->getModules() as $moduleId){
             $this   ->database
                     ->executeQuery("INSERT INTO moduleformation (`moduleId`,`formationId`) 
                                     VALUES (?, ?)",
-                                    [$moduleId, $idNewFormation['formationId']]
+                                    [$moduleId, $idNewFormation]
                                     );
         }
     }

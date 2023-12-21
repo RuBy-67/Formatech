@@ -2,12 +2,14 @@
 
 use Mapper\ModuleMapper;
 
-$moduleMapper = new ModuleMapper();
+$moduleMapper = ModuleMapper::getInstance();
 $modules = $moduleMapper->getList();
 
 ?>
-<form action="/Actions/module_delete.php" method="post">
-    
+
+<h2 class="mb-8">Formulaire de suppression de module</h2>
+
+<form action="/Actions/module_delete.php" method="post" class="flex flex-col justify-center items-center ">
     <label for="moduleIdToDelete">Formulaire à supprimé:</label>
     <select id="moduleIdToDelete" name="moduleIdToDelete" required>
        <?php foreach ($modules as $module) :?>
