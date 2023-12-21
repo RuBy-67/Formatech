@@ -17,16 +17,16 @@ class SessionRepository
     public function getList(): array
     {
         return $this->database
-            ->executeQuery("SELECT
-                                session_sessionId,
-                                session_date,
-                                session_startTime,
-                                session_endTime,
-                                session_moduleId,
-                                session_promotionId,
-                                session_classRoomId,
-                                session_SpeakerId
-                            FROM session")
+            ->executeQuery("SELECT s.sessionId, s.date, s.startTime, s.endTime, s.moduleId, m.name 
+            AS moduleName, s.promotionId, s.classRoomId, c.name 
+            AS className, s.SpeakerId, spk.firstName 
+            AS speakerFirstName, spk.lastName 
+            AS speakerLastName 
+            FROM session s 
+            LEFT JOIN module m 
+            ON s.moduleId = m.moduleId 
+            LEFT JOIN classroom c ON s.classRoomId = c.classroomId 
+            LEFT JOIN speaker spk ON s.SpeakerId = spk.speakerId")
             ->fetchAll();
     }
 
@@ -44,7 +44,7 @@ class SessionRepository
                 $session->getClassRoomId(),
                 $session->getSpeakerId()
             ]
-            );
+        );
     }
 
     public function modifySessionInDb(Session $session): void
@@ -74,4 +74,23 @@ class SessionRepository
             ['sessionId' => $sessionId]
         );
     }
+    public function getOneById(int $sessionId): ?array
+    {
+        return $this->database
+            ->executeQuery("SELECT
+                        s.sessionId,
+                        s.date,
+                        s.startTime,
+                        s.endTime,
+                        s.moduleId,
+                        s.promotionId,
+                        s.classRoomId,
+                        s.SpeakerId
+                    FROM session s
+                    WHERE s.sessionId = ?",
+                [$sessionId]
+            )
+            ->fetch();
+    }
+
 }

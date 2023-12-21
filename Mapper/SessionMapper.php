@@ -34,7 +34,7 @@ class SessionMapper
 
         foreach ($sessionArrayFromDb as $sessionFromDb) {
             $entity = null;
-            $sessionId = $sessionFromDb['session_sessionId'];
+            $sessionId = $sessionFromDb['sessionId'];
 
             if (isset($sessionEntities[$sessionId])) {
                 $entity = $sessionEntities[$sessionId];
@@ -43,15 +43,40 @@ class SessionMapper
             }
 
             $entity->setId($sessionId)
-                ->setDate($sessionFromDb['session_date'])
-                ->setStartTime($sessionFromDb['session_startTime'])
-                ->setEndTime($sessionFromDb['session_endTime'])
-                ->setModuleId($sessionFromDb['session_moduleId'])
-                ->setPromotionId($sessionFromDb['session_promotionId']);
+            ->setDate($sessionFromDb['date'])
+            ->setStartTime($sessionFromDb['startTime'])
+            ->setEndTime($sessionFromDb['endTime'])
+            ->setModuleId($sessionFromDb['moduleId'])
+            ->setModuleName($sessionFromDb['moduleName']) 
+            ->setPromotionId($sessionFromDb['promotionId'])
+            ->setClassRoomId($sessionFromDb['classRoomId'])
+            ->setClassName($sessionFromDb['className']) 
+            ->setSpeakerId($sessionFromDb['SpeakerId'])
+            ->setSpeakerFirstName($sessionFromDb['speakerFirstName'])
+            ->setSpeakerLastName($sessionFromDb['speakerLastName']);
 
             $sessionEntities[$entity->getId()] = $entity;
         }
 
         return $sessionEntities;
     }
+
+    public function getOneById(int $sessionId): ?Session
+{
+    $sessionDataFromDb = $this->sessionRepository->getOneById($sessionId);
+
+    return $sessionDataFromDb !== null
+        ? (new Session())
+            ->setId($sessionDataFromDb['sessionId'])
+            ->setDate($sessionDataFromDb['date'])
+            ->setStartTime($sessionDataFromDb['startTime'])
+            ->setEndTime($sessionDataFromDb['endTime'])
+            ->setModuleId($sessionDataFromDb['moduleId'])
+            ->setPromotionId($sessionDataFromDb['promotionId'])
+            ->setClassRoomId($sessionDataFromDb['classRoomId'])
+            ->setSpeakerId($sessionDataFromDb['SpeakerId'])
+        : null;
+}
+
+    
 }

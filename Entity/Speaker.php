@@ -9,6 +9,12 @@ class Speaker
     private string $lastName;
     private string $mail;
     private string $password;
+    private ?int $moduleSpeakerId;
+    private ?int $moduleId;
+    private ?int $moduleModuleId;
+    private ?string $moduleName;
+    private ?int $moduleDuration;
+
     /**
      * @var module[]
      */
@@ -57,6 +63,60 @@ class Speaker
     }
 
 
+    public function setModuleSpeakerId(?int $moduleSpeakerId): self
+    {
+        $this->moduleSpeakerId = $moduleSpeakerId;
+        return $this;
+    }
+
+    public function getModuleSpeakerId(): ?int
+    {
+        return $this->moduleSpeakerId;
+    }
+
+    public function setModuleId(?int $moduleId): self
+    {
+        $this->moduleId = $moduleId;
+        return $this;
+    }
+
+    public function getModuleId(): ?int
+    {
+        return $this->moduleId;
+    }
+
+    public function setModuleModuleId(?int $moduleModuleId): self
+    {
+        $this->moduleModuleId = $moduleModuleId;
+        return $this;
+    }
+
+    public function getModuleModuleId(): ?int
+    {
+        return $this->moduleModuleId;
+    }
+
+    public function setModuleName(?string $moduleName): self
+    {
+        $this->moduleName = $moduleName;
+        return $this;
+    }
+
+    public function getModuleName(): ?string
+    {
+        return $this->moduleName;
+    }
+
+    public function setModuleDuration(?int $moduleDuration): self
+    {
+        $this->moduleDuration = $moduleDuration;
+        return $this;
+    }
+
+    public function getModuleDuration(): ?int
+    {
+        return $this->moduleDuration;
+    }
 
     public function setId(int $id): self
     {
@@ -106,6 +166,7 @@ class Speaker
 
         return $this;
     }
+
 
 
     //* Format check method
