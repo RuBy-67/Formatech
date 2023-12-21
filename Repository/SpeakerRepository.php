@@ -2,6 +2,7 @@
 namespace Repository;
 
 use DB\Database;
+use Entity\Speaker;
 
 class SpeakerRepository
 {
@@ -14,7 +15,7 @@ class SpeakerRepository
     public function getList(): array
     {
         return $this->database
-                    ->executeQuery("SELECT
+            ->executeQuery("SELECT
                                         s.speakerId as speaker_speakerId,
                                         s.firstName as speaker_firstName,
                                         s.lastName as speaker_lastName,
@@ -31,7 +32,50 @@ class SpeakerRepository
                                         modulespeaker ms ON s.speakerId = ms.speakerId
                                     LEFT JOIN
                                         module m ON m.moduleId = ms.moduleId;")
-                    ->fetchAll();
+            ->fetchAll();
+    }
+    public function createSpeaker(string $firstName, string $lastName, string $mail, string $password): void
+    {
+        $speaker = new Speaker();
+        $speaker->setFirstName($firstName)
+            ->setLastName($lastName)
+            ->setMail($mail)
+            ->setPassword($password);
+        $this->database
+            ->executeQuery("INSERT INTO speaker (`firstName`, `lastName`, `mail`, `password`) 
+                            VALUES (?, ?, ?, ?)", [$firstName, $lastName, $mail, $password]);
+    }
+    public function updateSpeaker(Speaker $speaker): void
+    {
+        $this->database
+            ->executeQuery("UPDATE speaker SET 
+                            firstName = :firstName, 
+                            lastName = :lastName, 
+                            mail = :mail, 
+                            password = :password 
+                            WHERE speakerId = :speakerId",
+                [
+                    'firstName' => $speaker->getFirstName(),
+                    'lastName' => $speaker->getLastName(),
+                    'mail' => $speaker->getMail(),
+                    'password' => $speaker->getPassword(),
+                    'speakerId' => $speaker->getId(),
+                ]
+            );
+    }
+    public function deleteSpeaker(int $speakerId): void
+    {
+        // Delete from modulespeaker
+        $this->database
+            ->executeQuery("DELETE FROM modulespeaker WHERE speakerId = :speakerId", ['speakerId' => $speakerId]);
+
+        // Set speakerId to NULL in the module table
+        $this->database
+            ->executeQuery("UPDATE module SET speakerId = NULL WHERE speakerId = :speakerId", ['speakerId' => $speakerId]);
+
+        // Delete from speaker
+        $this->database
+            ->executeQuery("DELETE FROM speaker WHERE speakerId = :speakerId", ['speakerId' => $speakerId]);
     }
 
 }
