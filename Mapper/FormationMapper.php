@@ -21,6 +21,7 @@ class FormationMapper
     {
         if (self::$instance === null) {
             self::$instance = new FormationMapper();
+            self::$instance->__construct();
         }
         return self::$instance;
     }
