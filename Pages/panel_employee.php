@@ -15,6 +15,7 @@
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=formation_list_all">Liste des formations</a>
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=module_list">Liste des modules</a>
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=student_list">Liste des étudiants</a>
+            
         </section>
         <section class="flex-grow flex flex-col items-center mb-8" >
             <?php if(isset($_GET['action'])): ?>
