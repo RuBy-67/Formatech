@@ -4,7 +4,6 @@ use Mapper\StudentMapper;
 
 $studentMapper = new StudentMapper();
 $students = $studentMapper->getList();
-var_dump($students);
 
 ?>
 

@@ -16,7 +16,6 @@ if (!$promotionId) {
 $promotionRepository = new PromotionRepository();
 
 $promotionDetails = $promotionRepository->getPromotionDetailsInDb($promotionId);
-var_dump($promotionDetails);
 
 if (!$promotionDetails) {
     header("Location: /path/to/error_page.php");
@@ -25,7 +24,6 @@ if (!$promotionDetails) {
 
 
 $formationId = $promotionDetails['promotion_formationId'];
-var_dump($formationId);
 $promotionYear = $promotionDetails['promotion_promotionYear'];
 $startingDate = $promotionDetails['promotion_startingDate'];
 $endingDate = $promotionDetails['promotion_endingDate'];

@@ -13,7 +13,6 @@ $promotionRepository = new PromotionRepository();
 
 // Utilisez la méthode getPromotionDetailsInDb pour obtenir les détails de la promotion par ID
 $promotionDetails = $promotionRepository->getPromotionDetailsInDb($promotionId);
-var_dump($promotionDetails);
 // Vérifiez si la promotion existe
 if (!$promotionDetails) {
     header("Location: /path/to/error_page.php");
