@@ -36,6 +36,31 @@ class FormationRepository
                     ->fetchAll();
     }
 
+    public function getListPublic(): array
+    {
+        return $this->database
+                    ->executeQuery("SELECT 
+                                        f.formationId as formation_formationId, 
+                                        f.name as formation_name, 
+                                        f.durationFormationInMonth as formation_durationInMonth, 
+                                        f.abbreviation as formation_abbreviation, 
+                                        f.rncpLvl as formation_rncpLvl, 
+                                        f.accessibility as formation_accessibility,
+                                        mf.moduleId as moduleformation_moduleId,
+                                        mf.formationId as moduleformation_formationId, 
+                                        m.moduleId as module_moduleId, 
+                                        m.name as module_name, 
+                                        m.durationModuleInHours as module_durationModuleInHours
+                                    FROM `formation` f
+                                    LEFT JOIN moduleformation mf ON f.formationId = mf.formationId
+                                    LEFT JOIN module m ON m.moduleId = mf.moduleId
+                                    WHERE `accessibility` = :accessibility;",
+                                    [
+                                        ':accessibility' => 1
+                                    ])
+                    ->fetchAll();
+    }
+
     public function createFormation($name, $durationInMonth, $abbreviation, $rncpLvl, $accessibility, $selectedModuleIds): void
     {
         $formation = new Formation();

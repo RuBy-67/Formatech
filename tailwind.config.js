@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./Pages/*", "./Templates/*", "./Layouts/*"],
+    content: ["./Pages/*", "./Pages/login/*", "./Templates/*", "./Layouts/*"],
     theme: {
         container: {
             center: true,
@@ -30,7 +30,7 @@ module.exports = {
                 text: ["Roboto", "sans-serif"],
             },
             backgroundImage: {
-                "top-banner": "url('/Assets/images/quantic_computers_01.png')",
+                "top-banner": "linear-gradient(black, black),url('/Assets/images/quantic_computers_01.png')",
             },
         },
     },
