@@ -8,12 +8,12 @@ $speakers = $speakerMapper->getList();
 
 ?>
 
-<section>
-    <h2>Liste des Intervenant & leurs modules</h2>
-    <table>
-        <thead>
+<section class="container">
+    <h2 class="text-center">Liste des Intervenant & leurs modules</h2>
+    <table class="w-full">
+        <thead class="bg-darkGrey text-white">
             <tr>
-                <th hidden>Intervenant Id</th>
+                <th>Intervenant Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
@@ -23,7 +23,7 @@ $speakers = $speakerMapper->getList();
         <tbody>
             <?php foreach ($speakers as $speaker): ?>
                 <tr>
-                    <td hidden>
+                    <td>
                         <?= $speaker->getId() ?>
                     </td>
                     <td>
