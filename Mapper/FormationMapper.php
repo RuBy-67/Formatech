@@ -13,12 +13,21 @@ class FormationMapper
     private FormationRepository $formationRepository;
     private ModuleMapper $moduleMapper;
 
-    protected function _construct()
+    public function _construct()
     {
         $this->formationRepository = new FormationRepository();
         $this->moduleMapper = ModuleMapper::getInstance();
     }
+    public static function getInstance(): FormationMapper
+    {
 
+        if (self::$instance === null) {
+            self::$instance = new FormationMapper();
+            self::$instance->_construct();
+        }
+
+        return self::$instance;
+    }
     /**
      * @return Formation[]
      */
@@ -28,7 +37,7 @@ class FormationMapper
         $formationArrayFromDb = $this->formationRepository->getList();
         $formationEntities = [];
 
-        foreach($formationArrayFromDb as $formationFromDb){
+        foreach ($formationArrayFromDb as $formationFromDb) {
             $entity = null;
             $formationId = $formationFromDb['formation_formationId'];
 
@@ -37,13 +46,13 @@ class FormationMapper
             } else {
                 $entity = new Formation();
             }
-            
+
             $entity->setId($formationId)
-                   ->setName($formationFromDb['formation_name'])
-                   ->setDurationInMonth($formationFromDb['formation_durationInMonth'])
-                   ->setAbbreviation($formationFromDb['formation_abbreviation'])
-                   ->setRncpLvl($formationFromDb['formation_rncpLvl'])
-                   ->setAccessibility($formationFromDb['formation_accessibility']);
+                ->setName($formationFromDb['formation_name'])
+                ->setDurationInMonth($formationFromDb['formation_durationInMonth'])
+                ->setAbbreviation($formationFromDb['formation_abbreviation'])
+                ->setRncpLvl($formationFromDb['formation_rncpLvl'])
+                ->setAccessibility($formationFromDb['formation_accessibility']);
 
             $formationModule = $this->moduleMapper->getOneByArray($formationFromDb);
             if ($formationModule !== null) {
@@ -65,7 +74,7 @@ class FormationMapper
         }
 
         $formationEntities = [];
-        foreach($formationRowsFromDb as $row) {
+        foreach ($formationRowsFromDb as $row) {
             $entity = null;
             $formationId = $row['formation_formationId'];
 
@@ -76,11 +85,11 @@ class FormationMapper
             }
 
             $entity->setId($row['formation_formationId'])
-                   ->setName($row['formation_name'])
-                   ->setDurationInMonth($row['formation_durationInMonth'])
-                   ->setAbbreviation($row['formation_abbreviation'])
-                   ->setRncpLvl($row['formation_rncpLvl'])
-                   ->setAccessibility($row['formation_accessibility']);
+                ->setName($row['formation_name'])
+                ->setDurationInMonth($row['formation_durationInMonth'])
+                ->setAbbreviation($row['formation_abbreviation'])
+                ->setRncpLvl($row['formation_rncpLvl'])
+                ->setAccessibility($row['formation_accessibility']);
 
             $formationModule = $this->moduleMapper->getOneByArray($row);
             if ($formationModule !== null) {
@@ -88,7 +97,7 @@ class FormationMapper
             }
 
             $formationEntities[$entity->getId()] = $entity;
-        }        
+        }
 
         return reset($formationEntities) ?: null;
     }

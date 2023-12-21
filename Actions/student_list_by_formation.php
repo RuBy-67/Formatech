@@ -22,8 +22,7 @@ $students = $studentMapper->getStudentListInDbByFormation($formationId);
 
 // Afficher les informations des étudiants de la formation 
 ?>
-<h2>Liste des Étudiants de
-    <?= $formationName ?>
+<h2>Liste des Étudiants de <?php echo ($formationName) ?>
 </h2>
 <table>
     <tr>

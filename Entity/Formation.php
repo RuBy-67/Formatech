@@ -136,7 +136,7 @@ class Formation
         $regex = '/^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/u';
 
         if (!preg_match($regex, $stringToCheck)) {
-            echo "Erreur dans la saisie merci de recommencer";
+            echo "Erreur dans la saisie merci de recommencer regex alphabetic";
             exit;
         } 
         return true;
@@ -147,7 +147,7 @@ class Formation
         $regex = '/^[0-9]+$/';
 
         if (!preg_match($regex, $stringToCheck)) {
-            echo "Erreur dans la saisie merci de recommencer";
+            echo "Erreur dans la saisie merci de recommencer numeric";
             exit;
         } 
         return true;
@@ -158,7 +158,7 @@ class Formation
         $regex = '/^[4-7]+$/';
 
         if (!preg_match($regex, $stringToCheck)) {
-            echo "Erreur dans la saisie merci de recommencer";
+            echo "Erreur dans la saisie merci de recommencer rncp";
             exit;
         } 
         return true;
