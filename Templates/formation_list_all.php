@@ -43,7 +43,7 @@ $formations = $formationMapper->getList();
                     <td><?= $visibility?></td>
                     <td>
                         <?php foreach($formation->getModules() as $module):?>
-                        <span><?= $module->getName() ?></span>
+                        <span  class="border border-black border-solid rounded-md px-2"><?= $module->getName() ?></span>
                         <?php endforeach ?>
                     </td>
                     <td><a href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=formation_edit_form&id=<?= $formation->getId() ?>" class="bg-white rounded-md px-1">Modifier</a></td>

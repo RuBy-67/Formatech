@@ -26,7 +26,7 @@ $modules = $moduleMapper->getList();
                     <td><?= $module->getDurationInHours()?></td>
                     <td>
                         <?php foreach($module->getSpeakers() as $speaker):?>
-                            <span><?= $speaker->getFirstName() ?> <?= $speaker->getLastName() ?> </span>
+                            <span class="border border-black border-solid rounded-md px-2 mx-1"><?= $speaker->getFirstName() ?> <?= $speaker->getLastName() ?> </span>
                         <?php endforeach ?>
                     </td>
                     <td><a href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=module_edit_form&id=<?= $module->getId() ?>" class="bg-white rounded-md px-1">Modifier</a></td>

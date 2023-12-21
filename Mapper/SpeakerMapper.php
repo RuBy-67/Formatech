@@ -37,9 +37,16 @@ class SpeakerMapper
         $speakerEntities = [];
 
         foreach ($speakerArrayFromDb as $speakerFromDb) {
-            $entity = new Speaker();
+            $entity = null;
+            $moduleId = $speakerFromDb['speaker_speakerId'];
 
-            $entity->setId($speakerFromDb['speaker_speakerId'])
+            if (isset($speakerEntities[$moduleId])) {
+                $entity = $speakerEntities[$moduleId];
+            } else {
+                $entity = new Speaker();
+            }
+
+            $entity->setId($moduleId)
                 ->setFirstName($speakerFromDb['speaker_firstName'])
                 ->setLastName($speakerFromDb['speaker_lastName'])
                 ->setMail($speakerFromDb['speaker_mail'])
@@ -55,7 +62,7 @@ class SpeakerMapper
                 $entity->addModule($entityModule);
             }
 
-            $speakerEntities[] = $entity;
+            $speakerEntities[$entity->getId()] = $entity;
         }
 
         return $speakerEntities;

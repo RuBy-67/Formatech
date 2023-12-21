@@ -18,6 +18,7 @@ $speakers = $speakerMapper->getList();
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Module lié</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -36,11 +37,13 @@ $speakers = $speakerMapper->getList();
                         <?= $speaker->getMail() ?>
                     </td>
                     <td>
-                        <?= $speaker->getModuleName() ?>
+                        <?php foreach ($speaker->getModules() as $module): ?>
+                            <span class="border border-black border-solid rounded-md px-2"><?= $module->getName() ?></span>
+                        <?php endforeach ?>
                     </td>
+                    <td><a href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=speaker_update&id=<?= $speaker->getId() ?>" class="bg-white rounded-md px-1">Modifier</a></td>
                 </tr>
             <?php endforeach ?>
-
         </tbody>
     </table>
 </section>

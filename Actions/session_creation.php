@@ -10,7 +10,7 @@ $startTime = $_POST['startTime'];
 $endTime = $_POST['endTime'];
 $moduleId = $_POST['moduleId'];
 $promotionId = $_POST['promotionId'];
-$classRoomId = $_POST['classRoomId'];
+$classRoomId = 0;
 $speakerId = $_POST['speakerId'];
 
 // Create a Session object

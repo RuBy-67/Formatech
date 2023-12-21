@@ -65,13 +65,10 @@ class SpeakerRepository
     }
     public function deleteSpeaker(int $speakerId): void
     {
+        var_dump($speakerId);
         // Delete from modulespeaker
         $this->database
             ->executeQuery("DELETE FROM modulespeaker WHERE speakerId = :speakerId", ['speakerId' => $speakerId]);
-
-        // Set speakerId to NULL in the module table
-        $this->database
-            ->executeQuery("UPDATE module SET speakerId = NULL WHERE speakerId = :speakerId", ['speakerId' => $speakerId]);
 
         // Delete from speaker
         $this->database
@@ -90,8 +87,10 @@ class SpeakerRepository
                             FROM
                                 `speaker` s
                             WHERE
-                                s.speakerId = ?",
-                            [$speakerId])
+                                s.speakerId = :speakerId ;",
+                            [
+                                'speakerId' => $speakerId
+                            ])
             ->fetch();
     }
 
