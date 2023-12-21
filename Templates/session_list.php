@@ -5,8 +5,6 @@ use Mapper\SessionMapper;
 
 $sessionMapper = SessionMapper::getInstance();
 $sessions = $sessionMapper->getList();
-
-var_dump($sessions);
 ?>
 
 <section>
