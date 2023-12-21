@@ -1,7 +1,5 @@
 <?php
 require_once(__DIR__ . '\..\\Layouts\\header.php');
-
-
 ?>
 <section class="w-full h-[400px] banner-bg bg-cover flex flex-col justify-center items-center mb-8 ">
     <h1 class="text-center mb-8">Formatech Futur</h1> 

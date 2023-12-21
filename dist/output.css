@@ -662,6 +662,10 @@ video {
   flex-grow: 1;
 }
 
+.list-none {
+  list-style-type: none;
+}
+
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -765,6 +769,18 @@ video {
 
 .text-h4 {
   font-size: 32px;
+}
+
+.text-h6 {
+  font-size: 18px;
+}
+
+.text-h2 {
+  font-size: 48px;
+}
+
+.text-h3 {
+  font-size: 40px;
 }
 
 .text-black {
@@ -899,7 +915,8 @@ a {
 }
 
 button,
-input {
+input,
+.button {
   align-items: center;
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -925,6 +942,10 @@ input {
   touch-action: manipulation;
   vertical-align: top;
   white-space: nowrap;
+}
+
+.button {
+  margin-bottom: 0.75rem;
 }
 
 .banner-bg {

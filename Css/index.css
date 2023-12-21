@@ -73,7 +73,8 @@ a {
 }
 
 button,
-input {
+input,
+.button {
     align-items: center;
     appearance: none;
     background-color: #fff;
@@ -96,6 +97,10 @@ input {
     touch-action: manipulation;
     vertical-align: top;
     white-space: nowrap;
+}
+
+.button {
+    @apply mb-3;
 }
 
 .banner-bg {
