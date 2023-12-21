@@ -2,7 +2,7 @@
 require_once(__DIR__ . "\..\\Autoloader.php");
 use Mapper\StudentMapper;
 
-$studentMapper = new StudentMapper();
+$studentMapper = StudentMapper::getInstance();
 $students = $studentMapper->getList();
 
 ?>
@@ -17,12 +17,13 @@ $students = $studentMapper->getList();
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Birth Date</th>
+                <th>Promotion ID</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($students as $student): ?>
                 <tr>
-                    <td hidden></td>
+                    <td hidden>
                         <?= $student->getId() ?>
                     </td>
                     <td>
@@ -35,11 +36,14 @@ $students = $studentMapper->getList();
                         <?= $student->getMail() ?>
                     </td>
                     <td>
-                        <?= $student->getBirthDate();?>
-                        
+                        <?= $student->getBirthDate() ?>
+                    </td>
+                    <td>
+                        <?= $student->getPromotionId() ?>
                     </td>
                 </tr>
             <?php endforeach ?>
+
         </tbody>
     </table>
 </section>

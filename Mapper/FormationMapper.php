@@ -19,17 +19,6 @@ class FormationMapper
         $this->moduleMapper = ModuleMapper::getInstance();
     }
 
-    public static function getInstance(): FormationMapper
-    {
-        
-        if (self::$instance === null) {
-            self::$instance = new FormationMapper();
-            self::$instance->_construct();
-        }
-
-        return self::$instance;
-    }
-
     /**
      * @return Formation[]
      */
@@ -48,7 +37,6 @@ class FormationMapper
             } else {
                 $entity = new Formation();
             }
-            
             
             $entity->setId($formationId)
                    ->setName($formationFromDb['formation_name'])

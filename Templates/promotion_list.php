@@ -4,6 +4,7 @@ use Mapper\PromotionMapper;
 
 $promotionMapper = new PromotionMapper();
 $promotions = $promotionMapper->getList();
+var_dump($promotions);
 
 ?>
 

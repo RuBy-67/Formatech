@@ -27,8 +27,8 @@ class StudentRepository
                             sp.promotionId as student_promotionId,
                             p.formationId as student_formationId
                         FROM student s
-                        JOIN StudentPromotion sp ON s.studentId = sp.studentId
-                        JOIN Promotion p ON sp.promotionId = p.promotionId")
+                        LEFT JOIN StudentPromotion sp ON s.studentId = sp.studentId
+                        LEFT JOIN Promotion p ON sp.promotionId = p.promotionId")
             ->fetchAll();
     }
 
@@ -118,6 +118,8 @@ class StudentRepository
             [$studentId]
         )->fetch();
     }
+
+    
 
 
 }
