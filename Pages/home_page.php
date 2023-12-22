@@ -30,7 +30,7 @@ require_once(__DIR__ . '\..\\Layouts\\header.php');
     
     
 </section>
-<section class="container mb-8  h-[678px]">
+<section class="container mb-8">
   
     <?php
         require_once(__DIR__ . '\..\\Templates\\formation_list_public.php');
