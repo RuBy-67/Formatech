@@ -9,7 +9,7 @@ class Formation
     private string $name;
     private int $durationInMonth;
     private string $abbreviation;
-    private string $rncpLvl;
+    private int $rncpLvl;
     private int $accessibility;
     /**
      * @var module[]

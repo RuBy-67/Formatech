@@ -10,6 +10,7 @@ class StudentRepository
 
     private Database $database;
     private Student $student;
+
     public function __construct()
     {
         $this->database = Database::getInstance();
@@ -86,7 +87,7 @@ class StudentRepository
     }
 
 
-    function deleteStudentInDb(int $student): void
+    public function deleteStudentInDb(int $student): void
     {
         $this->database
             ->executeQuery("DELETE FROM student WHERE studentId = :studentId",

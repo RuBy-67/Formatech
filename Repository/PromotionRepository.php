@@ -60,7 +60,7 @@ class PromotionRepository
     }
 
 
-    function modifyPromotionInDb(Promotion $promotion): void
+    public function modifyPromotionInDb(Promotion $promotion): void
     {
         $this->database
             ->executeQuery("UPDATE Promotion SET formationId = :formationId, promotionYears = :promotionYear, startingDate = :startingDate, endingDate = :endingDate WHERE promotionId = :promotionId",
@@ -74,7 +74,7 @@ class PromotionRepository
             );
     }
 
-    function deletePromotionInDb($promotion): void
+    public function deletePromotionInDb($promotion): void
     {
         $this->database
             ->executeQuery("DELETE FROM Promotion WHERE promotionId = :promotionId",
