@@ -2,8 +2,10 @@
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\PromotionRepository;
+use Mapper\FormationMapper;
 
-
+$formationMapper = FormationMapper::getInstance();
+$formations = $formationMapper->getList();
 $promotionId = $_GET['id'];
 
 
@@ -37,11 +39,18 @@ $endingDate = $promotionDetails['promotion_endingDate'];
     <div class="grid grid-cols-2 gap-x-8 gap-y-3 mb-8 justify-items-center">
         <div class="flex flex-col items-center">
             <label for="formationId">ID de la formation :</label>
-            <input type="number" id="formationId" name="formationId" value="<?php echo $formationId; ?>" required><br>
+            <select id="formationId" name="formationId[]" require>
+                <?php foreach ($formations as $formation): ?>
+                    <option value="<?= $formation->getId() ?>"><?= $formation->getId() ?> -
+                        <?= $formation->getName() ?>
+                    </option>
+                <?php endforeach ?>
+            </select><br>
         </div>
         <div class="flex flex-col items-center">
             <label for="promotionYear">Année de promotion :</label>
-            <input type="number" id="promotionYear" name="promotionYear" value="<?php echo $promotionYear; ?>" required><br>
+            <input type="number" id="promotionYear" name="promotionYear" value="<?php echo $promotionYear; ?>"
+                required><br>
         </div>
         <div class="flex flex-col items-center">
             <label for="startingDate">Date de début :</label>
