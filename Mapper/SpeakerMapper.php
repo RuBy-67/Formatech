@@ -95,4 +95,22 @@ class SpeakerMapper
 
         return null;
     }
+
+    // public function getUpcomingSessions($sessions)
+    // {
+    // $upcomingSessions = [];
+
+    // $currentTime = new DateTime('now', new DateTimeZone('Europe/Paris'));
+
+    // foreach ($sessions as $session) {
+    //     $sessionDateTime = (new DateTime($session->getDate() . ' ' . $session->getStartTime()))
+    //         ->setTimezone(new DateTimeZone('Europe/Paris'));
+
+    //     if ($sessionDateTime > $currentTime) {
+    //         $upcomingSessions[] = $session;
+    //     }
+    // }
+
+//     return $upcomingSessions;
+// }
 }

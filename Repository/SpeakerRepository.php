@@ -38,12 +38,13 @@ class SpeakerRepository
     {
         $speaker = new Speaker();
         $speaker->setFirstName($firstName)
-            ->setLastName($lastName)
-            ->setMail($mail)
-            ->setPassword($password);
+                ->setLastName($lastName)
+                ->setMail($mail)
+                ->setPassword($password);
         $this->database
             ->executeQuery("INSERT INTO speaker (`firstName`, `lastName`, `mail`, `password`) 
-                            VALUES (?, ?, ?, ?)", [$firstName, $lastName, $mail, $password]);
+                            VALUES (?, ?, ?, ?)",
+                             [$speaker->getFirstName(), $speaker->getLastName(), $speaker->getMail(), $speaker->getPassword()]);
     }
     public function updateSpeaker(Speaker $speaker): void
     {
@@ -65,7 +66,6 @@ class SpeakerRepository
     }
     public function deleteSpeaker(int $speakerId): void
     {
-        var_dump($speakerId);
         // Delete from modulespeaker
         $this->database
             ->executeQuery("DELETE FROM modulespeaker WHERE speakerId = :speakerId", ['speakerId' => $speakerId]);

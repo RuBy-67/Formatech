@@ -1,10 +1,10 @@
 <?php
-session_start();
+require_once(__DIR__ . '\..\\..\\Layouts\\header.php');
+
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'intervenant') {
     header("Location: index.php");
     exit();
 }
-require_once(__DIR__ . "..\..\..\Autoloader.php");
 
 use Mapper\SpeakerMapper;
 use Mapper\ModuleMapper;
@@ -20,6 +20,7 @@ $moduleMapper = ModuleMapper::getInstance();
 $modules = $moduleMapper->getList();
 $sessionMapper = SessionMapper::getInstance();
 $sessions = $sessionMapper->getList();
+// $upcomingSessions = $speakerMapper->getUpcomingSessions($sessions);
 
 function compareSessionsByDate($session1, $session2)
 {
@@ -36,43 +37,31 @@ $speaker = $speakerMapper->getOneById($employeeId); // Assuming employeeId is th
 // You can add similar methods in the mappers for employee-specific details
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Dashboard</title>
-    <!-- Add your stylesheet and other head elements here -->
-</head>
-
-<body>
-    <h1>Welcome to the Employee Dashboard!</h1>
-
-    <h2>Your Information</h2>
-    <p>First Name:
-        <?= $speaker->getFirstName() ?>
-    </p>
-    <p>Last Name:
-        <?= $speaker->getLastName() ?>
-    </p>
-    <p>Email:
-        <?= $speaker->getMail() ?>
-    </p>
-    <h2>Modules permis</h2>
-    <ul>
+<section class="w-full h-[400px] banner-bg bg-cover flex flex-col justify-center items-center mb-8 ">
+    <h1 class="text-center mb-8">Mes informations</h1> 
+</section>
+<section class="container mb-12">
+    <h2 class="text-center">Informations Personelles :</h2>
+    <div class="grid grid-cols-3 justify-items-center">
+        <p>Prénom: <?= $speaker->getFirstName() ?></p>
+        <p>Nom: <?= $speaker->getLastName() ?></p>
+        <p>Email: <?= $speaker->getMail() ?></p> 
+    </div>
+</section>
+<section class="container mb-12">
+    <h2 class="text-center">Modules données :</h2>
+    <ul class="grid grid-cols-3 justify-items-center gap-y-3">
         <?php foreach ($modules as $module): ?>
-            <li>
+            <li class="border border-black border-solid rounded-md px-2">
                 <?= $module->getName() ?>
             </li>
         <?php endforeach; ?>
     </ul>
-
-    <h2>Sessions à Venir</h2>
-    <ul>
-        <?php foreach ($sessions as $session): ?>
+</section>
+<section class="container mb-12">
+    <h2 class="text-center">Sessions à Venir :</h2>
+    <ul class="grid grid-cols-3 justify-items-center gap-y-3">
+        <?php foreach ($upcomingSessions as $session): ?>
             <li>
                 <?= (new DateTime($session->getDate()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('j F Y') ?>
                 <?= (new DateTime($session->getStartTime()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('G:i') ?>
@@ -84,7 +73,12 @@ $speaker = $speakerMapper->getOneById($employeeId); // Assuming employeeId is th
                 <?= $session->getModuleName() ?>
             </li>
         <?php endforeach; ?>
-        <h2>Your Promotion</h2>
+        
+    </ul>
+</section>
+<section class="container mb-12">
+    <h2 class="text-center">Vos Promotions :</h2>
+    <ul class="grid grid-cols-3 justify-items-center gap-y-3">
         <?php foreach ($promotions as $promotion): ?>
             <li>
                 Classe :
@@ -96,7 +90,7 @@ $speaker = $speakerMapper->getOneById($employeeId); // Assuming employeeId is th
                 <button type="submit" name="promotionId" value="<?= $promotion->getId() ?>">Voir les étudiants</button>
             </form>
         <?php endforeach; ?>
-        <a href="logout.php">Logout ?</a>
-</body>
-
-</html>
+    </ul>
+</section>
+        
+        

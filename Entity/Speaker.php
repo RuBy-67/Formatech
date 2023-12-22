@@ -55,9 +55,10 @@ class Speaker
     }
     public function setPassword(string $password): self
     {
-
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
         $this->password = $hashedPassword;
+
         return $this;
     }
 

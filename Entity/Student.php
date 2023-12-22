@@ -103,8 +103,6 @@ class Student
 
     public function setPassword(string $password): self
     {
-        // $this->password = $this->isSecureParameter($password);
-
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $this->password = $hashedPassword;
         return $this;

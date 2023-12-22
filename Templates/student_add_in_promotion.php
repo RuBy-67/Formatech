@@ -5,7 +5,6 @@ use Mapper\StudentMapper;
 
 $promotionMapper = new PromotionMapper();
 $promotions = $promotionMapper->getList();
-var_dump($promotions);
 
 $studentMapper = StudentMapper::getInstance();
 $students = $studentMapper->getList();

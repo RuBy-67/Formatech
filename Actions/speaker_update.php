@@ -13,6 +13,7 @@ $newPassword = $_POST['newPassword'];
 
 $speakerMapper = SpeakerMapper::getInstance();
 $speakerToUpdate = $speakerMapper->getOneById($speakerIdToUpdate);
+
             $speakerToUpdate->setFirstName($newFirstName)
                             ->setLastName($newLastName)
                             ->setMail($newMail)
