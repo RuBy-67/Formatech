@@ -2,9 +2,12 @@
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\StudentRepository;
+use Mapper\PromotionMapper;
 
+$promotionMapper = PromotionMapper::getInstance();
+$promotions = $promotionMapper->getList();
 
- isset($_GET['id']) ? $studentId = $_GET['id'] : null;
+isset($_GET['id']) ? $studentId = $_GET['id'] : null;
 
 if (!isset($studentId)) {
     header("Location: /path/to/error_page.php");
@@ -17,19 +20,18 @@ $studentRepository = new StudentRepository();
 
 $studentDetails = $studentRepository->getOneById($studentId);
 
-
 if (!$studentDetails) {
     header("Location: /path/to/error_page.php");
     exit;
 }
 
-$studentId = $studentDetails['student_studentId'];
-$firstName = $studentDetails['student_firstName'];
-$lastName = $studentDetails['student_lastName'];
-$mail = $studentDetails['student_mail'];
-$birthDate = $studentDetails['student_birthDate'];
-$password = $studentDetails['student_password'];
-$promotionId = $studentDetails['promotion_formationId'];
+$studentId = $studentDetails[0]['student_studentId'];
+$firstName = $studentDetails[0]['student_firstName'];
+$lastName = $studentDetails[0]['student_lastName'];
+$mail = $studentDetails[0]['student_mail'];
+$birthDate = $studentDetails[0]['student_birthDate'];
+$password = $studentDetails[0]['student_password'];
+$promotionId = $studentDetails[0]['promotion_formationId'];
 ?>
 
 <form action="/Actions/student_update.php" method="post" class="flex flex-col justify-center items-center">
@@ -57,7 +59,13 @@ $promotionId = $studentDetails['promotion_formationId'];
         </div>
         <div class="flex flex-col items-center">
             <label for="promotionId">ID de la promotion :</label>
-            <input type="number" id="promotionId" name="promotionId" value="<?php echo $promotionId; ?>" required><br>
+            <select id="promotionId" name="promotionId" required>
+                <?php foreach ($promotions as $promotion): ?>
+                    <option value="<?php echo $promotion->getId(); ?>" <?php echo ($promotion->getId() == $promotionId) ? 'selected' : ''; ?>>
+                        <?php echo $promotion->getId(); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
     </div>
     <input type="submit" value="Mettre à jour l'étudiant">
