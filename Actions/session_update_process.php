@@ -14,7 +14,6 @@ $newStartTime = $_POST['startTime'];
 $newEndTime = $_POST['endTime'];
 $newModuleId = $_POST['moduleId'];
 $newPromotionId = $_POST['promotionId'];
-$newClassRoomId = $_POST['classRoomId'];
 $newSpeakerId = $_POST['speakerId'];
 
 $sessionMapper = SessionMapper::getInstance();
@@ -25,11 +24,10 @@ $sessionToUpdate->setDate($newDate)
     ->setEndTime($newEndTime)
     ->setModuleId($newModuleId)
     ->setPromotionId($newPromotionId)
-    ->setClassRoomId($newClassRoomId)
     ->setSpeakerId($newSpeakerId);
 
     $speakerRepository = new SessionRepository();
     $speakerRepository ->modifySessionInDb($sessionToUpdate);
 
-header("index.php");
+header("Location: /Pages/panel_employee.php?action=session_list");
 exit;

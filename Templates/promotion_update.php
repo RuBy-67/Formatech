@@ -4,7 +4,7 @@ require_once(__DIR__ . "/../Autoloader.php");
 use Repository\PromotionRepository;
 
 
-$promotionId = 1;
+$promotionId = $_GET['id'];
 
 
 if (!$promotionId) {

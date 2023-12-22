@@ -4,6 +4,7 @@ require_once(__DIR__ . "/../Autoloader.php");
 use Repository\PromotionRepository;
 use Entity\Promotion;
 // Récupération des données du formulaire
+
 $formationId = $_POST['formationId'];
 $promotionYear = $_POST['promotionYear'];
 $startingDate = $_POST['startingDate'];

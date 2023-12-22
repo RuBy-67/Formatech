@@ -42,7 +42,8 @@ class PromotionRepository
                             p.endingDate as promotion_endingDate
                         FROM Promotion p
                         WHERE p.promotionId = ?", [$promotionId]
-            )->fetch();
+            )
+            ->fetch();
     }
 
     public function createPromotion($newPromotion): void

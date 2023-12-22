@@ -13,7 +13,7 @@ $formations = $formationMapper->getList();
         <div class="grid grid-cols-2 gap-8">
             <div class="flex flex-col items-center">
                 <label for="formationId">ID de la formation liée :</label>
-                <select id="promotionId" name="promotionId" required>
+                <select id="formationId" name="formationId" required>
                     <?php foreach ($formations as $formation): ?>
                         <option value="<?= $formation->getId() ?>">
                             <?= $formation->getName() ?>

@@ -77,6 +77,13 @@ a {
     font-text;
 }
 
+select[multiple] {
+    height: 100px;
+}
+select {
+    width: 250px;
+}
+
 button,
 input,
 select,
