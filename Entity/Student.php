@@ -113,7 +113,7 @@ class Student
     //* Format check method
     public function isOnlyAlphabeticCharacters($stringToCheck): bool
     {
-        $regex = '/^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/u';
+        $regex = '/^[a-zA-ZÀ-ÖØ-öø-ÿ\'\s]+$/u';
 
         if (!preg_match($regex, $stringToCheck)) {
             echo "Erreur dans la saisie merci de recommencer, Alphabetic";
