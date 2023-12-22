@@ -7,10 +7,24 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'etudiant') {
 }
 
 use Mapper\StudentMapper;
+use Mapper\SessionMapper;
 
 $studentId = $_SESSION['user_id'];
 $studentMapper = StudentMapper::getInstance();
 $student = $studentMapper->getOneById($studentId);
+
+$sessionMapper = SessionMapper::getInstance();
+$sessions = $sessionMapper->getList();
+
+function compareSessionsByDate($session1, $session2)
+{
+    $date1 = strtotime($session1->getDate() . ' ' . $session1->getStartTime());
+    $date2 = strtotime($session2->getDate() . ' ' . $session2->getStartTime());
+
+    return $date1 <=> $date2;
+}
+
+usort($sessions, 'compareSessionsByDate');
 ?>
 
 <div>
@@ -30,7 +44,7 @@ $student = $studentMapper->getOneById($studentId);
         <h2 class="text-center">Promotions de l'étudiant :</h2>
         <div class="grid grid-cols-2 justify-items-center">
              <?php foreach($student->getPromotions() as $promotion): ?>
-                <div>
+                <div class="border border-black border-solid rounded-md px-2 mx-3">
                     <p class="flex flex-col items-center">
                         <span class>Promotion : </span>
                         <span><?= $promotion->getPromotionYear() ?></span>
@@ -59,9 +73,34 @@ $student = $studentMapper->getOneById($studentId);
         </div>
         
     </section>
-    <hr />
-    <section>
-       
+    <section class="container mb-12">
+        <h2 class="text-center">Sessions à venir :</h2>
+        <div class="grid grid-cols-2 justify-items-center">
+            <div class="border border-black border-solid rounded-md px-2 mx-3">
+                <?php foreach ($sessions as $session):
+                    // Convertir la date et l'heure de la session en timestamp
+                    $sessionTimestamp = strtotime($session->getDate() . ' ' . $session->getStartTime());
+
+                    // Vérifier si la date de la session est passée
+                    $isSessionPassed = ($sessionTimestamp < time());
+                    ?>
+
+                    <?php if (!$isSessionPassed): ?>
+                        <div>
+                            <?= (new DateTime($session->getDate()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('j F Y') ?>
+                            <?= (new DateTime($session->getStartTime()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('G:i') ?>
+                            -
+                            <?= (new DateTime($session->getEndTime()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('G:i') ?>
+                            Avec la classe
+                            <?= $session->getPromotionId() ?> dans la salle
+                            <?= $session->getClassName() ?>, Module Enseigné :
+                            <?= $session->getModuleName() ?>
+                    </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        
     </section>
 </div>
 
