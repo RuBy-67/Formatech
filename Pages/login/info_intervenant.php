@@ -20,7 +20,6 @@ $moduleMapper = ModuleMapper::getInstance();
 $modules = $moduleMapper->getList();
 $sessionMapper = SessionMapper::getInstance();
 $sessions = $sessionMapper->getList();
-//$upcomingSessions = $speakerMapper->getUpcomingSessions($sessions);
 
 function compareSessionsByDate($session1, $session2)
 {
