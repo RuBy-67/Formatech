@@ -16,7 +16,7 @@ $formationMapper = FormationMapper::getInstance();
             <tr>
                 <th>Id</th>
                 <th>Promotion Year</th>
-                <th>Formation Id</th>
+                <th>Formation Name</th>
                 <th>StartingDate</th>
                 <th>EndingDate</th>
                 <th></th>
@@ -32,7 +32,7 @@ $formationMapper = FormationMapper::getInstance();
                         <?= $promotion->getPromotionYear() ?>
                     </td>
                     <td>
-                        <?= $promotion->getFormationId() ?>
+                        <?= $promotion->getFormationName() ?>
                     </td>
                     <td>
                         <?= $promotion->getStartingDate() ?>

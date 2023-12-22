@@ -19,7 +19,7 @@ $promotions = $promotionMapper->getList();
 $speakers = $speakerMapper->getList();
 ?>
 <h2>Modification Session <?= $sessionIdToUpdate ?> <?= $sessionToUpdate->getStartTime() ?></h2>
-<form action="/formatech/Actions/session_update_process.php" method="post" class="flex flex-col justify-center items-center">
+<form action="/Actions/session_update_process.php" method="post" class="flex flex-col justify-center items-center">
     <div class="grid grid-cols-2 gap-x-8 gap-y-3 mb-8 justify-items-center">
         <div class="flex flex-col items-center">
             <label for="date">Date:</label>
