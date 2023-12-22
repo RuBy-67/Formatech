@@ -4,7 +4,7 @@ namespace Entity;
 
 class Student
 {
-    private int $id;
+    private ?int $id;
     private string $firstName;
     private string $lastName;
     private string $mail;

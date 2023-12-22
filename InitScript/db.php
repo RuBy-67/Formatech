@@ -1,39 +1,51 @@
 <?php
 
-require_once(__DIR__ . "\..\Autoloader.php");
-require_once('data.php');
-
-use DB\Database;
-
-$database = Database::getInstance();
-
-// Fonction pour ajouter les formations
-function addFormations($formations, $db)
-{
-    foreach ($formations as $formation) {
-        $db->executeQuery("INSERT INTO Formation (name, durationFormationInMonth, abbreviation, rncpLvl, moduleId, accessibility) VALUES (?, ?, ?, ?, ?, ?)", [$formation['nom'], $formation['duree'], $formation['abreviation'], $formation['niveau'], 1, 1]);
-    }
-}
-
-// Fonction pour ajouter les modules
-function addModules($modules, $db)
-{
-    foreach ($modules as $module) {
-        $db->executeQuery("INSERT INTO Module (name, durationModuleInHours, speakerId) VALUES (?, ?, ?)", [$module['nom'], $module['duree'], 1]); // Remplacez 1 par l'ID du conférencier approprié
-    }
-}
-
-// Fonction pour ajouter les salles
-function addClassRooms($salles, $db)
-{
-    foreach ($salles as $salle) {
-        $db->executeQuery("INSERT INTO ClassRoom (building, name, capacityMax) VALUES (?, ?, ?)", [$salle['batiment'], $salle['nom'], $salle['capacite']]);
-    }
-}
-
-
-// Appels de fonctions avec vos données
-addFormations($formations, $database);
-addModules($modules, $database);
-addClassRooms($salles, $database);
-?>
+try {
+    // Connexion à la base de données
+    $pdo = new PDO("mysql:host=127.0.0.1;dbname=formatech", "formatech", "formatech67");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ 
+     // Inclusion des données depuis data.php
+     include 'data.php';
+ 
+     // Insertion des nouvelles données pour la table 'formation'
+     foreach ($formations as $formation) {
+         $query = "INSERT INTO formation (name, durationFormationInMonth, abbreviation, rncpLvl, accessibility) VALUES (:name, :duration, :abbreviation, :rncpLvl, :accessibility)";
+         $stmt = $pdo->prepare($query);
+         $stmt->execute([
+             'name' => $formation['nom'],
+             'duration' => $formation['duree'],
+             'abbreviation' => $formation['abreviation'],
+             'rncpLvl' => $formation['niveau'],
+             'accessibility' => 1, // Vous pouvez ajuster cette valeur en fonction de vos besoins
+         ]);
+     }
+ 
+     // Insertion des nouvelles données pour la table 'module'
+     foreach ($modules as $module) {
+         // Vous devrez remplacer 'formation_name' par le nom correct de la formation dans laquelle ce module appartient
+         $query = "INSERT INTO module (name, durationModuleInHours) VALUES (:name, :duration)";
+         $stmt = $pdo->prepare($query);
+         $stmt->execute([
+             'name' => $module['nom'],
+             'duration' => $module['duree'],
+         ]);
+     }
+ 
+     // Insertion des nouvelles données pour la table 'classroom'
+     foreach ($salles as $salle) {
+         $query = "INSERT INTO classroom (name, capacityMax, building) VALUES (:name, :capacity, :building)";
+         $stmt = $pdo->prepare($query);
+         $stmt->execute([
+             'name' => $salle['nom'],
+             'capacity' => $salle['capacite'],
+             'building' => $salle['batiment'],
+         ]);
+     }
+ 
+     echo "Les données ont été insérées avec succès.";
+ } catch (PDOException $e) {
+     echo "Erreur : " . $e->getMessage();
+ }
+ 
+ ?>

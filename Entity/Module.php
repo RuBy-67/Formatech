@@ -131,7 +131,8 @@ class Module{
         $regex = '/^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/u';
 
         if (!preg_match($regex, $stringToCheck)) {
-            echo "Erreur dans la saisie merci de recommencer";
+            var_dump($stringToCheck);
+            echo "Erreur dans la saisie merci de recommencer module ALPHA";
             exit;
         } 
         return true;

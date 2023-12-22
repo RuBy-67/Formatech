@@ -173,8 +173,4 @@ class Formation
          [null, $name, $durationFormationInMonth, $abbreviation, $rncpLvl, $accessibility]);
     }
 
-    public function modifyInDb(){
-         $database->executeQuery("UPDATE formation SET formationId = ?, promotionYears = ?, startingDate = ?, endingDate = ? WHERE promotionId = ?",
-          [$name, $durationFormationInMonth, $abbreviation, $rncpLvl, $accessibility, $database]);
-    }
 }

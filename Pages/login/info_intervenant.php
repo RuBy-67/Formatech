@@ -20,7 +20,7 @@ $moduleMapper = ModuleMapper::getInstance();
 $modules = $moduleMapper->getList();
 $sessionMapper = SessionMapper::getInstance();
 $sessions = $sessionMapper->getList();
-// $upcomingSessions = $speakerMapper->getUpcomingSessions($sessions);
+//$upcomingSessions = $speakerMapper->getUpcomingSessions($sessions);
 
 function compareSessionsByDate($session1, $session2)
 {
@@ -34,18 +34,23 @@ usort($sessions, 'compareSessionsByDate');
 
 $speaker = $speakerMapper->getOneById($employeeId); // Assuming employeeId is the speakerId
 
-// You can add similar methods in the mappers for employee-specific details
 
 ?>
 <section class="w-full h-[400px] banner-bg bg-cover flex flex-col justify-center items-center mb-8 ">
-    <h1 class="text-center mb-8">Mes informations</h1> 
+    <h1 class="text-center mb-8">Mes informations</h1>
 </section>
 <section class="container mb-12">
     <h2 class="text-center">Informations personnelles :</h2>
     <div class="grid grid-cols-3 justify-items-center">
-        <p>Prénom: <?= $speaker->getFirstName() ?></p>
-        <p>Nom: <?= $speaker->getLastName() ?></p>
-        <p>Email: <?= $speaker->getMail() ?></p> 
+        <p>Prénom:
+            <?= $speaker->getFirstName() ?>
+        </p>
+        <p>Nom:
+            <?= $speaker->getLastName() ?>
+        </p>
+        <p>Email:
+            <?= $speaker->getMail() ?>
+        </p>
     </div>
 </section>
 <section class="container mb-12">
@@ -60,20 +65,29 @@ $speaker = $speakerMapper->getOneById($employeeId); // Assuming employeeId is th
 </section>
 <section class="container mb-12">
     <h2 class="text-center">Sessions à Venir :</h2>
-    <ul class="grid grid-cols-3 justify-items-center gap-y-3">
-        <?php foreach ($upcomingSessions as $session): ?>
-            <li>
-                <?= (new DateTime($session->getDate()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('j F Y') ?>
-                <?= (new DateTime($session->getStartTime()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('G:i') ?>
-                -
-                <?= (new DateTime($session->getEndTime()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('G:i') ?>
-                Avec la classe
-                <?= $session->getPromotionId() ?> dans la salle
-                <?= $session->getClassName() ?>, Module Enseigné :
-                <?= $session->getModuleName() ?>
-            </li>
+    <ul class="grid grid-cols-3 justify-items-center gap-y-3 gap-x-4">
+        <?php foreach ($sessions as $session):
+            // Convertir la date et l'heure de la session en timestamp
+            $sessionTimestamp = strtotime($session->getDate() . ' ' . $session->getStartTime());
+
+            // Vérifier si la date de la session est passée
+            $isSessionPassed = ($sessionTimestamp < time());
+            ?>
+
+            <?php if (!$isSessionPassed): ?>
+                <li class="border border-black border-solid rounded-md px-2 mx-3">
+                    <?= (new DateTime($session->getDate()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('j F Y') ?>
+                    <?= (new DateTime($session->getStartTime()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('G:i') ?>
+                    -
+                    <?= (new DateTime($session->getEndTime()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('G:i') ?>
+                    Avec la classe
+                    <?= $session->getPromotionId() ?> dans la salle
+                    <?= $session->getClassName() ?>, Module Enseigné :
+                    <?= $session->getModuleName() ?>
+                </li>
+            <?php endif; ?>
         <?php endforeach; ?>
-        
+
     </ul>
 </section>
 <section class="container mb-12">
@@ -92,5 +106,3 @@ $speaker = $speakerMapper->getOneById($employeeId); // Assuming employeeId is th
         <?php endforeach; ?>
     </ul>
 </section>
-        
-        
