@@ -11,7 +11,7 @@
         </li>
         <?php if (isset($_SESSION['user_type']) || isset($_SESSION['user_type'] )) :?>
             <li>
-                <a href="/Actions/disconection.php" class="text-black mx-1.5 button">Se déconnecter</a>
+                <a href="/Actions/disconection.php" class="text-black mx-1.5 button-nav">Se déconnecter</a>
             </li>
         <?php else :?>
             <li>

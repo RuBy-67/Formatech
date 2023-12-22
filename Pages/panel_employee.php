@@ -1,11 +1,11 @@
 <?php require_once(__DIR__ . "\..\\Layouts\\header.php");
 
-// // Check if the user is not an employee
-// if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employe') {
-//     // Redirect the user to index.php or any other login page
-//     header("Location: /index.php");
-//     exit();
-// }
+// Check if the user is not an employee
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employe') {
+    // Redirect the user to index.php or any other login page
+    header("Location: /index.php");
+    exit();
+}
 
 ?>
 
