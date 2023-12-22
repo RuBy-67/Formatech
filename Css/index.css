@@ -80,7 +80,8 @@ a {
 button,
 input,
 select,
-.button {
+.button,
+.button-nav {
     align-items: center;
     appearance: none;
     background-color: #fff;

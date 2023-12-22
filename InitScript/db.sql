@@ -89,8 +89,8 @@ CREATE TABLE StudentPromotion (
 CREATE TABLE Session (
     sessionId INT PRIMARY KEY AUTO_INCREMENT,
     date DATE,
-    startTime INT,
-    endTime INT,
+    startTime TIME,
+    endTime TIME,
     moduleId INT,
     promotionId INT,
     classRoomId INT,
