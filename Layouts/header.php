@@ -14,7 +14,7 @@ require_once(__DIR__ . "\..\\Autoloader.php");
 
 </head>
 <body>
-    <header class=" fixed top-0 z-10  w-full items-center justify-between bg-[#FBFBFB] py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
+    <header class=" fixed top-0 z-10  w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
        <div class="container flex flex-row items-center  flex-no-wrap ">
             <img class=" w-14 h-14 " src="/Assets/Favicon.png" alt="FormaTech Futur" >
             <?php require_once(__DIR__ . "\\nav.php"); ?>

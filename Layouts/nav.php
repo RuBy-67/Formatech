@@ -7,15 +7,15 @@
     ?>
     <ul class="flex mr-4 justify-center items-center">
         <li>
-            <a href="/Pages/home_page.php" class="text-black mx-1.5">Accueil</a>
+            <a href="/Pages/home_page.php" class="text-secondary mx-1.5">Accueil</a>
         </li>
         <?php if (isset($_SESSION['user_type']) || isset($_SESSION['user_type'] )) :?>
             <li>
-                <a href="/Actions/disconection.php" class="text-black mx-1.5 button-nav">Se déconnecter</a>
+                <a href="/Actions/disconection.php" class="text-secondary mx-1.5 button-nav">Se déconnecter</a>
             </li>
         <?php else :?>
             <li>
-                <a href="/Actions/disconection.php" class="text-black mx-1.5 button-nav">Se Connecter</a>
+                <a href="/Actions/disconection.php" class="text-secondary mx-1.5 button-nav">Se Connecter</a>
             </li>
         <?php endif;?>
         <?php if (!empty($_SESSION)) :?>
@@ -25,7 +25,7 @@
                 </li>
             <?php elseif(isset($_SESSION['user_type']) & $_SESSION['user_type'] == 'employe'):?>
                 <li>
-                    <a href="/Pages/login/panel_employee.php ?>" class="text-black mx-1.5">Panneau de gestion</a>
+                    <a href="/Pages/panel_employee.php" class="text-secondary mx-1.5">Panneau de gestion</a>
                 </li>
             <?php endif;?>
         <?php endif;?>
