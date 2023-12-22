@@ -50,7 +50,8 @@ class PromotionMapper
                 ->setFormationId($promotionFromDb['promotion_formationId'])
                 ->setPromotionYear($promotionFromDb['promotion_promotionYear'])
                 ->setStartingDate($promotionFromDb['promotion_startingDate'])
-                ->setEndingDate($promotionFromDb['promotion_endingDate']);
+                ->setEndingDate($promotionFromDb['promotion_endingDate'])
+                ->setFormationName($promotionFromDb['formation_name']);
 
             $promotionEntities[] = $entity; // Utilisez un tableau indexé par des clés numériques
         }

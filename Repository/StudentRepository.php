@@ -159,6 +159,16 @@ class StudentRepository
         }
     }
 
+    public function getStudentListInDbByPromotion($promotionId)
+    {
+        return $this->database->executeQuery("SELECT s.* FROM Student s
+            JOIN StudentPromotion sp ON s.studentId = sp.studentId
+            JOIN Promotion p ON sp.promotionId = p.promotionId
+            WHERE p.promotionId = ?",
+            [$promotionId]
+        )->fetchAll();
+    }
+
 
 
 }

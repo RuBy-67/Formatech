@@ -67,15 +67,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_lastname'] = $user['lastName'];
             $_SESSION['user_mail'] = $user['mail'];
 
-            // Redirect the user to a dashboard page, for example
-            header("Location: dashboard.php");
-            exit();
+            if($type = 'employe'){
+                header("Location: /Pages/panel_employee.php");
+                exit();
+            } else {
+                // Redirect the user to a dashboard page, for example
+                header("Location: info_$type.php");
+                exit();  
+            }
+        
+        } else {
+            echo "Aucun utilisateur correspondant sur " . $type . ".";
         }
-       echo "Identifiants incorrects";
-    } else {
-        echo "Aucun utilisateur correspondant sur " . $type . ".";
     }
 }
+
 function getUserbyDb($mail, $table, $database)
 {
     $result = $database->executeQuery(
