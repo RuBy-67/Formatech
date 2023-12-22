@@ -41,7 +41,7 @@ $speaker = $speakerMapper->getOneById($employeeId); // Assuming employeeId is th
     <h1 class="text-center mb-8">Mes informations</h1> 
 </section>
 <section class="container mb-12">
-    <h2 class="text-center">Informations Personelles :</h2>
+    <h2 class="text-center">Informations personnelles :</h2>
     <div class="grid grid-cols-3 justify-items-center">
         <p>Prénom: <?= $speaker->getFirstName() ?></p>
         <p>Nom: <?= $speaker->getLastName() ?></p>
