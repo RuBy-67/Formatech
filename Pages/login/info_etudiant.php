@@ -90,10 +90,10 @@ usort($sessions, 'compareSessionsByDate');
                             <?= (new DateTime($session->getDate()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('j F Y') ?>
                             <?= (new DateTime($session->getStartTime()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('G:i') ?>
                             -
-                            <?= (new DateTime($session->getEndTime()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('G:i') ?>
-                            Avec la classe
-                            <?= $session->getPromotionId() ?> dans la salle
-                            <?= $session->getClassName() ?>, Module Enseigné :
+                            <?= (new DateTime($session->getEndTime()))->setTimezone(new DateTimeZone('Europe/Paris'))->format('G:i') ?><br> <p><strong>----</strong></p> <br> 
+                            Classe :
+                            <?= $session->getPromotionId() ?> <br> Salle
+                            <?= $session->getClassName() ?> <br> Module Enseigné :
                             <?= $session->getModuleName() ?>
                     </div>
                     <?php endif; ?>
