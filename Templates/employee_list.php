@@ -9,7 +9,7 @@ $employees = $employeeMapper->getList();
 ?>
 
 <section class="container">
-    <h2 class=" text-center">Liste des étudiants</h2>
+    <h2 class=" text-center">Liste des Employees</h2>
     <table class="w-full">
         <thead class="bg-darkGrey text-white">
             <tr>

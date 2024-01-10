@@ -26,7 +26,7 @@ class PromotionRepository
             p.startingDate as promotion_startingDate,
             p.endingDate as promotion_endingDate,
             f.name as formation_name
-        FROM Promotion p
+        FROM promotion p
        LEFT JOIN Formation f ON p.formationId = f.formationId")
             ->fetchAll();
     }
@@ -40,7 +40,7 @@ class PromotionRepository
                             p.promotionYears as promotion_promotionYear,
                             p.startingDate as promotion_startingDate,
                             p.endingDate as promotion_endingDate
-                        FROM Promotion p
+                        FROM promotion p
                         WHERE p.promotionId = ?", [$promotionId]
             )
             ->fetch();

@@ -29,7 +29,7 @@ class StudentRepository
                             p.formationId as student_formationId
                         FROM student s
                         LEFT JOIN studentpromotion sp ON s.studentId = sp.studentId
-                        LEFT JOIN Promotion p ON sp.promotionId = p.promotionId")
+                        LEFT JOIN promotion p ON sp.promotionId = p.promotionId")
             ->fetchAll();
     }
 
@@ -78,7 +78,7 @@ class StudentRepository
 
         // Mettre à jour l'association de l'étudiant à la promotion dans la table de liaison
         $this->database
-            ->executeQuery("UPDATE StudentPromotion SET promotionId = :promotionId WHERE studentId = :studentId",
+            ->executeQuery("UPDATE studentpromotion SET promotionId = :promotionId WHERE studentId = :studentId",
                 [
                     'promotionId' => $promotionId,
                     'studentId' => $student->getId()
@@ -103,7 +103,7 @@ class StudentRepository
     {
         return $this->database->executeQuery("SELECT s.* FROM Student s
             JOIN studentpromotion sp ON s.studentId = sp.studentId
-            JOIN Promotion p ON sp.promotionId = p.promotionId
+            JOIN promotion p ON sp.promotionId = p.promotionId
             WHERE p.formationId = ?",
             [$formationId]
         )->fetchAll();
