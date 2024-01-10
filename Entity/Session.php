@@ -97,14 +97,22 @@ class Session
         return $this;
     }
 
-    public function setPromotionId(int $promotionId): self
+    public function setPromotionId(?int $id): self
     {
-        if ($this->isOnlyNumericCharacters($promotionId)) {
-            $this->promotionId = $promotionId;
-        }
+        if ($id === null) {
+            $this->promotionId = 0;
+        } else {
+            if ($this->isOnlyNumericCharacters((string) $id)) {
+                $this->promotionId = $id;
+            } else {
 
+                $this->promotionId = 0;
+            }
+        }
+    
         return $this;
     }
+    
     public function setSpeakerId(?int $speakerId): self
     {
         $this->speakerId = $speakerId;
@@ -167,7 +175,7 @@ class Session
         $regex = '/^[0-9]+$/';
 
         if (!preg_match($regex, $stringToCheck)) {
-            echo "Erreur dans la saisie, merci de recommencer, Numeric";
+            echo "Erreur dans la saisie, merci de recommencer, Numeric session";
             return false;
         }
 

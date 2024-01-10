@@ -52,14 +52,23 @@ class Student
     }
    
 
-    public function setPromotionId(int $id): self
+    public function setPromotionId(?int $id): self
     {
-        if ($this->isOnlyNumericCharacters($id)) {
-            $this->promotionId = $id;
+        if ($id === null) {
+            $this->promotionId = 0;
+        } else {
+            if ($this->isOnlyNumericCharacters((string) $id)) {
+                $this->promotionId = $id;
+            } else {
+
+                $this->promotionId = 0;
+            }
         }
     
         return $this;
     }
+    
+    
 
     public function setId(int $id): self
     {
@@ -129,6 +138,7 @@ class Student
         if (!preg_match($regex, $stringToCheck)) {
             echo "Erreur dans la saisie merci de recommencer, Numeric";
             exit;
+
         }
         return true;
     }
