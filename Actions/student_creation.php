@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\StudentRepository;
@@ -27,5 +28,6 @@ $studentRepository = new StudentRepository();
 $studentRepository->createStudent($newStudent, $promotionId);
 
 // Redirection vers la page précédente
+$_SESSION['confirmationMessage'] = 'Etudiant(e) '.$firstName .'-'. $lastName.' ajoutées avec succès!';
 header("Location: {$_SERVER['HTTP_REFERER']}");
 exit;

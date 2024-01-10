@@ -1,4 +1,5 @@
 <?php
+session_start();
 use Entity\Speaker;
 use Mapper\SpeakerMapper;
 use Repository\SpeakerRepository;
@@ -22,6 +23,7 @@ $speakerToUpdate = $speakerMapper->getOneById($speakerIdToUpdate);
 $speakerRepository = new SpeakerRepository();
             // Appeler la méthode d'update dans le mapper
             $speakerRepository->updateSpeaker($speakerToUpdate);
+            $_SESSION['confirmationMessage'] = 'Intervenant(e) '.$newFirstName .'-'. $newLastName. ' modifiées avec succès!';
             header("Location:/Pages/panel_employee.php?action=speaker_list");
             exit;
             

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\EmployeeRepository;
@@ -13,6 +14,7 @@ $password = $_POST['password'];
 
 $formationRepository = new EmployeeRepository();
 $formationRepository->createEmployee($firstName, $lastName, $job, $mail, $password);
+$_SESSION['confirmationMessage'] = 'Employé(e)' . $firstName. '-'. $lastName . ' ajoutées avec succès!';
 
 header("Location: {$_SERVER['HTTP_REFERER']}");
 exit;

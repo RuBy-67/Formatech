@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Entity\Session;
@@ -28,6 +29,7 @@ $sessionMapper = new SessionRepository();
 $sessionMapper->createSession($session);
 
 // Redirect back to the previous page
+$_SESSION['confirmationMessage'] = 'Session du '.$date . $startTime .' ajoutées avec succès!';
 header("Location: {$_SERVER['HTTP_REFERER']}");
 exit;
 ?>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\SpeakerRepository;
@@ -10,5 +11,6 @@ $password = $_POST['password'];
 
 $speakerRepository = new SpeakerRepository();
 $speakerRepository->createSpeaker($firstName, $lastName, $mail, $password);
+$_SESSION['confirmationMessage'] = 'Intervenant(e) '.$firstName .'-'. $lastName.' ajoutées avec succès!';
 header("Location: {$_SERVER['HTTP_REFERER']}");
 exit;

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\StudentRepository;
@@ -28,5 +29,6 @@ $student->setId($studentId)
 // Mettez à jour l'étudiant dans la base de données
 $studentRepository->modifyStudentInDb($student, $promotionId);
 // Redirigez vers une page de confirmation ou toute autre page appropriée
+$_SESSION['confirmationMessage'] = 'Etudiant(e) '. $firstName.'-'. $lastName.' modifiées avec succès!';
 header("Location: {$_SERVER['HTTP_REFERER']}");
 exit;

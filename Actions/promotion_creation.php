@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\PromotionRepository;
@@ -22,5 +23,6 @@ $promotionRepository = new PromotionRepository();
 // Appel de la fonction createPromotion avec la promotion nouvellement créée
 $promotionRepository->createPromotion($newPromotion);
 // Redirection vers la page précédente
+$_SESSION['confirmationMessage'] = 'Promotion '. $promotionYear .' ajoutées avec succès!';
 header("Location: {$_SERVER['HTTP_REFERER']}");
 exit;

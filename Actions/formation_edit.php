@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\FormationRepository;
@@ -29,6 +30,6 @@ $formationRepository = new FormationRepository();
 $formationRepository->updateformation($formation);
 $formationRepository->addModulesToformation($formationId, $modulesToAddToformation);
 $formationRepository->removeModulesFromformation($formationId, $modulesToRemoveFromformation);
-
+$_SESSION['confirmationMessage'] = 'Formation '. $newName .' modifiées avec succès!';
 header("Location: {$_SERVER['HTTP_REFERER']}");
 exit;

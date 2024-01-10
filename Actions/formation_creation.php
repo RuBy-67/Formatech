@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\FormationRepository;
@@ -14,7 +15,7 @@ $selectedModuleIds = isset($_POST['moduleId']) ? $_POST['moduleId'] : array();
 
 $formationRepository = new FormationRepository();
 $formationRepository->createFormation($name, $durationInMonth, $abbreviation, $rncpLvl, $accessibility, $selectedModuleIds);
-
+$_SESSION['confirmationMessage'] = 'Formation '. $name .' ajoutées avec succès!';
 header("Location: {$_SERVER['HTTP_REFERER']}");
 exit;
 

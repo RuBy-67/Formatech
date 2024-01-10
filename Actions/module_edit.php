@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\ModuleRepository;
@@ -22,6 +23,6 @@ $moduleRepository = new ModuleRepository();
 $moduleRepository->updateModule($module);
 $moduleRepository->addSpeakersToModule($moduleId, $speakersToAddToModule);
 $moduleRepository->removeSpeakersFromModule($moduleId, $speakersToRemoveFromModule);
-
+$_SESSION['confirmationMessage'] = 'Module '. $newName .' modifiées avec succès!';
 header("Location: /Pages/panel_employee.php?action=module_list");
 exit;

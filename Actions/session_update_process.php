@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 use Entity\Session;
 use Mapper\SessionMapper;
 use Repository\SessionRepository;
@@ -28,6 +28,6 @@ $sessionToUpdate->setDate($newDate)
 
     $speakerRepository = new SessionRepository();
     $speakerRepository ->modifySessionInDb($sessionToUpdate);
-
+    $_SESSION['confirmationMessage'] = 'Session ' . $sessionIdToUpdate .' modifiée avec succès!';
 header("Location: /Pages/panel_employee.php?action=session_list");
 exit;

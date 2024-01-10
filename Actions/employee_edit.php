@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\EmployeeRepository;
@@ -22,7 +23,7 @@ $employee->setFirstName($newFirstName)
 
 $employeeRepository = new EmployeeRepository();
 $employeeRepository->updateemployee($employee);
-
+$_SESSION['confirmationMessage'] = 'Employé(e) '. $newFirstName .'-'.$newLastName .' modifiées avec succès!';
 
 header("Location: /Pages/panel_employee.php?action=employee_list");
 exit;

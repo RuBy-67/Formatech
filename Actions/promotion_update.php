@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . "/../Autoloader.php");
 
 use Entity\Promotion;
@@ -14,7 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     
     if (!$promotionId) {
-        header("Location: /path/to/error_page.php");
+        $_SESSION['confirmationMessage'] = 'Erreurs dans la mise à jours de la promotion';
+        header("Location: /Pages/panel_employee.php?action=promotion_list");
         exit;
     }
 
@@ -31,11 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $promotionRepository->modifyPromotionInDb($promotion);
 
-    
+    $_SESSION['confirmationMessage'] = 'Promotion modifiées avec succès!';
     header("Location: /Pages/panel_employee.php?action=promotion_list");
     exit;
 } else {
    
-    header("Location: /path/to/error_page.php");
+    $_SESSION['confirmationMessage'] = 'Erreur dans la mise à jours de la promotion';
+    header("Location: /Pages/panel_employee.php?action=promotion_list");
     exit;
 }
