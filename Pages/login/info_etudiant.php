@@ -46,23 +46,23 @@ usort($sessions, 'compareSessionsByDate');
              <?php foreach($student->getPromotions() as $promotion): ?>
                 <div class="border border-black border-solid rounded-md px-2 mx-3">
                     <p class="flex flex-col items-center">
-                        <span class>Promotion : </span>
+                        <span class> <strong>Promotion :</strong> </span>
                         <span><?= $promotion->getPromotionYear() ?></span>
                         <span>Du <?= $promotion->getStartingDate() ?> au <?= $promotion->getEndingDate() ?></span>
                 
                         <div class="pl-8 flex flex-col items-center gap-x-3">
                             <?php $formation = $promotion->getFormation() ?>
-                            <p class="flex flex-row "><span>Nom de la formation : </span><span> <?= $formation->getName() ?></span></p>
-                            <p class="flex flex-row "><span>Nombres de mois : </span><span> <?= $formation->getDurationInMonth() ?></span></p>
-                            <p class="flex flex-row "><span>Abbreviation : </span><span> <?= $formation->getAbbreviation() ?></span></p>
-                            <p class="flex flex-row "><span>Niveau RNCP : </span><span> <?= $formation->getRncpLvl() ?></span></p>
-                            <p class="flex flex-row "><span>Accessibilité : </span><span> <?= $formation->getAccessibility() ?></span></p>
-                            <span class=" leading-span "> </span>
-                            <p class="flex flex-row ">Modules de la formation :</p>
-                            <div class="pl-8 grid grid-cols-2 justify-items-center">
+                            <p class="flex flex-row "><span>Nom de la formation : <?= $formation->getName() ?></span></p>
+                            <p class="flex flex-row "><span>Nombres de mois :  <?= $formation->getDurationInMonth() ?></span></p>
+                            <p class="flex flex-row "><span>Abbreviation :  <?= $formation->getAbbreviation() ?></span></p>
+                            <p class="flex flex-row "><span>Niveau RNCP :  <?= $formation->getRncpLvl() ?></span></p>
+                            <p class="flex flex-row "><span>Accessibilité : <?= $formation->getAccessibility() ?></span></p>
+                            <p><strong>--------</strong></p>
+                            <p class="flex flex-row"> <strong>Modules de la formation :</strong></p>
+                            <div class="pl-8 grid justify-items-center">
                                 <?php foreach($formation->getModules() as $module): ?>
-                                    <p class="flex flex-row mr-2"><span>Nom du module : </span><span> <?= $module->getName() ?></span></p>
-                                    <p class="flex flex-row "><span>Heures : </span><span> <?= $module->getDurationInHours() ?></span></p>
+                                    <p class="flex flex-row"><span>Nom du module : <?= $module->getName() ?></span></p>
+                                    <p class="flex flex-row "><span>Heures :  <?= $module->getDurationInHours() ?></span></p>
                                 <?php endforeach; ?>
                             </div>
                         </div>

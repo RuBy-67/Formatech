@@ -6,7 +6,7 @@ $sessionMapper = SessionMapper::getInstance();
 $sessions = $sessionMapper->getList();
 ?>
 <section>
-    <h2>Formulaire de suppression</h2>
+    <h2>Formulaire de suppression de Session</h2>
     <form action="/Actions/session_delete.php" method="post" class="flex flex-col items-center">
         <select id="sessionToDelete" name="sessionId" required>
             <?php

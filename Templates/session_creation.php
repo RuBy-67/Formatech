@@ -19,7 +19,7 @@ $promotions = $promotionRepository->getList();
 //$classRooms = $classRoomRepository->getList();
 ?>
 <section class="container">
-    <h2 class="text-center">Create Session</h2>
+    <h2 class="text-center">Création de Sessions</h2>
 
     <form action="/Actions/session_creation.php" method="post" class="flex flex-col justify-center items-center">
         <div class="grid grid-cols-2 gap-8">

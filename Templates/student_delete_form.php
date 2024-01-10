@@ -7,7 +7,7 @@ $students = $studentMapper->getList();
 
 ?>
 
-<h2 class="mb-8">Formulaire de suppression de student</h2>
+<h2 class="mb-8">Formulaire de suppression d'Etudiant</h2>
 <form action="/Templates/student_delete.php" method="post" class="flex flex-col justify-center items-center ">
     
     <label for="studentIdToDelete">Student à retirer de l'école:</label>
