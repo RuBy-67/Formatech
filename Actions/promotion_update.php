@@ -7,7 +7,7 @@ use Repository\PromotionRepository;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
    
     $promotionId = isset($_POST['promotionId']) ? $_POST['promotionId'] : null;
-    $formationId = isset($_POST['formationId']) ? $_POST['formationId'] : null;
+    $formationId = isset($_POST['formationId']) ? $_POST['formationId'][0] : null; //! a corriger 
     $promotionYear = isset($_POST['promotionYear']) ? $_POST['promotionYear'] : null;
     $startingDate = isset($_POST['startingDate']) ? $_POST['startingDate'] : null;
     $endingDate = isset($_POST['endingDate']) ? $_POST['endingDate'] : null;

@@ -7,7 +7,7 @@ $sessions = $sessionMapper->getList();
 ?>
 <section>
     <h2>Formulaire de suppression</h2>
-    <form action="/formatech/Actions/session_delete.php" method="post" class="flex flex-col items-center">
+    <form action="/Actions/session_delete.php" method="post" class="flex flex-col items-center">
         <select id="sessionToDelete" name="sessionId" required>
             <?php
             $sessions = $sessionMapper->getList();

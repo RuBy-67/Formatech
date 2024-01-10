@@ -124,7 +124,7 @@ class Formation
 
     public function addModule(Module $module): self
     {
-        // TODO : Vérifier que le module n'existe pas deja dans le tableau avant de l'ajouter
+        // TODO : Vérifier que  le module n'existe pas deja dans le tableau avant de l'ajouter
         $this->modules[] = $module;
 
         return $this;
