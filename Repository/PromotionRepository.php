@@ -27,7 +27,7 @@ class PromotionRepository
             p.endingDate as promotion_endingDate,
             f.name as formation_name
         FROM promotion p
-       LEFT JOIN Formation f ON p.formationId = f.formationId")
+       LEFT JOIN formation f ON p.formationId = f.formationId")
             ->fetchAll();
     }
 
