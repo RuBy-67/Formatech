@@ -49,7 +49,7 @@ class PromotionRepository
     public function createPromotion($newPromotion): void
     {
         $this->database->executeQuery(
-            "INSERT INTO Promotion (`formationId`, `promotionYears`, `startingDate`, `endingDate`) 
+            "INSERT INTO promotion (`formationId`, `promotionYears`, `startingDate`, `endingDate`) 
              VALUES ( :formationId, :promotionYear, :startingDate, :endingDate)",
             [
                 'formationId' => $newPromotion->getFormationId(),
@@ -64,7 +64,7 @@ class PromotionRepository
     public function modifyPromotionInDb(Promotion $promotion): void
     {
         $this->database
-            ->executeQuery("UPDATE Promotion SET formationId = :formationId, promotionYears = :promotionYear, startingDate = :startingDate, endingDate = :endingDate WHERE promotionId = :promotionId",
+            ->executeQuery("UPDATE promotion SET formationId = :formationId, promotionYears = :promotionYear, startingDate = :startingDate, endingDate = :endingDate WHERE promotionId = :promotionId",
                 [
                     'formationId' => $promotion->getFormationId(),
                     'promotionYear' => $promotion->getPromotionYear(),
@@ -78,13 +78,13 @@ class PromotionRepository
     public function deletePromotionInDb($promotion): void
     {
         $this->database
-            ->executeQuery("DELETE FROM Promotion WHERE promotionId = :promotionId",
+            ->executeQuery("DELETE FROM promotion WHERE promotionId = :promotionId",
                 [
                     'promotionId' => $promotion
                 ]
             );
         $this->database
-            ->executeQuery("UPDATE StudentPromotion SET promotionId = NULL WHERE promotionId = :promotionId",
+            ->executeQuery("UPDATE studentpromotion SET promotionId = NULL WHERE promotionId = :promotionId",
                 [
                     'promotionId' => $promotion
                 ]

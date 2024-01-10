@@ -149,12 +149,12 @@ class StudentRepository
     public function addStudentInPromotion($studentId, $promotionId)
     {
         // Vérifier si la paire étudiant-promotion existe déjà
-        $existingPair = $this->database->executeQuery("SELECT * FROM StudentPromotion WHERE studentId = ? AND promotionId = ?",
+        $existingPair = $this->database->executeQuery("SELECT * FROM studentpromotion WHERE studentId = ? AND promotionId = ?",
             [$studentId, $promotionId]
         )->fetch();
 
         if (!$existingPair) {
-            return $this->database->executeQuery("INSERT INTO StudentPromotion (studentId, promotionId) VALUES (?, ?)",
+            return $this->database->executeQuery("INSERT INTO studentpromotion (studentId, promotionId) VALUES (?, ?)",
                 [$studentId, $promotionId]
             );
         }
@@ -162,9 +162,9 @@ class StudentRepository
 
     public function getStudentListInDbByPromotion($promotionId)
     {
-        return $this->database->executeQuery("SELECT s.* FROM Student s
-            JOIN StudentPromotion sp ON s.studentId = sp.studentId
-            JOIN Promotion p ON sp.promotionId = p.promotionId
+        return $this->database->executeQuery("SELECT s.* FROM student s
+            JOIN studentpromotion sp ON s.studentId = sp.studentId
+            JOIN promotion p ON sp.promotionId = p.promotionId
             WHERE p.promotionId = ?",
             [$promotionId]
         )->fetchAll();
