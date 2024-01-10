@@ -43,13 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $table = '';
     $idColumnName = '';
     if ($type == "etudiant") {
-        $table = "Student";
+        $table = "student";
         $idColumnName = 'studentId';
     } else if ($type == "intervenant") {
-        $table = "Speaker";
+        $table = "speaker";
         $idColumnName = 'speakerId';
     } else if ($type == "employe") {
-        $table = "Employees";
+        $table = "employees";
         $idColumnName = 'employeeId';
     } else {
         header("Location: index.php");
