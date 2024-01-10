@@ -37,7 +37,7 @@ else
                 <?php endforeach ?>
                 </ul>
             </div>
-            <?php require_once(__DIR__ . "\..\\Actions\\student_list_by_formation.php"); ?>
+            <?php require_once(__DIR__ . "/../Actions/student_list_by_formation.php"); ?>
         </div>
     </div>
     <a class="button" href="<?= $_SERVER['HTTP_REFERER'] ?>">Retourner à la liste des formations</a>

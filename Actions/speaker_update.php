@@ -3,7 +3,7 @@ use Entity\Speaker;
 use Mapper\SpeakerMapper;
 use Repository\SpeakerRepository;
 
-require_once(__DIR__ . "\..\\Autoloader.php");
+require_once(__DIR__ . "/../Autoloader.php");
 
 $speakerIdToUpdate = $_POST['id'];
 $newFirstName = $_POST['newFirstName'];

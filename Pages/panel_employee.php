@@ -1,4 +1,4 @@
-<?php require_once(__DIR__ . "\..\\Layouts\\header.php");
+<?php require_once(__DIR__ . "/../Layouts/header.php");
 
 // Check if the user is not an employee
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employe') {
@@ -53,4 +53,4 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employe') {
     </div>
 </div>
 
-<?php require_once(__DIR__ . "\..\\Layouts\\footer.php") ?>
+<?php require_once(__DIR__ . "/../Layouts/footer.php") ?>

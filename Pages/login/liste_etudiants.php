@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '\..\\..\\Layouts\\header.php');
+require_once(__DIR__ . '/../../Layouts/header.php');
 use Repository\StudentRepository;
 ?>
 <?php
@@ -29,4 +29,4 @@ if (isset($_POST['promotionId'])) :
     </ul>
 </section>
 
-<?php require_once(__DIR__ . '\..\\..\\Layouts\\header.php');?>
+<?php require_once(__DIR__ . '/../../Layouts/header.php');?>

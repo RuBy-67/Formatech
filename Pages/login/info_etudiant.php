@@ -1,5 +1,5 @@
 <?php 
-require_once(__DIR__ . '\..\\..\\Layouts\\header.php');
+require_once(__DIR__ . '/../../Layouts/header.php');
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'etudiant') {
     header("Location: /index.php");
@@ -104,4 +104,4 @@ usort($sessions, 'compareSessionsByDate');
     </section>
 </div>
 
-<?php require_once(__DIR__ . "\..\\..\\Layouts\\footer.php") ?>
+<?php require_once(__DIR__ . "/../../Layouts/footer.php") ?>

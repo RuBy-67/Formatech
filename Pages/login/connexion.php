@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . "..\..\..\Autoloader.php");
+require_once(__DIR__ . "../../../Autoloader.php");
 use DB\Database;
 
 $database = new Database();
@@ -14,7 +14,7 @@ if ($type != "etudiant" && $type != "intervenant" && $type != "employe") {
 ?>
 
 <?php
-require_once(__DIR__ . '\..\\..\\Layouts\\header.php');
+require_once(__DIR__ . '/../../Layouts/header.php');
 ?>
 <section class="w-full h-[400px] banner-bg bg-cover flex flex-col justify-center items-center mb-8 ">
     <h1 class="text-white text-center ">Connexion
@@ -31,7 +31,7 @@ require_once(__DIR__ . '\..\\..\\Layouts\\header.php');
     </form>
     </section>
 <?php
-require_once(__DIR__ . '\..\\..\\Layouts\\footer.php');
+require_once(__DIR__ . '/../../Layouts/footer.php');
 ?>
 
 

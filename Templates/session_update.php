@@ -1,6 +1,6 @@
 <?php
 $sessionIdToUpdate = $_GET['id'];
-require_once(__DIR__ . "\..\\Autoloader.php");
+require_once(__DIR__ . "/../Autoloader.php");
 use Entity\Session;
 use Mapper\SessionMapper;
 use Mapper\ModuleMapper;

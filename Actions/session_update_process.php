@@ -4,7 +4,7 @@ use Entity\Session;
 use Mapper\SessionMapper;
 use Repository\SessionRepository;
 
-require_once(__DIR__ . "\..\\Autoloader.php");
+require_once(__DIR__ . "/../Autoloader.php");
 
 // Assuming you have the necessary includes for Session entity and SessionMapper
 

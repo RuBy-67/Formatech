@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "\..\\Autoloader.php");
+require_once(__DIR__ . "/../Autoloader.php");
 
 use Repository\ModuleRepository;
 use Mapper\ModuleMapper;

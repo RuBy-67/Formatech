@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '\..\\..\\Layouts\\header.php');
+require_once(__DIR__ . '/../../Layouts/header.php');
 ?>
 <section class="w-full h-[400px] banner-bg bg-cover flex flex-col justify-center items-center mb-8 ">
     <h1 class="text-white text-center ">Se connecter</h1>
@@ -13,6 +13,6 @@ require_once(__DIR__ . '\..\\..\\Layouts\\header.php');
     </ul>
 </section>
 <?php
-require_once(__DIR__ . '\..\\..\\Layouts\\footer.php');
+require_once(__DIR__ . '/../../Layouts/footer.php');
 ?>
    

@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '\..\\..\\Layouts\\header.php');
+require_once(__DIR__ . '/../../Layouts/header.php');
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'intervenant') {
     header("Location: index.php");
