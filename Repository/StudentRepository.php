@@ -28,7 +28,7 @@ class StudentRepository
                             sp.promotionId as student_promotionId,
                             p.formationId as student_formationId
                         FROM student s
-                        LEFT JOIN StudentPromotion sp ON s.studentId = sp.studentId
+                        LEFT JOIN studentpromotion sp ON s.studentId = sp.studentId
                         LEFT JOIN Promotion p ON sp.promotionId = p.promotionId")
             ->fetchAll();
     }
@@ -102,7 +102,7 @@ class StudentRepository
     public function getStudentListInDbByFormation($formationId)
     {
         return $this->database->executeQuery("SELECT s.* FROM Student s
-            JOIN StudentPromotion sp ON s.studentId = sp.studentId
+            JOIN studentpromotion sp ON s.studentId = sp.studentId
             JOIN Promotion p ON sp.promotionId = p.promotionId
             WHERE p.formationId = ?",
             [$formationId]
