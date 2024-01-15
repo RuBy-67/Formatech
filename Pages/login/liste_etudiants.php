@@ -21,11 +21,9 @@ if (isset($_POST['promotionId'])) :
         foreach ($students as $student) :?>
             <li><?=$student['firstName']?> <?= $student['lastName']?><br>Contact: <?=$student['mail'] ?> <br><br></li>
         <?php 
-            endforeach;
-            else :
-        ?>
-        <li>Aucune liromotion sélectionnée</li>
-        <?php endif?>
+            endforeach;?>
+        <?php endif;?>
+        <li>Aucune promotion sélectionnée</li>
     </ul>
 </section>
 

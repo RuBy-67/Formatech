@@ -7,9 +7,9 @@ require_once(__DIR__ . '/../../Layouts/header.php');
 <section class="container">
     <h3 class="mb-8 text-center">Je suis :</h3>
     <ul class="list-none flex flex-col items-center">
-        <li><a class="button" href="connexion.php?type=etudiant">Etudiant</a></li>
-        <li><a class="button" href="connexion.php?type=intervenant">Intervenant</a></li>
-        <li><a class="button" href="connexion.php?type=employe">Employé</a></li>
+        <li><a class="button" href="connexion.php?type=etudiant">Etudiant(e) 🎓</a></li>
+        <li><a class="button" href="connexion.php?type=intervenant">Intervenant(e) 👨‍🏫</a></li>
+        <li><a class="button" href="connexion.php?type=employe">Employé(e) 💻</a></li>
     </ul>
 </section>
 <?php
