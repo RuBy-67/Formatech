@@ -41,7 +41,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employe') {
                 href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=module_creation_form">➕ Créer un module</a>
             <a class="bg-white rounded-md px-4 py-1"
                 href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=promotion_creation">➕ Crée une promotion</a>
-            <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=session_creation">Créer
+            <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=session_creation">➕Créer
                 une session</a>
             <span class="leading-span"></span>
             <a class="bg-white rounded-md px-4 py-1"
@@ -54,7 +54,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employe') {
                 href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=session_delete">🗑️ Supprimer une session</a>
             <span class="leading-span"></span>
             <a class="bg-white rounded-md px-4 py-1"
-                href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=formation_list_all">Liste des formations</a>
+                href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=formation_list_all">🧾 Liste des formations</a>
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=module_list">🧾 Liste des
                 modules</a>
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=promotion_list">🧾 Liste
