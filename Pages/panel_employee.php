@@ -34,6 +34,11 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employe') {
                 href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=speaker_creation">➕ Ajouter un intervenant</a>
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=speaker_delete">🗑️ Retirer
                 un intervenant</a>
+                <span class="leading-span"></span>
+            <a class="bg-white rounded-md px-4 py-1"
+                href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=classroom_creation_form">➕ Ajouter une salle de classe</a>
+            <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=classroom_delete_form">🗑️ Retirer une salle</a>
+
             <span class="leading-span"></span>
             <a class="bg-white rounded-md px-4 py-1"
                 href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=formation_creation_form">➕ Créer une formation</a>
@@ -67,6 +72,8 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'employe') {
                 intervenants</a>
             <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=session_list">🧾 Liste des
                 sessions</a>
+                <a class="bg-white rounded-md px-4 py-1" href="<?= $_SERVER['SCRIPT_NAME'] ?>?action=classroom_list">🧾 Liste des
+                Salle</a>
 
         </section>
         <section class="flex-grow flex flex-col items-center mb-8">
