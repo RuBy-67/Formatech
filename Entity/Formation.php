@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Entity;
 
 use Db\Database;
@@ -54,7 +54,7 @@ class Formation
         return $this->modules;
     }
 
-  
+
     public function getModulesIds(): array
     {
         return array_map(
@@ -65,23 +65,23 @@ class Formation
         );
     }
 
- 
+
 
 
     //* Set element
 
-     public function setId(int $id): self
+    public function setId(int $id): self
     {
-      $this->id = $this->isOnlyNumericCharacters($id) ? ucfirst(strtolower($id)) : null;
+        $this->id = $this->isOnlyNumericCharacters($id) ? ucfirst(strtolower($id)) : null;
 
-      return $this;
+        return $this;
     }
-    
+
     public function setName(string $name): self
     {
-      $this->name = $this->isOnlyAlphabeticCharacters($name) ? ucfirst(strtolower($name)) : null;
+        $this->name = $this->isOnlyAlphabeticCharacters($name) ? ucfirst(strtolower($name)) : null;
 
-      return $this;
+        return $this;
     }
 
     public function setDurationInMonth(int $durationInMonth): self
@@ -93,21 +93,21 @@ class Formation
 
     public function setAbbreviation(string $abbreviation): self
     {
-        $this->abbreviation = $this->isOnlyAlphabeticCharacters($abbreviation) ? ucfirst(strtolower($abbreviation)) : null; 
-        
+        $this->abbreviation = $this->isOnlyAlphabeticCharacters($abbreviation) ? ucfirst(strtolower($abbreviation)) : null;
+
         return $this;
     }
 
     public function setRncpLvl(int $rncpLvl): self
     {
         $this->rncpLvl = $this->isRncpLvlGood($rncpLvl) ? ucfirst(strtolower($rncpLvl)) : null;
-        
+
         return $this;
     }
 
     public function setAccessibility(string $accessibility): self
     {
-        $this->accessibility = $this->isOnlyNumericCharacters($accessibility) ? ucfirst(strtolower($accessibility)) : null; 
+        $this->accessibility = $this->isOnlyNumericCharacters($accessibility) ? ucfirst(strtolower($accessibility)) : null;
 
         return $this;
     }
@@ -130,15 +130,15 @@ class Formation
         return $this;
     }
 
-   //* Format check method
-    public function isOnlyAlphabeticCharacters(string $stringToCheck) :bool
+    //* Format check method
+    public function isOnlyAlphabeticCharacters(string $stringToCheck): bool
     {
         $regex = '/^[a-zA-ZÀ-ÖØ-öø-ÿ\'\s]+$/u';
 
         if (!preg_match($regex, $stringToCheck)) {
             echo "Erreur dans la saisie merci de recommencer regex alphabetic";
             exit;
-        } 
+        }
         return true;
     }
 
@@ -149,7 +149,7 @@ class Formation
         if (!preg_match($regex, $stringToCheck)) {
             echo "Erreur dans la saisie merci de recommencer numeric";
             exit;
-        } 
+        }
         return true;
     }
 
@@ -160,17 +160,18 @@ class Formation
         if (!preg_match($regex, $stringToCheck)) {
             echo "Erreur dans la saisie merci de recommencer rncp";
             exit;
-        } 
+        }
         return true;
     }
 
 
 
     //* Method
-    public static function addInDb($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $accessibility, $database){
-    
+    public static function addInDb($name, $durationFormationInMonth, $abbreviation, $rncpLvl, $accessibility, $database)
+    {
+
         $database->executeQuery("INSERT INTO formation (`formationId`, `name`, `durationFormationInMonth`, `abbreviation`, `rncpLvl`, `accessibility`) VALUES (?, ?, ?, ?, ?, ?)",
-         [null, $name, $durationFormationInMonth, $abbreviation, $rncpLvl, $accessibility]);
+            [null, $name, $durationFormationInMonth, $abbreviation, $rncpLvl, $accessibility]);
     }
 
 }
