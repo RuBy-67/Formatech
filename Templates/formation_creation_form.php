@@ -29,7 +29,7 @@ $modules = $moduleMapper->getList();
             </div>
             <div class="flex flex-col items-center">
                 <label for="rncpLvl">Niveau RNCP:</label>
-                <input type="number" id="rncpLvl" name="rncpLvl" required><br>
+<input type="number" id="rncpLvl" name="rncpLvl" min="4" max="7" pattern="[4-7]" required><br>
             </div>
             <div class="flex flex-col items-center">
                 <label for="accessibility">Modules</label>

@@ -2,7 +2,7 @@
 
 try {
     // Connexion à la base de données
-    $pdo = new PDO("mysql:host=127.0.0.1;dbname=formatechfutur", "root", "");
+    $pdo = new PDO("mysql:host=127.0.0.1;dbname=formatech", "root", "");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  
      // Inclusion des données depuis data.php

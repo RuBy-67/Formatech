@@ -1,8 +1,7 @@
 <?php
 require_once(__DIR__ . "/../Autoloader.php");
 use Repository\PromotionRepository;
-$promotionId = 1;  // Remplacez par l'ID de la promotion que vous souhaitez supprimer
-
+$promotionId = $_POST['promotionIdToDelete'] ?? null;
 if (!$promotionId) {
     header("Location: /path/to/error_page.php");
     exit;
@@ -28,7 +27,7 @@ require_once(__DIR__ . '/../Layouts/header.php');
         <h1 class="text-white text-center ">Supprimer une promotion</h1>
     </section>
     <section class="container h-100%">
-        <h3 class="mb-8 text-center">Voulez-vous supprimer la promotion ayant pour ID  "<?php echo $promotionId; ?>" ?</h3>
+        <h3 class="mb-8 text-center">Voulez-vous supprimer la promotion ayant pour ID  "<?php echo $promotionId; ?>" ? <br> Promotion : <?php echo $promotionDetails[0]['promotion_promotionYear']?></h3>
         <form action="/Actions/promotion_delete.php" method="post" class="flex items-center justify-center">
             <input type="hidden" name="promotionId" value="<?php echo $promotionId; ?>">
             <input type="submit" value="Confirmer la suppression">

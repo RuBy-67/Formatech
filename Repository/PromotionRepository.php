@@ -43,7 +43,7 @@ class PromotionRepository
                         FROM promotion p
                         WHERE p.promotionId = ?", [$promotionId]
             )
-            ->fetch();
+            ->fetchAll();
     }
 
     public function createPromotion($newPromotion): void

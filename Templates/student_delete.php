@@ -1,10 +1,10 @@
 <?php
 require_once(__DIR__ . "/../Autoloader.php");
 use Repository\StudentRepository;
-$studentId = 2;
+$studentId = $_POST['studentIdToDelete'] ?? null;
 
 if (!$studentId) {
-    header("Location: /path/to/error_page.php");
+    header("Location: /Templates/student_delete_form.php");
     exit;
 }
 // Créez une instance de StudentRepository
@@ -14,18 +14,20 @@ $studentDetails = $studentRepository->getOneById($studentId);
 
 // Vérifiez si l'étudiant existe
 if (!$studentDetails) {
-    header("Location: /path/to/error_page.php");
+    // Si l'étudiant n'existe pas, redirigez l'utilisateur vers la page de suppression de l'étudiant
+    header("Location: /Templates/student_delete_form.php");
     exit;
+
 }
 
 // Les détails de l'étudiant sont maintenant dans $studentDetails
-$studentId = $studentDetails['student_studentId'];
-$firstName = $studentDetails['student_firstName'];
-$lastName = $studentDetails['student_lastName'];
-$mail = $studentDetails['student_mail'];
-$birthDate = $studentDetails['student_birthDate'];
-$password = $studentDetails['student_password'];
-$promotionId = $studentDetails['promotion_formationId'];
+$studentId = $studentDetails[0]['student_studentId'];
+$firstName = $studentDetails[0]['student_firstName'];
+$lastName = $studentDetails[0]['student_lastName'];
+$mail = $studentDetails[0]['student_mail'];
+$birthDate = $studentDetails[0]['student_birthDate'];
+$password = $studentDetails[0]['student_password'];
+$promotionId = $studentDetails[0]['promotion_formationId'];
 ?>
 <?php
 require_once(__DIR__ . '/../Layouts/header.php');
