@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         
         } else {
-            echo "Aucun utilisateur correspondant sur " . $type . ".";
+            echo "erreur mdp " . $type . ".";
         }
     }
 }
