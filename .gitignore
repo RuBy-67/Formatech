@@ -1,3 +1,2 @@
-node_modules
-config.php
-
+node_modules/
+InitScript/db.php
