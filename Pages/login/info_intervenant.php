@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../../Layouts/header.php');
+require_once (__DIR__ . '/../../Layouts/header.php');
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'intervenant') {
     header("Location: index.php");
@@ -11,13 +11,13 @@ use Mapper\ModuleMapper;
 use Mapper\SessionMapper;
 use Mapper\PromotionMapper;
 
-$employeeId = $_SESSION['user_id'];
+$speakerId = $_SESSION['user_id'];
 
 $speakerMapper = SpeakerMapper::getInstance();
 $promotionMapper = PromotionMapper::getInstance();
 $promotions = $promotionMapper->getList();
 $moduleMapper = ModuleMapper::getInstance();
-$modules = $moduleMapper->getList();
+$modules = $moduleMapper->getListBySpeakerId($speakerId);
 $sessionMapper = SessionMapper::getInstance();
 $sessions = $sessionMapper->getList();
 
@@ -31,7 +31,7 @@ function compareSessionsByDate($session1, $session2)
 
 usort($sessions, 'compareSessionsByDate');
 
-$speaker = $speakerMapper->getOneById($employeeId); // Assuming employeeId is the speakerId
+$speaker = $speakerMapper->getOneById($speakerId);
 
 
 ?>

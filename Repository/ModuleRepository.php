@@ -3,11 +3,12 @@ namespace Repository;
 
 use DB\Database;
 use Entity\Module;
+
 //Interagir avec la Database 
 class ModuleRepository
 {
     private Database $database;
-  
+
 
     public function __construct()
     {
@@ -17,7 +18,7 @@ class ModuleRepository
     public function getList(): array
     {
         return $this->database
-                    ->executeQuery("SELECT 
+            ->executeQuery("SELECT 
                                         m.moduleId as module_moduleId, 
                                         m.name as module_name, 
                                         m.durationModuleInHours as module_durationModuleInHours,
@@ -31,77 +32,95 @@ class ModuleRepository
                                     FROM `module` m
                                     LEFT JOIN modulespeaker ms ON m.moduleId = ms.moduleId
                                     LEFT JOIN speaker s ON s.speakerId = ms.speakerId;")
-                    ->fetchAll();
+            ->fetchAll();
+    }
+    public function getListBySpeakerId($speakerId): array
+    {
+        return $this->database
+            ->executeQuery("SELECT 
+                            m.moduleId as module_moduleId, 
+                            m.name as module_name, 
+                            m.durationModuleInHours as module_durationModuleInHours
+                        FROM `module` m
+                        LEFT JOIN modulespeaker ms ON m.moduleId = ms.moduleId
+                        WHERE ms.speakerId = ?
+                        ", [$speakerId])
+            ->fetchAll();
     }
 
 
     public function createModule(string $name, int $durationInHours, array $speakerIDs): void
     {
-        
+
         $module = new Module();
-        $module ->setName($name)
-                ->setDurationInHours($durationInHours)
-                ->setSpeakers($speakerIDs);
+        $module->setName($name)
+            ->setDurationInHours($durationInHours)
+            ->setSpeakers($speakerIDs);
         //Insert just le module dans la table module
         $this->database
-             ->executeQuery("INSERT INTO module (`moduleId`, `name`, `durationModuleInHours`) 
+            ->executeQuery("INSERT INTO module (`moduleId`, `name`, `durationModuleInHours`) 
                             VALUES (?, ?, ?)",
-                            [null, $module->getName(), $module->getDurationInHours()]
-                        );
-    
-        $idNewModule = $this    ->database
-                                ->getLastInsertId();
+                [null, $module->getName(), $module->getDurationInHours()]
+            );
 
-        foreach($module->getSpeakers() as $speakerId){
-          
-            $this   ->database
-                    ->executeQuery("INSERT INTO modulespeaker (`moduleId`,`speakerId`) 
+        $idNewModule = $this->database
+            ->getLastInsertId();
+
+        foreach ($module->getSpeakers() as $speakerId) {
+
+            $this->database
+                ->executeQuery("INSERT INTO modulespeaker (`moduleId`,`speakerId`) 
                                     VALUES (?, ?)",
-                                    [$idNewModule, $speakerId]
-                                    );
+                    [$idNewModule, $speakerId]
+                );
         }
 
-        foreach($module->getFormations() as $formationId){
-          
-            $this   ->database
-                    ->executeQuery("INSERT INTO moduleformation (`moduleId`,`formationId`) 
+        foreach ($module->getFormations() as $formationId) {
+
+            $this->database
+                ->executeQuery("INSERT INTO moduleformation (`moduleId`,`formationId`) 
                                     VALUES (?, ?)",
-                                    [$idNewModule, $formationId]
-                                    );
+                    [$idNewModule, $formationId]
+                );
         }
     }
+
 
     public function deleteModule(int $id): void
     {
         //Delete into Table Formation
-        $this   ->database
-                ->executeQuery("DELETE FROM `module`
+        $this->database
+            ->executeQuery("DELETE FROM `module`
                                 WHERE `moduleId` = :moduleId"
-                                ,[
-                                    ':moduleId' => $id
-                                ]);
+                ,
+                [
+                    ':moduleId' => $id
+                ]
+            );
         //Delete into pivot table moduleSpeaker
-        $this   ->database
-                ->executeQuery("DELETE FROM `modulespeaker`
+        $this->database
+            ->executeQuery("DELETE FROM `modulespeaker`
                                 WHERE `moduleId` = :moduleId"
-                                ,[
-                                    ':moduleId' => $id
-                                ]
-                            );
+                ,
+                [
+                    ':moduleId' => $id
+                ]
+            );
         //Delete into pivot table moduleformation
-        $this   ->database
-                ->executeQuery("DELETE FROM `moduleformation`
+        $this->database
+            ->executeQuery("DELETE FROM `moduleformation`
                                 WHERE `moduleId` = :moduleId"
-                                ,[
-                                    ':moduleId' => $id
-                                ]
-                            );
+                ,
+                [
+                    ':moduleId' => $id
+                ]
+            );
     }
 
     public function getOneById(int $id): array
     {
         return $this->database
-                    ->executeQuery("SELECT 
+            ->executeQuery("SELECT 
                                         m.moduleId as module_moduleId, 
                                         m.name as module_name, 
                                         m.durationModuleInHours as module_durationModuleInHours,
@@ -116,30 +135,31 @@ class ModuleRepository
                                     LEFT JOIN modulespeaker ms ON m.moduleId = ms.moduleId
                                     LEFT JOIN speaker s ON s.speakerId = ms.speakerId
                                     WHERE m.moduleId = :moduleId;",
-                                    ['moduleId' => $id])
-                    ->fetchAll();
+                ['moduleId' => $id]
+            )
+            ->fetchAll();
     }
 
     public function updateModule(Module $module): void
     {
         $this->database
-             ->executeQuery("UPDATE module SET
+            ->executeQuery("UPDATE module SET
                              name = :name,
                              durationModuleInHours = :durationModuleInHours
                              WHERE moduleId = :moduleId;",
-                            [
-                                'moduleId' => $module->getId(),
-                                'name' => $module->getName(),
-                                'durationModuleInHours' => $module->getDurationInHours()
-                            ]
-                        );
+                [
+                    'moduleId' => $module->getId(),
+                    'name' => $module->getName(),
+                    'durationModuleInHours' => $module->getDurationInHours()
+                ]
+            );
     }
 
     public function addSpeakersToModule(int $moduleId, array $speakerIdsToAdd): void
     {
-        foreach($speakerIdsToAdd as $speakerIdToAdd){
+        foreach ($speakerIdsToAdd as $speakerIdToAdd) {
             $this->database
-                 ->executeQuery(
+                ->executeQuery(
                     "INSERT INTO modulespeaker
                     (moduleId, speakerId) 
                     VALUES (:moduleId, :speakerId);",
@@ -147,22 +167,22 @@ class ModuleRepository
                         'moduleId' => $moduleId,
                         'speakerId' => $speakerIdToAdd
                     ]
-                 );
+                );
         }
     }
 
     public function removeSpeakersFromModule(int $moduleId, array $speakerIdsToRemove): void
     {
-        foreach($speakerIdsToRemove as $speakerIdToRemove){
+        foreach ($speakerIdsToRemove as $speakerIdToRemove) {
             $this->database
-                 ->executeQuery(
+                ->executeQuery(
                     "DELETE FROM modulespeaker
                     WHERE moduleId = :moduleId AND speakerId = :speakerId;",
                     [
                         'moduleId' => $moduleId,
                         'speakerId' => $speakerIdToRemove
                     ]
-                 );
+                );
         }
     }
 }

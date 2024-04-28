@@ -5,6 +5,7 @@ namespace Mapper;
 use Repository\ModuleRepository;
 use Mapper\SpeakerMapper;
 use Entity\Module;
+
 //Transformer la Donnée de la Database en entité
 class ModuleMapper
 {
@@ -20,7 +21,7 @@ class ModuleMapper
 
     public static function getInstance(): ModuleMapper
     {
-        
+
         if (self::$instance === null) {
             self::$instance = new ModuleMapper();
             self::$instance->_construct();
@@ -33,11 +34,11 @@ class ModuleMapper
      * @return Module[]
      */
     public function getList(): array
-    {  
+    {
         $moduleArrayFromDb = $this->moduleRepository->getList();
         $moduleEntities = [];
 
-        foreach($moduleArrayFromDb as $moduleFromDb){
+        foreach ($moduleArrayFromDb as $moduleFromDb) {
             $entity = null;
             $moduleId = $moduleFromDb['module_moduleId'];
 
@@ -46,10 +47,10 @@ class ModuleMapper
             } else {
                 $entity = new Module();
             }
-               
+
             $entity->setId($moduleId)
-                   ->setName($moduleFromDb['module_name'])
-                   ->setDurationInHours($moduleFromDb['module_durationModuleInHours']);
+                ->setName($moduleFromDb['module_name'])
+                ->setDurationInHours($moduleFromDb['module_durationModuleInHours']);
 
             $moduleSpeaker = $this->speakerMapper->getOneByArray($moduleFromDb);
             if ($moduleSpeaker !== null) {
@@ -57,6 +58,24 @@ class ModuleMapper
             }
 
             $moduleEntities[$entity->getId()] = $entity;
+        }
+
+        return $moduleEntities;
+    }
+
+    public function getListBySpeakerId($speakerId): array
+    {
+        $moduleArrayFromDb = $this->moduleRepository->getListBySpeakerId($speakerId);
+        $moduleEntities = [];
+
+        foreach ($moduleArrayFromDb as $moduleFromDb) {
+            $entity = new Module();
+
+            $entity->setId($moduleFromDb['module_moduleId'])
+                ->setName($moduleFromDb['module_name'])
+                ->setDurationInHours($moduleFromDb['module_durationModuleInHours']);
+
+            $moduleEntities[] = $entity;
         }
 
         return $moduleEntities;
@@ -70,8 +89,8 @@ class ModuleMapper
 
         $entity = new Module();
         $entity->setId($moduleDataFromDb['module_moduleId'])
-               ->setName($moduleDataFromDb['module_name'])
-               ->setDurationInHours($moduleDataFromDb['module_durationModuleInHours']);
+            ->setName($moduleDataFromDb['module_name'])
+            ->setDurationInHours($moduleDataFromDb['module_durationModuleInHours']);
 
         $moduleSpeaker = $this->speakerMapper->getOneByArray($moduleDataFromDb);
         if ($moduleSpeaker !== null) {
@@ -90,7 +109,7 @@ class ModuleMapper
         }
 
         $moduleEntities = [];
-        foreach($moduleRowsFromDb as $row) {
+        foreach ($moduleRowsFromDb as $row) {
             $entity = null;
             $moduleId = $row['module_moduleId'];
 
@@ -101,8 +120,8 @@ class ModuleMapper
             }
 
             $entity->setId($row['module_moduleId'])
-               ->setName($row['module_name'])
-               ->setDurationInHours($row['module_durationModuleInHours']);
+                ->setName($row['module_name'])
+                ->setDurationInHours($row['module_durationModuleInHours']);
 
             $moduleSpeaker = $this->speakerMapper->getOneByArray($row);
             if ($moduleSpeaker !== null) {
@@ -110,7 +129,7 @@ class ModuleMapper
             }
 
             $moduleEntities[$entity->getId()] = $entity;
-        }        
+        }
 
         return reset($moduleEntities) ?: null;
     }
