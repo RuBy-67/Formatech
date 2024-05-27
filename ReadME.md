@@ -22,6 +22,7 @@ Le centre de formation « FormaTech FUTUR » est un nouveau centre deformation d
 > templates -> composants réutilisable
 
 > js -> JavaScript (si besoin)
+> sql bdd
 
 ## Package et documentation
 
